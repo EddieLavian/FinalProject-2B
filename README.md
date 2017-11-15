@@ -30,7 +30,7 @@ Eddie Lavian
  |Category|Link|
 |---|---|
 | Recommended IDE | [Android Studio](https://developer.android.com/studio/index.html) |
-| Issues | [![GitHub issues](https://img.shields.io/github/issues/meitarsh/m.s-aluminium-manager-app.svg?style=flat)](https://github.com/meitarsh/m.s-aluminium-manager-app/issues) |
+| Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/EddieLavian/FinalProject-2B/issues) |
 | Project Management Board| [here](https://github.com/meitarsh/m.s-aluminium-manager-app/projects/1) |
 | Documnetation | [![Inline docs](http://inch-ci.org/github/meitarsh/m.s-aluminium-manager-app.svg?branch=master)](https://github.com/EddieLavian/FinalProject-2B/issues) |
 | Diary |  [link](https://calendar.google.com/calendar/embed?src=t1f2ojv5arrqonei6h09i5fld0%40group.calendar.google.com&ctz=Europe/Athens) |
