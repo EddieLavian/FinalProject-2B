@@ -30,7 +30,7 @@ Eddie Lavian
 
 
 
-** Acedamic advisor Shimrit Tzur-David
+* Acedamic advisor Shimrit Tzur-David
   
  |Category|Link|
 |---|---|
