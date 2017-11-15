@@ -18,12 +18,14 @@
 * Developers and Owners:
 
 <a href="https://github.com/TalYehoshua">Tal Yehoshua
+  
 <img src="https://avatars0.githubusercontent.com/u/26079767?v=3&s=460" alt="Tal Yehushoua" width="100" height="100">
 </a>
 
-Eddie Lavian 
-
-<img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/eddie.jpg" height="100" width="80">
+<a href="https://github.com/EddieLavian">Eddie Lavian 
+  
+<img src="https://avatars3.githubusercontent.com/u/26080528?v=3&s=460" alt="Eddie Lavian" width="100" height="100">
+</a>
 
 
 * Acedamic advisor Shimrit Tzur-David
