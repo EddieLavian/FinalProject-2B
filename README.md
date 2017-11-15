@@ -18,9 +18,9 @@
 * Developers and Owners
 
 Eddie Lavian 
-<img src="https://avatars3.githubusercontent.com/u/25983708?s=400&u=b8851ea42c6dc967d131b307a0b99074a84a851e&v=4" height="100" width="80">
+<img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/eddie.jpg" height="100" width="80">
 Tal Yehoshua
-<img src="https://avatars1.githubusercontent.com/u/26038128?s=400&v=4" height="100" width="80">
+<img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/Tal.jpg" height="100" width="80">
 
 * Acedamic advisor 
   Shay Tavor
