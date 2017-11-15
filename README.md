@@ -27,9 +27,8 @@ Eddie Lavian
 * Acedamic advisor 
   Shimrit Tzur-David
   
- |Category|Status|
+ |Category|Link|
 |---|---|
-| Version Control System| [git](https://git-scm.com/) & [github](https://github.com/) |
 | Recommended IDE | [Android Studio](https://developer.android.com/studio/index.html) |
 | License | [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/) |
 | Code Style | [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/meitarsh/m.s-aluminium-manager-app) |
