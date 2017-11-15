@@ -2,7 +2,7 @@
 
 ### Soccer application - To be part of the game
 
-![github project settings](./Logo8.png)
+![github project settings](https://github.com/EddieLavian/FinalProject-2B/blob/master/Logo8.PNG)
 
 
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/jce-il/Bishvil-Crew)
