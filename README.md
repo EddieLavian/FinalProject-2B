@@ -15,12 +15,12 @@
 * This repository include files, documents, planning, photos and all that relevent for the product.
 
 ## Staff
-* Main project developer repository masters
+* Developers and Owners
 
-Zeev Melumuian 
+Eddie Lavian 
 <img src="https://avatars3.githubusercontent.com/u/25983708?s=400&u=b8851ea42c6dc967d131b307a0b99074a84a851e&v=4" height="100" width="80">
- Meitar Shukrun
- <img src="https://avatars1.githubusercontent.com/u/26038128?s=400&v=4" height="100" width="80">
+Tal Yehoshua
+<img src="https://avatars1.githubusercontent.com/u/26038128?s=400&v=4" height="100" width="80">
 
 * Acedamic advisor 
   Shay Tavor
