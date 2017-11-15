@@ -18,8 +18,8 @@
 * Developers and Owners:
 
 Tal Yehoshua
-<a href="https://github.com/TalYehoshua"/>
-<img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/Tal.jpg" height="100" width="80">
+<a href="https://github.com/TalYehoshua"
+img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/Tal.jpg" height="100" width="80">
 
 Eddie Lavian 
 
