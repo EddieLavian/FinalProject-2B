@@ -6,7 +6,7 @@
 
 
 [![Diary](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/jce-il/Bishvil-Crew)
-[![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/Nir-Cohen/Bishvil/issues)
+[![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/EddieLavian/FinalProject-2B/issues)
 
 
 
