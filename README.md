@@ -31,7 +31,7 @@ Eddie Lavian
 | Recommended IDE | [Android Studio](https://developer.android.com/studio/index.html) |
 | Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/EddieLavian/FinalProject-2B/issues) |
 | Project Management Board| [Tasks](https://github.com/EddieLavian/FinalProject-2B/projects) |
-| Diary |  [TeamUp Calender](https://teamup.com/ksr245rqo4i7dqs464) |
+| Diary |  [Teamup Calendar](https://teamup.com/ksr245rqo4i7dqs464) |
 
 
 ## [Software Design](https://github.com/meitarsh/m.s-aluminium-manager-app/wiki/Software-Design)
