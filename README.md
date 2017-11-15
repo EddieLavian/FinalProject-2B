@@ -9,9 +9,11 @@
 
 
 ### Welcome
-Welcome to our final project 2B - friendly soccer application that makes everyone feel part of the game. 
-in this wiki you will be able to view all files regarding our final project at the Software Engineering program in JCE if you have any questions please contact us by e-mail, which is available at our user profile in github
+Our final project 2B - friendly soccer application that makes everyone feel part of the game.
 
+This wiki explain about our final project at the Software Engineering program in JCE(College of Engineering Jerusalem) and share our files and documents to all.
+
+Hope you will find that is a great project.
 
 ### Project Documents
 - [User Manual](https://github.com/Nir-Cohen/Bishvil/wiki/User-Manual)
