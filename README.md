@@ -8,7 +8,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/EddieLavian/FinalProject-2B/issues)
 
 
-###Welcome
+### Welcome
 Welcome to our final project 2B - friendly soccer application that makes everyone feel part of the game. 
 in this wiki you will be able to view all files regarding our final project at the Software Engineering program in JCE if you have any questions please contact us by e-mail, which is available at our user profile in github
 
