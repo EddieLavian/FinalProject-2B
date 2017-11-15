@@ -25,7 +25,7 @@ Eddie Lavian
 
 
 * Acedamic advisor 
-  Shay Tavor
+  Shimrit Tzur-David
   
  |Category|Status|
 |---|---|
