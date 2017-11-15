@@ -15,12 +15,13 @@
 * This repository include files, documents, planning, photos and all that relevent for the product.
 
 ## Staff
-* Developers and Owners
+* Developers and Owners:
+Tal Yehoshua
+<img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/Tal.jpg" height="100" width="80">
 
 Eddie Lavian 
 <img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/eddie.jpg" height="100" width="80">
-Tal Yehoshua
-<img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/Tal.jpg" height="100" width="80">
+
 
 * Acedamic advisor 
   Shay Tavor
