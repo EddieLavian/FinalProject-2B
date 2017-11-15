@@ -18,7 +18,10 @@
 * Developers and Owners:
 
 Tal Yehoshua
-<a href="https://github.com/TalYehoshua"
+<a href="https://github.com/Nir-Cohen">
+<img src="https://avatars2.githubusercontent.com/u/26038473?v=3&s=460" alt="Nir Cohen" width="100" height="100">
+  
+<a href="https://github.com/TalYehoshua">
 img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/Tal.jpg" height="100" width="80">
 
 Eddie Lavian 
