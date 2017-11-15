@@ -24,15 +24,14 @@ Eddie Lavian
 <img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/eddie.jpg" height="100" width="80">
 
 
-* Acedamic advisor 
-  Shimrit Tzur-David
+* Acedamic advisor Shimrit Tzur-David
   
  |Category|Link|
 |---|---|
 | Recommended IDE | [Android Studio](https://developer.android.com/studio/index.html) |
 | Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/EddieLavian/FinalProject-2B/issues) |
 | Project Management Board| [Tasks](https://github.com/EddieLavian/FinalProject-2B/projects) |
-| Diary |  [link](https://teamup.com/ksr245rqo4i7dqs464) |
+| Diary |  [TeamUp Calender](https://teamup.com/ksr245rqo4i7dqs464) |
 
 
 ## [Software Design](https://github.com/meitarsh/m.s-aluminium-manager-app/wiki/Software-Design)
