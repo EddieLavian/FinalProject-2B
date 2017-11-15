@@ -18,8 +18,7 @@
 * Developers and Owners:
 
 Tal Yehoshua
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
+![Tal Yehoshua](https://www.facebook.com/tal.yehoshua1?ref=ts&fref=ts)
 <img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/pictures/Tal.jpg" height="100" width="80">
 
 Eddie Lavian 
