@@ -5,7 +5,7 @@
 ![github project settings](https://github.com/EddieLavian/FinalProject-2B/blob/master/Logo8.PNG)
 
 
-[![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)|(https://github.com/EddieLavian/FinalProject-2B/issues)
+[![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/Nir-Cohen/Bishvil/issues)
 
 
 
