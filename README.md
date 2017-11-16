@@ -41,7 +41,7 @@ Eddie Lavian
 
 ## [Diagrams and Designs]()
 
-## [Iterations]
+## Iterations
 
 * [Iteration 0 ZFR](https://github.com/EddieLavian/FinalProject-2B/wiki/Iteration-0-ZFR)
 * [Iteration 1 MVP](https://github.com/EddieLavian/FinalProject-2B/wiki/Iteration-1-MVP)
