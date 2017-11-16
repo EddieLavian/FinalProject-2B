@@ -43,8 +43,8 @@ Eddie Lavian
 
 ## [Iterations]()
 
-* [Iteration 0 ZFR]()
-* [Iteration 1 MVP]()
-* [Iteration 2 alpa]()
-* [Iteration 3 beta]()
-* [Iteration 4 final]()
+* [Iteration 0 ZFR](https://github.com/EddieLavian/FinalProject-2B/wiki/Iteration-0-ZFR)
+* [Iteration 1 MVP](https://github.com/EddieLavian/FinalProject-2B/wiki/Iteration-1-MVP)
+* [Iteration 2 alpha](https://github.com/EddieLavian/FinalProject-2B/wiki/Iteration-2-ALPHA)
+* [Iteration 3 beta](https://github.com/EddieLavian/FinalProject-2B/wiki/Iteration-3-BETA)
+* [Iteration 4 final](https://github.com/EddieLavian/FinalProject-2B/wiki/Iteration-4-FINAL)
