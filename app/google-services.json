@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "15246466950",
+    "firebase_url": "https://tobe-722db.firebaseio.com",
+    "project_id": "tobe-722db",
+    "storage_bucket": "tobe-722db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15246466950:android:8d078932a544c2af",
+        "android_client_info": {
+          "package_name": "com.example.talyeh3.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15246466950-ua9qafb0gv6o7vh1tuk7surs73hrfe3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdwl1vSGIx5iErzoZ3CrVjhT5eZjgvtUw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
