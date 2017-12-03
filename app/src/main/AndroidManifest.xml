@@ -3,7 +3,7 @@
     package="com.example.talyeh3.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +20,15 @@
         </activity>
         <activity android:name=".AddPostActivity" />
         <activity android:name=".AllPostActivity" />
-        <activity android:name=".EditPostActivity"></activity>
+        <activity android:name=".EditPostActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".OpenTeam" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".OpenTeamDetails" />
+        <activity android:name=".MyTeams" />
+        <activity android:name=".TeamDetails" />
+        <activity android:name=".AllUsers" />
+        <activity android:name=".ProfilePage"></activity>
     </application>
 
 </manifest>

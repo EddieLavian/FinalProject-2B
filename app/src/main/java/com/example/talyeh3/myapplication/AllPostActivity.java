@@ -22,6 +22,7 @@ public class AllPostActivity extends AppCompatActivity {
     AllPostAdapter allPostAdapter;
     private DatabaseReference database;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

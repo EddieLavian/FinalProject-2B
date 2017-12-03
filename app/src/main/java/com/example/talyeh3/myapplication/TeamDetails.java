@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,42 +16,37 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class EditPostActivity extends AppCompatActivity implements View.OnClickListener{
-
-    EditText etTitle,etBody;
-    Button btnSave;
+public class TeamDetails extends AppCompatActivity {
+    TextView tvName;
     FirebaseDatabase database;
-    DatabaseReference postRef;
+    DatabaseReference teamRef;
+    Team t;
     String key;
-    Post p;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_post);
+        setContentView(R.layout.activity_team_details);//try commit
+
 
         database = FirebaseDatabase.getInstance();
-        etTitle = (EditText) findViewById(R.id.etTitle);
-        etBody = (EditText) findViewById(R.id.etBody);
-        btnSave = (Button) findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+        tvName = (TextView) findViewById(R.id.tvName);
         Intent intent = getIntent();
 
-        key = intent.getExtras().getString("key");
-        postRef = database.getReference("Posts/" + key);
-        Toast.makeText(EditPostActivity.this, "user: " + postRef, Toast.LENGTH_LONG).show();
+        key = intent.getExtras().getString("keyteam");
+        teamRef = database.getReference("Teams/" + key);
+        Toast.makeText(TeamDetails.this, "user: " + key, Toast.LENGTH_LONG).show();
         this.retrieveData();
     }
 
 
+
     public void retrieveData()
     {
-        postRef.addValueEventListener(new ValueEventListener() {
+        teamRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                p = dataSnapshot.getValue(Post.class);
-                etBody.setText(p.body);
-                etTitle.setText(p.title);
-
+                t = dataSnapshot.getValue(Team.class);
+                tvName.setText("team name: " + t.name);
             }
 
             @Override
@@ -58,19 +54,15 @@ public class EditPostActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+
     }
+
+
     public void onClick(View v) {
-        postRef = database.getReference("Posts/" + p.key);
-
-        p.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        p.title = etTitle.getText().toString();
-        p.body = etBody.getText().toString();
-        p.likes = 0;
-        postRef.setValue(p);
-
-        finish();
-
 
 
     }
+
+
+
 }

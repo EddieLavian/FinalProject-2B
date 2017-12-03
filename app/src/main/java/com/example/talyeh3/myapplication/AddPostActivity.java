@@ -1,5 +1,6 @@
 package com.example.talyeh3.myapplication;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
+
         database = FirebaseDatabase.getInstance();
         etTitle = (EditText) findViewById(R.id.etTitle);
         etBody = (EditText) findViewById(R.id.etBody);
@@ -33,35 +35,15 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    public void retrieveData()
-    {
-
-
-        postRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                p = dataSnapshot.getValue(Post.class);
-                etBody.setText(p.body);
-                etTitle.setText(p.title);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
     @Override
     public void onClick(View v) {
+
         String uid = FirebaseAuth.getInstance().getCurrentUser().toString();
         Post p = new Post(uid,etTitle.getText().toString(),etBody.getText().toString(),0,"");
         postRef = database.getReference("Posts").push();
         p.key = postRef.getKey();
         postRef.setValue(p);
+
         finish();
 
     }
