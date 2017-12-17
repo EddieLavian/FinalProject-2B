@@ -24,7 +24,6 @@ public class AllPostAdapter extends ArrayAdapter<Post> {
 
         this.context=context;
         this.objects=objects;
-        this.objects=objects;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
