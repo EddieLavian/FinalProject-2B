@@ -115,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),"File",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
 
 
                             Uri downloadUri = taskSnapshot.getMetadata().getDownloadUrl();
