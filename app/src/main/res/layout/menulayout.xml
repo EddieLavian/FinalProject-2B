@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/logOut"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ellipse_03"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/down_arrow2"
+        android:padding="10dp"
+        android:text="Log Out"
+        android:textColor="#3c464f"
+        android:textSize="16sp" />
+
+
+</LinearLayout>
