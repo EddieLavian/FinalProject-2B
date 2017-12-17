@@ -33,8 +33,9 @@
         <activity android:name=".TeamDetails" />
         <activity android:name=".AllUsers" />
         <activity android:name=".ProfilePage" />
-        <activity android:name=".Chat.ChatActivity"></activity>
-        <activity android:name=".WeatherActivity"></activity>
+        <activity android:name=".Chat.ChatActivity" />
+        <activity android:name=".WeatherActivity" />
+        <activity android:name=".Weather.WeatherActivity"></activity>
     </application>
 
 </manifest>
