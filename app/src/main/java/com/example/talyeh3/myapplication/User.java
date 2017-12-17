@@ -14,6 +14,8 @@ public class User {
     public String userName;
     public String email;
     public int age;
+    public String city;
+    public double rating;
 
     List<String> teams;
 
@@ -22,7 +24,7 @@ public class User {
         //empty constructor becouse firebase needs
     }
 
-    public User(String uid, String userName, String email, int age, String key,List<String> teams,String imgUrl){
+    public User(String uid, String userName, String email, int age, String key,List<String> teams,String imgUrl, String city, double rating){
         this.key = key;
         this.imgUrl=imgUrl;
         this.teams=teams;
@@ -30,7 +32,7 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.age = age;
-
-
+        this.city = city;
+        this.rating = rating;
     }
 }

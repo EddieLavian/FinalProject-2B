@@ -7,6 +7,18 @@
     tools:context="com.example.talyeh3.myapplication.OpenTeamDetails">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,12 +44,41 @@
             android:gravity="top"
             android:hint="Team Name" />
         <Button
+            android:id="@+id/btnChoose"
+            android:layout_width="100dp"
+            android:background="#119bc1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Choose Photo" />
+        <Button
             android:id="@+id/btnSave"
             android:layout_width="100dp"
             android:background="#119bc1"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="save" />
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+
+
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:entries="@array/howMuchPlayers"
+            android:gravity="center"
+            android:hint="From"
+            android:inputType="number"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
+</ScrollView>
 </android.support.constraint.ConstraintLayout>

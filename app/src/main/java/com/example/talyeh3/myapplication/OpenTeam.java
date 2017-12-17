@@ -62,20 +62,24 @@ public class OpenTeam extends AppCompatActivity {
                intent.putExtra("team",teamKey);
                startActivity(intent);
 
-
             }
 
-
-
-
-
         });
+/*
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                User u =users.get(position);
+                DatabaseReference currentUser = FirebaseDatabase.getInstance().getReference("Users/teams/" +teamKey);
+                DatabaseReference currentTeam = FirebaseDatabase.getInstance().getReference("Teams/users/" + u.uid);
+                currentUser.removeValue();
+                currentTeam.removeValue();
+                return true;
 
 
-
-
-
-
+            }
+        });
+*/
 
         setupAutoComplete(tv,users);
     }
@@ -89,12 +93,17 @@ public class OpenTeam extends AppCompatActivity {
 
                 users = new ArrayList<User>();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    //if (data.getValue(User.class).uid!=myUserId)
-                    {
                         User u = data.getValue(User.class);
-                        users.add(u);
-                    }
-
+                        int notDuplicateUser=0;
+                        for (int i = 0; i < users.size();i++)
+                        {
+                            if (u.uid.equals(users.get(i).uid))
+                            {
+                                notDuplicateUser=1;
+                            }
+                        }
+                        if (!u.uid.equals( myUserId )&& notDuplicateUser==0)
+                            users.add(u);
 
                 }
                 progressDialog.dismiss();

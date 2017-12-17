@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ public class AllPostActivity extends AppCompatActivity {
     ListView lv;
     ArrayList<Post> posts;
     AllPostAdapter allPostAdapter;
+    Button btnAddPost;
     private DatabaseReference database;
 
 
@@ -29,6 +31,19 @@ public class AllPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_post);
 
         database = FirebaseDatabase.getInstance().getReference("Posts");
+
+
+        btnAddPost = (Button)findViewById(R.id.btnAddPost);
+        btnAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AllPostActivity.this,AddPostActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         lv = (ListView) findViewById(R.id.lv);
         this.retriveData();
 
@@ -41,7 +56,6 @@ public class AllPostActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

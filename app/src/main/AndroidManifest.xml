@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ToBe">
+        <activity
+            android:name=".ToBeTest"
+            android:label="@string/title_activity_to_be_test"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +32,9 @@
         <activity android:name=".MyTeams" />
         <activity android:name=".TeamDetails" />
         <activity android:name=".AllUsers" />
-        <activity android:name=".ProfilePage"></activity>
+        <activity android:name=".ProfilePage" />
+        <activity android:name=".Chat.ChatActivity"></activity>
+        <activity android:name=".WeatherActivity"></activity>
     </application>
 
 </manifest>

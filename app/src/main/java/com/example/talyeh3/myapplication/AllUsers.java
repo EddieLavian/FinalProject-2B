@@ -3,11 +3,13 @@ package com.example.talyeh3.myapplication;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -30,7 +33,6 @@ public class AllUsers extends AppCompatActivity {
     TextView tvUserName;
     private DatabaseReference database;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String myUserId = user.getUid();
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class AllUsers extends AppCompatActivity {
                 Intent getIntent = getIntent();
                 Intent intent = new Intent(AllUsers.this, ProfilePage.class);
                 intent.putExtra("key", u.uid );
+                intent.putExtra("photo", u.imgUrl );
                 startActivity(intent);
             }
         });

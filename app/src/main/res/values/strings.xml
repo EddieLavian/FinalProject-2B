@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="title_activity_to_be_test">ToBeTest</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="city">
+        <item>Jerusalem</item>
+        <item>Tel-Aviv</item>
+        <item>Ashkelon</item>
+        <item>Ashdod</item>
+        <item>Haifa</item>
+        <item>Maale-Adumim</item>
+        <item>Ramat-Gan</item>
+        <item>Eilat</item>
+    </string-array>
+
+
+    <string-array name="howMuchPlayers">
+        <item>2x2</item>
+        <item>3x3</item>
+        <item>4x4</item>
+        <item>5x5</item>
+        <item>6x6</item>
+        <item>7x7</item>
+        <item>8x8</item>
+        <item>9x9</item>
+        <item>10x10</item>
+        <item>11x11</item>
+    </string-array>
+
 </resources>

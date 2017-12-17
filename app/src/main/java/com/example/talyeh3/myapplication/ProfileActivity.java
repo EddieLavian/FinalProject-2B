@@ -90,7 +90,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         userRefTeam = database.getReference("Teams/" + t.key);
         t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        t.users.add(u.email);
+        t.users.add(u.uid);
         userRefTeam.setValue(t);
         userRef = database.getReference("Users/" + key);
         u.teams.add(t.key);

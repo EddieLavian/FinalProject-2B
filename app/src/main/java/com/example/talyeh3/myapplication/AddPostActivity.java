@@ -37,14 +37,11 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-
         String uid = FirebaseAuth.getInstance().getCurrentUser().toString();
         Post p = new Post(uid,etTitle.getText().toString(),etBody.getText().toString(),0,"");
         postRef = database.getReference("Posts").push();
         p.key = postRef.getKey();
         postRef.setValue(p);
-
         finish();
-
     }
 }

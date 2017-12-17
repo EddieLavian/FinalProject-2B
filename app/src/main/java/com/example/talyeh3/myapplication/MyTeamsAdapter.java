@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -32,11 +35,18 @@ public class MyTeamsAdapter extends ArrayAdapter<Team> {
         //tvTitle.setText(temp);
         Team temp = objects.get(position);
         tvTitle.setText(temp.name);
+
+        ImageView imgTeamProfile = (ImageView)view.findViewById(R.id.imgTeamProfile);
+
+
+        Picasso
+                .with( context )
+                .load( temp.imgUrl )
+                .fit() // will explain later
+                .into( imgTeamProfile );
+
+
         return view;
     }
-
-
-
-
 
 }
