@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:padding="0dp"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/banner">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:src="@drawable/ball"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:text="Create a Game"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="22sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="#f7f6f6">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date"
+            android:drawableLeft="@drawable/ellipse_03"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:textColor="#a6aff1"
+            android:id="@+id/btnDate"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Time"
+            android:drawableLeft="@drawable/ellipse_04"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:textColor="#a6aff1"
+            android:id="@+id/btnTime"/>
+
+        <TextView
+            android:id="@+id/btnLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location"
+            android:drawableLeft="@drawable/ellipse_05"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:textColor="#a6aff1"/>
+
+        <EditText
+            android:id="@+id/etMinimumPlayers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Minimum Players"
+            android:drawableLeft="@drawable/ellipse_06"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:textColor="#a6aff1"
+            android:inputType="number"/>
+
+        <Button
+            android:id="@+id/btnCreateGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Create"
+            android:drawableLeft="@drawable/ellipse_7"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#a6aff1"/>
+    </LinearLayout>
+</LinearLayout>

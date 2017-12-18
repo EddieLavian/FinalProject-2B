@@ -3,14 +3,14 @@ package com.example.talyeh3.myapplication;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,15 +49,15 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_page);
-        imgProfile = (ImageView)findViewById(R.id.imgProfile);
+        setContentView( R.layout.activity_profile_page);
+        imgProfile = (ImageView)findViewById( R.id.imgProfile);
         database = FirebaseDatabase.getInstance();
-        tvUserName = (TextView) findViewById(R.id.tvUserName);
+        tvUserName = (TextView) findViewById( R.id.tvUserName);
 
        // tvTeam = (TextView) findViewById(R.id.tvTeam);
-        tvTeams = (TextView) findViewById(R.id.tvTeams);
-        tvCity = (TextView) findViewById(R.id.tvCity);
-        tvAge = (TextView) findViewById(R.id.tvAge);
+        tvTeams = (TextView) findViewById( R.id.tvTeams);
+        tvCity = (TextView) findViewById( R.id.tvCity);
+        tvAge = (TextView) findViewById( R.id.tvAge);
         Intent intent = getIntent();
         key = intent.getExtras().getString("key");
         photo = intent.getExtras().getString("photo");
@@ -88,9 +88,9 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         if(firstPress==0)
         {
             d= new Dialog(this);
-            d.setContentView(R.layout.activity_my_teams);
+            d.setContentView( R.layout.activity_my_teams);
             d.setCancelable(true);
-            lv = (ListView) d.findViewById(R.id.lv);
+            lv = (ListView) d.findViewById( R.id.lv);
             this.retriveDataTeams();
             d.show();
         }

@@ -3,18 +3,16 @@ package com.example.talyeh3.myapplication;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.talyeh3.myapplication.CreateGame.CreateGame;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,10 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView tvName,btnAddPlayer;
+    TextView tvName,btnAddPlayer,btnCreateGame;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
     DatabaseReference teamRef;
@@ -46,14 +43,16 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     AllUsersAdapter allPlayersAdapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_details);//try commit
+        setContentView( R.layout.activity_team_details);//try commit
         Toast.makeText(TeamDetails.this, "sd  "+firstPress,Toast.LENGTH_SHORT).show();
-        user_profile_photo=(ImageView)findViewById(R.id.user_profile_photo);
+        user_profile_photo=(ImageView)findViewById( R.id.user_profile_photo);
         database = FirebaseDatabase.getInstance();
-        tvName = (TextView) findViewById(R.id.tvName);
+        tvName = (TextView) findViewById( R.id.tvName);
         btnAddPlayer=(TextView)findViewById( R.id.btnAddPlayer );
+        btnCreateGame=(TextView)findViewById( R.id.btnCreateGame );
         btnTeamPlayers=(ImageView) findViewById( R.id.btnTeamPlayers );
         btnAddPlayer.setOnClickListener( this );
+        btnCreateGame.setOnClickListener( this );
         btnTeamPlayers.setOnClickListener( this );
 
 
@@ -61,7 +60,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         key = intent.getExtras().getString("keyteam");
         teamRef = database.getReference("Teams/" + key);
         this.retrieveData();
-
+        Toast.makeText(TeamDetails.this, "hghg         "+key, Toast.LENGTH_LONG).show();
         //for all players team
         database2 = FirebaseDatabase.getInstance().getReference("Teams/"+key+"/users");
     }
@@ -73,9 +72,9 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         if(firstPress==0)
         {
             d= new Dialog(this);
-            d.setContentView(R.layout.activity_all_users);
+            d.setContentView( R.layout.activity_all_users);
             d.setCancelable(true);
-            lv = (ListView) d.findViewById(R.id.lv);
+            lv = (ListView) d.findViewById( R.id.lv);
             this.retriveDataPlayers();
             d.show();
             Toast.makeText(TeamDetails.this, "a"+firstPress,Toast.LENGTH_SHORT).show();
@@ -178,8 +177,16 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         {
             teamPlayers();
         }
+        if (v==btnCreateGame)
+        {
+            Intent intent = new Intent( TeamDetails.this, CreateGame.class );
+            intent.putExtra( "teamKey", key );
+            startActivity( intent );
+        }
 
     }
+
+
 
 
 

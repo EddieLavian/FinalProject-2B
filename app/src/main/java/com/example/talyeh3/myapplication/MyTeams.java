@@ -2,8 +2,8 @@ package com.example.talyeh3.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,11 +36,11 @@ public class MyTeams extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_teams);
+        setContentView( R.layout.activity_my_teams);
 
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Users/"+myUserId+"/teams");
-        lv = (ListView) findViewById(R.id.lv);
+        lv = (ListView) findViewById( R.id.lv);
         if(database!=null)
         {
             this.retriveData();

@@ -4,10 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,7 +71,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         btnChoose = (Button) findViewById( R.id.btnChoose );
         btnChoose.setOnClickListener(this);
 
-        spin = (Spinner) findViewById(R.id.spinner);
+        spin = (Spinner) findViewById( R.id.spinner);
 
         this.retriveData();
     }
@@ -99,7 +99,10 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         List<String> players;
         players = new ArrayList<String>();
         players.add( FirebaseAuth.getInstance().getCurrentUser().getUid());
-        Team t = new Team( uid, etTeamName.getText().toString(), players, "", generatedFilePath ,spin.getSelectedItem().toString());
+        List<String> games;
+        games= new ArrayList<String>();
+        games.add("-1");
+        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString());
         teamRef = database.getReference( "Teams" ).push();
         t.key = teamRef.getKey();
 
@@ -118,8 +121,8 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         uploadFile( t);
         teamRef.setValue( t );
         if (b == true) {
-         //   t.imgUrl=generatedFilePath;
-         //   teamRef.setValue( t );
+            t.imgUrl=generatedFilePath;
+            teamRef.setValue( t );
 
             finish();
             Intent intent = new Intent( OpenTeamDetails.this, OpenTeam.class );

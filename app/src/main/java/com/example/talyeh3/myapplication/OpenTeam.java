@@ -2,18 +2,14 @@ package com.example.talyeh3.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,13 +38,13 @@ public class OpenTeam extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_open_team);
+        setContentView( R.layout.activity_open_team);
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Users");
-        lv = (ListView) findViewById(R.id.lv);
-        tvAddPlayer= (TextView) findViewById(R.id.tvAddPlayer);
+        lv = (ListView) findViewById( R.id.lv);
+        tvAddPlayer= (TextView) findViewById( R.id.tvAddPlayer);
         this.retriveData();
-        AutoCompleteTextView tv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        AutoCompleteTextView tv = (AutoCompleteTextView) findViewById( R.id.autoCompleteTextView);
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
