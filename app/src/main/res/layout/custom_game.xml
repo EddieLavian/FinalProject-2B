@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/lvUser"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="#d6e7f9"
         android:orientation="horizontal"
@@ -20,15 +20,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.111">
-
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
         <TextView
-
             android:id="@+id/tvDate"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="0dp"
-            android:layout_weight="2"
+            android:layout_margin="10dp"
+            android:background="#d6e7f9"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:hint="hello"
+            android:padding="0dp"
+            android:textColor="#666262"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:background="#d6e7f9"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
@@ -37,11 +52,57 @@
             android:textColor="#666262"
             android:textSize="16sp" />
         <TextView
+            android:id="@+id/tvPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="#d6e7f9"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:hint="hello"
+            android:padding="0dp"
+            android:textColor="#666262"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvMinimumPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="#d6e7f9"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:hint="hello"
+            android:padding="0dp"
+            android:textColor="#666262"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvAttended"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="#d6e7f9"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:hint="hello"
+            android:padding="0dp"
+            android:textColor="#666262"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
 
             android:id="@+id/tvAttending"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="0dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="#d6e7f9"
             android:fontFamily="sans-serif-condensed"
@@ -58,10 +119,10 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
-            android:src="@drawable/profile"
+            android:src="@drawable/ball"
             app:border_color="#7a868f"
             app:border_width="1dp" />
-
+    </LinearLayout>
 
     </LinearLayout>
 

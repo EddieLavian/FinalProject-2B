@@ -41,7 +41,7 @@ public class TeamGamesActivity extends AppCompatActivity {
     DatabaseReference attendingRef;
     FirebaseDatabase attendingDatabase;
     Game g;
-    Boolean ifAttending=true,checkIfAttending=false;
+    Boolean ifAttending=true,checkIfAttending=false,first=true;
     String myUserId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +58,6 @@ public class TeamGamesActivity extends AppCompatActivity {
         {
             this.retriveData();
         }
-        /*
-        for (int i = 0 ; i<g.whoIsComming.size();i++)
-        {
-            if(g.whoIsComming.get( i ).equals( myUserId ))
-            {
-                checkIfAttending=true;
-            }
-        }
-*/
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -94,6 +85,7 @@ public class TeamGamesActivity extends AppCompatActivity {
                 }
                 else
                 {
+
                     builder.setTitle("Attending");
                     builder.setMessage("Are You Sure You want cancel your attending?");
                     builder.setCancelable(true);
@@ -102,11 +94,6 @@ public class TeamGamesActivity extends AppCompatActivity {
                     AlertDialog dialog=builder.create();
                     dialog.show();
                 }
-
-
-               // Intent intent = new Intent(TeamGamesActivity.this, AttendingActivity.class);
-               // intent.putExtra("keyteam", g.key );
-               // startActivity(intent);
             }
 
 
@@ -135,7 +122,7 @@ public class TeamGamesActivity extends AppCompatActivity {
                     ValueEventListener valueEventListener = gameDatabase.addValueEventListener( new ValueEventListener() {
                         public void onDataChange(DataSnapshot snapshot) {
                             Game g = snapshot.getValue( Game.class );
-                            if(ifAttending == true)
+                            if(first == true)
                             {
                                 games.add( g );
                                 Log.d( "onStart", snapshot.toString() );
@@ -165,6 +152,7 @@ public class TeamGamesActivity extends AppCompatActivity {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            first=false;
             if (which==-1)//yes
             {
                 if (checkIfAttending==false)
@@ -175,7 +163,6 @@ public class TeamGamesActivity extends AppCompatActivity {
                     g.attending++;
                     g.whoIsComming.add( myUserId );
                     attendingRef.setValue( g );
-                    //lv.setBackgroundColor( ( getResources().getColor(R.color.colorAttending)  ));
                 }
                 else
                 {
@@ -187,11 +174,10 @@ public class TeamGamesActivity extends AppCompatActivity {
                     attendingRef.setValue( g );
                 }
             }
-            else if(which == -2)//no
+            else if(which == -2)//no, maybe later
             {
 
             }
-            Toast.makeText(TeamGamesActivity.this,"u selected "+which ,Toast.LENGTH_LONG).show();
         }
     }
 

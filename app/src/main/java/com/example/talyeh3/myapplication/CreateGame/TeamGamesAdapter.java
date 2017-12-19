@@ -35,9 +35,17 @@ public class TeamGamesAdapter extends ArrayAdapter<Game> {
         View view = layoutInflater.inflate( R.layout.custom_game, parent, false);
         TextView tvDate = (TextView)view.findViewById(R.id.tvDate);
         TextView tvAttending = (TextView)view.findViewById(R.id.tvAttending);
+        TextView tvTime = (TextView)view.findViewById(R.id.tvTime);
+        TextView tvPlace = (TextView)view.findViewById(R.id.tvPlace);
+        TextView tvAttended = (TextView)view.findViewById(R.id.tvAttended);
+        TextView tvMinimumPlayers = (TextView)view.findViewById(R.id.tvMinimumPlayers);
         Game temp = objects.get(position);
         tvDate.setText(temp.date);
-
+        tvTime.setText( temp.location );
+        tvTime.setText( temp.time );
+        tvPlace.setText( temp.location );
+        tvAttended.setText( "Attended: "+String.valueOf(temp.attending  ) );
+        tvMinimumPlayers.setText("Minimum players: "+ String.valueOf(temp.minimumPlayers ));
         for (int i = 0 ; i<temp.whoIsComming.size();i++)
         {
             if(temp.whoIsComming.get( i ).equals( myUserId ))
@@ -47,7 +55,6 @@ public class TeamGamesAdapter extends ArrayAdapter<Game> {
 
             }
         }
-
 
         return view;
     }

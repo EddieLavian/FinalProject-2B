@@ -25,6 +25,7 @@ import com.example.talyeh3.myapplication.Game;
 import com.example.talyeh3.myapplication.OpenTeam;
 import com.example.talyeh3.myapplication.OpenTeamDetails;
 import com.example.talyeh3.myapplication.R;
+import com.example.talyeh3.myapplication.RegisterActivity;
 import com.example.talyeh3.myapplication.Team;
 import com.example.talyeh3.myapplication.TeamDetails;
 import com.example.talyeh3.myapplication.User;
@@ -36,12 +37,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CreateGame extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, View.OnClickListener {
 
@@ -185,6 +189,11 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
     public void onClick(View view) {
         if (view == btnCreateGame)
         {
+            if(etMinimumPlayers.getText().length()<=0 || btnLocation.getText().toString().equals( "" )||mDisplayDate.getText().toString().equals( "" )||mDisplayTime.getText().toString().equals( "" ) )
+            {
+                Toast.makeText(CreateGame.this, "Some Fields Are Empty", Toast.LENGTH_LONG).show();
+                return;
+            }
             String uid = FirebaseAuth.getInstance().getCurrentUser().toString();
             List<String> whoIsComming;
             whoIsComming = new ArrayList<String>();
@@ -226,7 +235,6 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
             }
         } );
     }
-
 
 
 
