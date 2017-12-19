@@ -186,7 +186,10 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
         if (view == btnCreateGame)
         {
             String uid = FirebaseAuth.getInstance().getCurrentUser().toString();
-            Game g = new Game( mDisplayDate.getText().toString(), mDisplayTime.getText().toString(), btnLocation.getText().toString(), 0, "" ,keyTeam,userOpen);
+            List<String> whoIsComming;
+            whoIsComming = new ArrayList<String>();
+            whoIsComming.add("-1");
+            Game g = new Game( mDisplayDate.getText().toString(), mDisplayTime.getText().toString(), btnLocation.getText().toString(),  Integer.valueOf(etMinimumPlayers.getText().toString()), "" ,keyTeam,userOpen,0,whoIsComming);
           gameRef = database.getReference( "Games" ).push();
             g.key = gameRef.getKey();
             Toast.makeText(CreateGame.this, "hghg", Toast.LENGTH_LONG).show();
@@ -201,16 +204,11 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
             if (teamRef2 != null) {
                 teamRef2.removeValue();
             }
-
-
                 finish();
-        //        Intent intent = new Intent( CreateGame.this, TeamDetails.class );
-         //       startActivity( intent );
-
-            }
-
-
         }
+
+
+    }
 
 
 
