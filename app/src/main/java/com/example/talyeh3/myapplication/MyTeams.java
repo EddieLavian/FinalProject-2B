@@ -80,8 +80,6 @@ public class MyTeams extends AppCompatActivity {
                          Log.d("onDataChange", data.getValue().toString());
                         keyteam = (String) snapshot.child(String.valueOf(i)).getValue();
                         teamDatabase = FirebaseDatabase.getInstance().getReference("Teams/" + keyteam);
-
-
                   ValueEventListener valueEventListener = teamDatabase.addValueEventListener(new ValueEventListener() {
 
                        public void onDataChange(DataSnapshot snapshot) {
@@ -101,12 +99,9 @@ public class MyTeams extends AppCompatActivity {
                    });
 
                    i++;
-
-
                }
                 allTeamsAdapter = new MyTeamsAdapter(MyTeams.this, 0, 0, teams);
                 lv.setAdapter(allTeamsAdapter);
-
             }
             public void onCancelled(DatabaseError databaseError) {
 

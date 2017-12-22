@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.talyeh3.myapplication.Statistics.Statistics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -91,10 +92,24 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         userRefTeam = database.getReference("Teams/" + t.key);
         t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         t.users.add(u.uid);
+        String myUserKey = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String myUserMail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        t.statistics.add(myUserKey+t.key);
+
+
+
         userRefTeam.setValue(t);
         userRef = database.getReference("Users/" + key);
         u.teams.add(t.key);
         userRef.setValue(u);
+        String keyStatistics=key+t.key;
+        Statistics s=new Statistics( keyStatistics,t.key,u.userName,0,0,0);
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Statistics").child(keyStatistics).setValue(s);
+
+
+
         finish();
     }
 

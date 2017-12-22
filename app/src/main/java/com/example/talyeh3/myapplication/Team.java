@@ -10,9 +10,10 @@ public class Team {
     public String key;
     public String uid;
     public String name;
-    public List<String> users,games;
+    public List<String> users,games,statistics;
     public String imgUrl;
     public String howMouchPlayers;
+
 
 
     public Team()
@@ -20,7 +21,7 @@ public class Team {
         //empty constructor becouse firebase needs
     }
 
-    public Team(String uid, String name, List<String> users,List<String> games, String key,String imgUrl,String howMouchPlayers) {
+    public Team(String uid, String name, List<String> users,List<String> games, String key,String imgUrl,String howMouchPlayers,List<String> statistics) {
         this.key = key;
         this.uid = uid;
         this.name = name;
@@ -28,6 +29,7 @@ public class Team {
         this.imgUrl=imgUrl;
         this.howMouchPlayers = howMouchPlayers;
         this.games=games;
+        this.statistics=statistics;
 
     }
 }

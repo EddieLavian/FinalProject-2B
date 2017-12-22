@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.CreateGame.CreateGame;
 import com.example.talyeh3.myapplication.CreateGame.TeamGamesActivity;
+import com.example.talyeh3.myapplication.Statistics.StatisticsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +25,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView tvName,btnAddPlayer,btnCreateGame,btnGames;
+    TextView tvName,btnAddPlayer,btnCreateGame,btnGames,btnStatistics;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
     DatabaseReference teamRef;
@@ -52,8 +53,10 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnAddPlayer=(TextView)findViewById( R.id.btnAddPlayer );
         btnCreateGame=(TextView)findViewById( R.id.btnCreateGame );
         btnTeamPlayers=(ImageView) findViewById( R.id.btnTeamPlayers );
+        btnStatistics=(TextView)findViewById( R.id.btnStatistics );
         btnGames=(TextView) findViewById( R.id.btnGames );
         btnAddPlayer.setOnClickListener( this );
+        btnStatistics.setOnClickListener( this );
         btnCreateGame.setOnClickListener( this );
         btnTeamPlayers.setOnClickListener( this );
         btnGames.setOnClickListener( this );
@@ -182,6 +185,12 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         if (v==btnCreateGame)
         {
             Intent intent = new Intent( TeamDetails.this, CreateGame.class );
+            intent.putExtra( "teamKey", key );
+            startActivity( intent );
+        }
+        if (v==btnStatistics)
+        {
+            Intent intent = new Intent( TeamDetails.this, StatisticsActivity.class );
             intent.putExtra( "teamKey", key );
             startActivity( intent );
         }

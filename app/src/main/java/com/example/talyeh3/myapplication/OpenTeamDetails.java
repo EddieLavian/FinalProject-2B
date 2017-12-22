@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.talyeh3.myapplication.Statistics.Statistics;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +42,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
     DatabaseReference teamRef, userRef, userRef2;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String myUserId = user.getUid();
+    String myUserName=user.getDisplayName();
     ArrayList<String> myTeams;
     User u;
 
@@ -102,9 +104,24 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         List<String> games;
         games= new ArrayList<String>();
         games.add("-1");
-        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString());
+        String myUserKey = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String myUserMail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        List<String> statistics;
+        statistics= new ArrayList<String>();
+        statistics.add( "-1" );
+        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString(),statistics);
         teamRef = database.getReference( "Teams" ).push();
         t.key = teamRef.getKey();
+        //String keyStatistics=myUserKey+t.key;
+        statistics.add(myUserKey+t.key);
+            statistics.remove( "-1" );
+        t.statistics=statistics;
+        Statistics s=new Statistics( myUserKey+t.key,t.key,myUserMail,0,0,0);
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Statistics").child(myUserKey+t.key).setValue(s);
+
+
 
         myTeams = new ArrayList<String>();
         userRef = database.getReference( "Users/" + myUserId );
