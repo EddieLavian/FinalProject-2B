@@ -20,25 +20,75 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.156">
 
-        <EditText
-            android:id="@+id/etTitle"
+        <TextView
+            android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="title" />
+            android:hint="Name"
+            android:drawableLeft="@drawable/ellipse_03"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:textColor="#a6aff1"
+            android:inputType="number"/>
         <EditText
-            android:id="@+id/etBody"
+            android:id="@+id/etGames"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="top"
-            android:hint="body" />
+            android:layout_height="wrap_content"
+            android:hint="Games"
+            android:drawableLeft="@drawable/ellipse_04"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:textColor="#a6aff1"
+            android:inputType="number"/>
+        <EditText
+            android:id="@+id/etGoals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Goals"
+            android:drawableLeft="@drawable/ellipse_05"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:textColor="#a6aff1"
+            android:inputType="number"/>
+        <EditText
+            android:id="@+id/etAssists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Assists"
+            android:drawableLeft="@drawable/ellipse_06"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:textColor="#a6aff1"
+            android:inputType="number"/>
         <Button
             android:id="@+id/btnSave"
-            android:layout_width="100dp"
-            android:background="#c1112e"
-
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="save" />
+            android:hint="Save"
+            android:drawableLeft="@drawable/ellipse_7"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#a6aff1"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

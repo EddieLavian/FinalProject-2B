@@ -8,19 +8,65 @@
 
 
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/tvAssists"
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
+            android:layout_height="74dp"
+            android:layout_weight="2"
+            android:background="#8ac3ff"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:hint="assists"
+            android:orientation="horizontal"
+            android:padding="0dp"
+            android:textColor="#312e2e"
+            android:textSize="16sp"
+            >
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Name"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Games" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Goals" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Assists" />
+        </LinearLayout>
 
         <ListView
+            android:id="@+id/lv"
+            android:layout_weight="2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/lv">
-        </ListView>
-
-
+            android:layout_height="match_parent"></ListView>
 
     </LinearLayout>
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.R;
 
@@ -31,7 +32,6 @@ public class StatisticsAdapter extends ArrayAdapter<Statistics> {
 
         LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
         View view = layoutInflater.inflate( R.layout.custom_statistics, parent, false);
-
        TextView tvName = (TextView)view.findViewById(R.id.tvName);
         TextView tvGames = (TextView)view.findViewById(R.id.tvGames);
         TextView tvGoals = (TextView)view.findViewById(R.id.tvGoals);
@@ -42,5 +42,8 @@ public class StatisticsAdapter extends ArrayAdapter<Statistics> {
         tvGoals.setText(String.valueOf(temp.goals));
         tvAssists.setText(String.valueOf(temp.assist));
         return view;
+
     }
+
+
 }

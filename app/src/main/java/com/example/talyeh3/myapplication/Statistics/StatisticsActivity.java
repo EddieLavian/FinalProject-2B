@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.CreateGame.CreateGame;
+import com.example.talyeh3.myapplication.EditPostActivity;
 import com.example.talyeh3.myapplication.MyTeams;
 import com.example.talyeh3.myapplication.MyTeamsAdapter;
 import com.example.talyeh3.myapplication.R;
@@ -25,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class StatisticsActivity extends AppCompatActivity {
     ListView lv;
@@ -38,6 +41,7 @@ public class StatisticsActivity extends AppCompatActivity {
     //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     //String myUserId = user.getUid();
     ProgressDialog progressDialog;
+    Boolean first=true;
 
 
 
@@ -50,7 +54,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         keyTeam = intent.getExtras().getString("teamKey");
-        Toast.makeText(StatisticsActivity.this, "hghg         "+keyTeam, Toast.LENGTH_LONG).show();
+
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Teams/"+keyTeam+"/statistics");
         lv = (ListView) findViewById( R.id.lv);
@@ -58,13 +62,13 @@ public class StatisticsActivity extends AppCompatActivity {
         {
             this.retriveData();
         }
-        /*
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Team t = teams.get(position);
-                Intent intent = new Intent(MyTeams.this, TeamDetails.class);
-                intent.putExtra("keyteam", t.key );
+                Statistics s = statistics.get(position);
+                Intent intent = new Intent(StatisticsActivity.this, editStatistics.class);
+                intent.putExtra("keyStatistic", s.key );
                 startActivity(intent);
 
 
@@ -75,7 +79,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
 
         });
-        */
+
     }
 
 
@@ -94,17 +98,30 @@ public class StatisticsActivity extends AppCompatActivity {
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Log.d("onDataChange", data.getValue().toString());
                     keyStatistic = (String) snapshot.child(String.valueOf(i)).getValue();
-
+                    Toast.makeText(StatisticsActivity.this, i+keyStatistic, Toast.LENGTH_LONG).show();
                     statisticsDatabase = FirebaseDatabase.getInstance().getReference("Statistics/" + keyStatistic);
+
                     ValueEventListener valueEventListener = statisticsDatabase.addValueEventListener(new ValueEventListener() {
 
                         public void onDataChange(DataSnapshot snapshot) {
+                                Statistics s = snapshot.getValue( Statistics.class );
+                                for (int j =0; j<statistics.size();j++)//for not duplicate on the screen
+                                {
+                                    if(statistics.get( j ).name.equals( s.name ))
+                                    {
+                                        statistics.remove( j );
+                                    }
+                                }
+                            //Collections.sort(statistics);
 
-                            Statistics s = snapshot.getValue(Statistics.class);
-                            statistics.add(s);
-                            Log.d("onStart", snapshot.toString());
+                                statistics.add( s );
+                                Log.d( "onStart", snapshot.toString() );
+
                             statisticsAdapter.notifyDataSetChanged();
-                            progressDialog.dismiss();
+
+                                progressDialog.dismiss();
+
+
                         }
 
 

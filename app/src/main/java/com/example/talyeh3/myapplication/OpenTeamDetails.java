@@ -111,12 +111,12 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         statistics.add( "-1" );
         Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString(),statistics);
         teamRef = database.getReference( "Teams" ).push();
+            userRef = database.getReference( "Users/" + myUserId );
         t.key = teamRef.getKey();
-        //String keyStatistics=myUserKey+t.key;
         statistics.add(myUserKey+t.key);
             statistics.remove( "-1" );
         t.statistics=statistics;
-        Statistics s=new Statistics( myUserKey+t.key,t.key,myUserMail,0,0,0);
+        Statistics s=new Statistics( myUserKey+t.key,t.key,u.userName,0,0,0);
         DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Statistics").child(myUserKey+t.key).setValue(s);
@@ -124,7 +124,6 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
 
 
         myTeams = new ArrayList<String>();
-        userRef = database.getReference( "Users/" + myUserId );
         userRef2 = database.getReference( "Users/" + myUserId + "/teams/0" );
 
         // Toast.makeText(OpenTeamDetails.this,  userRef2.toString(), Toast.LENGTH_LONG).show();

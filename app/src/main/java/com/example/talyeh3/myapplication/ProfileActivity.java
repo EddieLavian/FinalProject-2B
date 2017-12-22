@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         t.users.add(u.uid);
         String myUserKey = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String myUserMail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        t.statistics.add(myUserKey+t.key);
+        t.statistics.add(key+t.key);
 
 
 
