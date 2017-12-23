@@ -7,13 +7,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.CreateGame.CreateGame;
+import com.example.talyeh3.myapplication.CreateGame.TeamGamesActivity;
 import com.example.talyeh3.myapplication.EditPostActivity;
 import com.example.talyeh3.myapplication.MyTeams;
 import com.example.talyeh3.myapplication.MyTeamsAdapter;
+import com.example.talyeh3.myapplication.OpenTeam;
 import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.Team;
 import com.example.talyeh3.myapplication.TeamDetails;
@@ -28,8 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
-public class StatisticsActivity extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity implements View.OnClickListener{
     ListView lv;
     int i = 0;
     String keyStatistic="";
@@ -38,10 +42,8 @@ public class StatisticsActivity extends AppCompatActivity {
     StatisticsAdapter statisticsAdapter;
     private DatabaseReference database,statisticsDatabase;
     String keyTeam="";
-    //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    //String myUserId = user.getUid();
     ProgressDialog progressDialog;
-    Boolean first=true;
+    Button btnSortGames,btnSortAssists,btnSortGolas;
 
 
 
@@ -51,6 +53,12 @@ public class StatisticsActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_statistics );
 
+ //       btnSortGames=(Button) findViewById( R.id.btnSortGames );
+ //       btnSortAssists=(Button)findViewById( R.id.btnSortAssists );
+  //      btnSortGolas=(Button) findViewById( R.id.btnSortGolas );
+  //      btnSortGames.setOnClickListener( this );
+  //      btnSortAssists.setOnClickListener( this );
+  //      btnSortGolas.setOnClickListener( this );
 
         Intent intent = getIntent();
         keyTeam = intent.getExtras().getString("teamKey");
@@ -70,8 +78,6 @@ public class StatisticsActivity extends AppCompatActivity {
                 Intent intent = new Intent(StatisticsActivity.this, editStatistics.class);
                 intent.putExtra("keyStatistic", s.key );
                 startActivity(intent);
-
-
             }
 
 
@@ -112,10 +118,19 @@ public class StatisticsActivity extends AppCompatActivity {
                                         statistics.remove( j );
                                     }
                                 }
-                            //Collections.sort(statistics);
+
 
                                 statistics.add( s );
-                                Log.d( "onStart", snapshot.toString() );
+                            Collections.sort(statistics, new Comparator<Statistics>(){
+                                public int compare(Statistics obj1, Statistics obj2)
+                                {
+                                    // TODO Auto-generated method stub
+                                    return (obj1.goals > obj2.goals) ? -1: (obj1.goals > obj2.goals) ? 1:0 ;
+                                }
+                            });
+
+
+                            Log.d( "onStart", snapshot.toString() );
 
                             statisticsAdapter.notifyDataSetChanged();
 
@@ -143,4 +158,50 @@ public class StatisticsActivity extends AppCompatActivity {
 
 
     }
-}
+
+
+
+
+    public void onClick(View v) {
+        /*
+        if (v==btnSortAssists)
+        {
+            Collections.sort(statistics, new Comparator<Statistics>(){
+                public int compare(Statistics obj1, Statistics obj2)
+                {
+                    // TODO Auto-generated method stub
+                    return (obj1.assist > obj2.assist) ? -1: (obj1.assist > obj2.assist) ? 1:0 ;
+                }
+            });
+
+        }
+        if(v==btnSortGames)
+        {
+            Collections.sort(statistics, new Comparator<Statistics>(){
+                public int compare(Statistics obj1, Statistics obj2)
+                {
+                    // TODO Auto-generated method stub
+                    return (obj1.games > obj2.games) ? -1: (obj1.games > obj2.games) ? 1:0 ;
+                }
+            });
+
+        }
+        if (v==btnSortGolas)
+        {
+            Collections.sort(statistics, new Comparator<Statistics>(){
+                public int compare(Statistics obj1, Statistics obj2)
+                {
+                    // TODO Auto-generated method stub
+                    return (obj1.goals > obj2.goals) ? -1: (obj1.goals > obj2.goals) ? 1:0 ;
+                }
+            });
+
+        }
+
+
+*/
+    }
+
+
+
+    }

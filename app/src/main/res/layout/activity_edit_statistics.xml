@@ -33,49 +33,111 @@
             android:clickable="true"
             android:padding="10dp"
             android:textColor="#a6aff1"
-            android:inputType="number"/>
-        <EditText
-            android:id="@+id/etGames"
+            />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Games"
-            android:drawableLeft="@drawable/ellipse_04"
-            android:textAllCaps="false"
-            android:drawablePadding="16dp"
-            android:textSize="18sp"
-            android:gravity="start"
-            android:clickable="true"
-            android:padding="10dp"
-            android:textColor="#a6aff1"
-            android:inputType="number"/>
-        <EditText
-            android:id="@+id/etGoals"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/etGames"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:hint="Games"
+                android:textAllCaps="false"
+                android:drawablePadding="16dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:clickable="true"
+                android:padding="10dp"
+                android:textColor="#a6aff1"
+                android:inputType="number"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Games"
+                android:drawableLeft="@drawable/ellipse_04"
+                android:textAllCaps="false"
+                android:drawablePadding="16dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:clickable="true"
+                android:padding="10dp"
+                android:textColor="#a6aff1"
+               />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Goals"
-            android:drawableLeft="@drawable/ellipse_05"
-            android:textAllCaps="false"
-            android:drawablePadding="16dp"
-            android:textSize="18sp"
-            android:gravity="start"
-            android:clickable="true"
-            android:padding="10dp"
-            android:textColor="#a6aff1"
-            android:inputType="number"/>
-        <EditText
-            android:id="@+id/etAssists"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/etGoals"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:hint="Goals"
+                android:textAllCaps="false"
+                android:drawablePadding="16dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:clickable="true"
+                android:padding="10dp"
+                android:textColor="#a6aff1"
+                android:inputType="number"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Goals"
+                android:drawableLeft="@drawable/ellipse_05"
+                android:textAllCaps="false"
+                android:drawablePadding="16dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:clickable="true"
+                android:padding="10dp"
+                android:textColor="#a6aff1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Assists"
-            android:drawableLeft="@drawable/ellipse_06"
-            android:textAllCaps="false"
-            android:drawablePadding="16dp"
-            android:textSize="18sp"
-            android:gravity="start"
-            android:clickable="true"
-            android:padding="10dp"
-            android:textColor="#a6aff1"
-            android:inputType="number"/>
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/etAssists"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:hint="Assists"
+                android:textAllCaps="false"
+                android:drawablePadding="16dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:clickable="true"
+                android:padding="10dp"
+                android:textColor="#a6aff1"
+                android:inputType="number"/>
+            <TextView
+                android:id="@+id/tvAssists"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Assists"
+                android:drawableLeft="@drawable/ellipse_06"
+                android:textAllCaps="false"
+                android:drawablePadding="16dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:clickable="true"
+                android:padding="10dp"
+                android:textColor="#a6aff1"
+                />
+        </LinearLayout>
+
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
