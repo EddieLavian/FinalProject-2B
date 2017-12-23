@@ -36,7 +36,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
 
     Dialog d;
-    int firstPress=0;
+    int firstPress=0,addPlayer=0;
     ListView lv;
     int i = 0;
     private DatabaseReference database2,teamDatabase;
@@ -74,6 +74,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
     public void teamPlayers()
     {
+
         if(firstPress==0)
         {
             d= new Dialog(this);
@@ -84,6 +85,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             d.show();
             Toast.makeText(TeamDetails.this, "a"+firstPress,Toast.LENGTH_SHORT).show();
         }
+
         else
             {
             d.show();
@@ -94,6 +96,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             public boolean onKey(DialogInterface arg0, int keyCode, KeyEvent event) {
                 // TODO Auto-generated method stub
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    d.cancel();
                     d.dismiss();
                     firstPress=1;
                 }
@@ -137,9 +140,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                     keyUser = (String) snapshot.child(String.valueOf(i)).getValue();//put in array of users at the teams key and not mail
                     //Toast.makeText(TeamDetails.this, "sd  "+firstPress,Toast.LENGTH_SHORT).show();
                     teamDatabase = FirebaseDatabase.getInstance().getReference("Users/" + keyUser);
-
-
-
                     ValueEventListener valueEventListener = teamDatabase.addValueEventListener(new ValueEventListener() {
                         public void onDataChange(DataSnapshot snapshot) {
                             User u = snapshot.getValue(User.class);
@@ -174,8 +174,11 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         if (v==btnAddPlayer)
         {
+            startActivity(getIntent());
+            addPlayer=1;
             Intent intent = new Intent( TeamDetails.this, OpenTeam.class );
             intent.putExtra( "teamKey", t.key );
+            finish();
             startActivity( intent );
         }
         if(v==btnTeamPlayers)
