@@ -33,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-public class StatisticsActivity extends AppCompatActivity implements View.OnClickListener{
+public class StatisticsActivity extends AppCompatActivity{
     ListView lv;
     int i = 0;
     String keyStatistic="";
@@ -52,14 +52,14 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_statistics );
-
- //       btnSortGames=(Button) findViewById( R.id.btnSortGames );
- //       btnSortAssists=(Button)findViewById( R.id.btnSortAssists );
-  //      btnSortGolas=(Button) findViewById( R.id.btnSortGolas );
-  //      btnSortGames.setOnClickListener( this );
-  //      btnSortAssists.setOnClickListener( this );
-  //      btnSortGolas.setOnClickListener( this );
-
+/*
+        btnSortGames=(Button) findViewById( R.id.btnSortGames );
+        btnSortAssists=(Button)findViewById( R.id.btnSortAssists );
+        btnSortGolas=(Button) findViewById( R.id.btnSortGolas );
+        btnSortGames.setOnClickListener( this );
+        btnSortAssists.setOnClickListener( this );
+        btnSortGolas.setOnClickListener( this );
+*/
         Intent intent = getIntent();
         keyTeam = intent.getExtras().getString("teamKey");
 
@@ -78,6 +78,8 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
                 Intent intent = new Intent(StatisticsActivity.this, editStatistics.class);
                 intent.putExtra("keyStatistic", s.key );
                 startActivity(intent);
+
+
             }
 
 
@@ -161,9 +163,8 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
 
 
 
-
+/*
     public void onClick(View v) {
-        /*
         if (v==btnSortAssists)
         {
             Collections.sort(statistics, new Comparator<Statistics>(){
@@ -173,7 +174,6 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
                     return (obj1.assist > obj2.assist) ? -1: (obj1.assist > obj2.assist) ? 1:0 ;
                 }
             });
-
         }
         if(v==btnSortGames)
         {
@@ -184,7 +184,8 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
                     return (obj1.games > obj2.games) ? -1: (obj1.games > obj2.games) ? 1:0 ;
                 }
             });
-
+            finish();
+            startActivity(getIntent());
         }
         if (v==btnSortGolas)
         {
@@ -197,11 +198,11 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
             });
 
         }
+        finish();
+        startActivity(getIntent());
 
-
-*/
     }
 
-
+*/
 
     }

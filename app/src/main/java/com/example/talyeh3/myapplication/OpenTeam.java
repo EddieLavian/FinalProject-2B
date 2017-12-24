@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,11 +32,14 @@ public class OpenTeam extends AppCompatActivity {
     ArrayList<User> users;
     OpenTeamAdapter allUsersAdapter;
     TextView tvAddPlayer;
+    ImageView image;
     private DatabaseReference database;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String myUserId = user.getUid();
-
+    Button btn;
+    String keyUser="";
     ProgressDialog progressDialog;
+    int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +49,38 @@ public class OpenTeam extends AppCompatActivity {
         lv = (ListView) findViewById( R.id.lv);
         tvAddPlayer= (TextView) findViewById( R.id.tvAddPlayer);
         this.retriveData();
-        AutoCompleteTextView tv = (AutoCompleteTextView) findViewById( R.id.autoCompleteTextView);
 
+
+/*
+        List<String> names = new AbstractList<String>() {
+            public int size() { return users.size(); }
+            public String get(int location) {
+
+                return users.get(location).userName;
+            }
+        };
+        final AutoCompleteTextView tv = (AutoCompleteTextView) findViewById( R.id.autoCompleteTextView);
+        ArrayAdapter<String >adapter=new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, names );
+        tv.setAdapter( adapter );
+        image = (ImageView) findViewById( R.id.image);
+
+        image.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv.showDropDown();
+            }
+        } );
+        btn= (Button) findViewById( R.id.btn);
+        btn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String s = tv.getText().toString();
+
+            }
+        } );
+
+
+*/
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,7 +112,9 @@ public class OpenTeam extends AppCompatActivity {
         });
 */
 
-        setupAutoComplete(tv,users);
+     //   setupAutoComplete(tv,users);
+
+
     }
 
     public void retriveData() {
@@ -86,27 +123,27 @@ public class OpenTeam extends AppCompatActivity {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 users = new ArrayList<User>();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                         User u = data.getValue(User.class);
                         int notDuplicateUser=0;
+                        /*
                         for (int i = 0; i < users.size();i++)
                         {
                             if (u.uid.equals(users.get(i).uid))
                             {
-                                notDuplicateUser=1;
+                                users.remove( i );
+                                notDuplicateUser=-1;
                             }
                         }
+                        */
+
                         if (!u.uid.equals( myUserId )&& notDuplicateUser==0)
                             users.add(u);
-
                 }
                 progressDialog.dismiss();
                 allUsersAdapter = new OpenTeamAdapter(OpenTeam.this, 0, 0, users);
                 lv.setAdapter(allUsersAdapter);
-
-
             }
 
             @Override
@@ -117,6 +154,7 @@ public class OpenTeam extends AppCompatActivity {
 
 
     }
+    /*
     private void setupAutoComplete(AutoCompleteTextView view, List<User> objects) {
         List<String> names = new AbstractList<String>() {
             public int size() { return users.size(); }
@@ -126,8 +164,9 @@ public class OpenTeam extends AppCompatActivity {
             }
         };
         view.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names));
-    }
 
+    }
+    */
 
 }
 

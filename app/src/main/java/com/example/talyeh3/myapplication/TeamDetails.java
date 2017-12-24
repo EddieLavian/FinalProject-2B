@@ -12,9 +12,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.talyeh3.myapplication.Chat.ChatActivity;
 import com.example.talyeh3.myapplication.CreateGame.CreateGame;
 import com.example.talyeh3.myapplication.CreateGame.TeamGamesActivity;
 import com.example.talyeh3.myapplication.Statistics.StatisticsActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +28,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView tvName,btnAddPlayer,btnCreateGame,btnGames,btnStatistics;
+    TextView tvName,btnAddPlayer,btnCreateGame,btnGames,btnStatistics,btnChat;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
     DatabaseReference teamRef;
@@ -33,7 +36,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     Team t;
     String key;
     String photo="";
-
+    String teamName;
+    private DatabaseReference databaseUser;
 
     Dialog d;
     int firstPress=0,addPlayer=0;
@@ -43,9 +47,19 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     ArrayList<User> users;
     String keyUser="";
     AllUsersAdapter allPlayersAdapter;
+    FirebaseUser us = FirebaseAuth.getInstance().getCurrentUser();
+    String myUserId = us.getUid();
+
+
+
+    User user,user2;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_team_details);//try commit
+
+
+        databaseUser = FirebaseDatabase.getInstance().getReference("Users");
+        this.retriveData();
         Toast.makeText(TeamDetails.this, "sd  "+firstPress,Toast.LENGTH_SHORT).show();
         user_profile_photo=(ImageView)findViewById( R.id.user_profile_photo);
         database = FirebaseDatabase.getInstance();
@@ -54,13 +68,14 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnCreateGame=(TextView)findViewById( R.id.btnCreateGame );
         btnTeamPlayers=(ImageView) findViewById( R.id.btnTeamPlayers );
         btnStatistics=(TextView)findViewById( R.id.btnStatistics );
+        btnChat=(TextView)findViewById( R.id.btnChat );
         btnGames=(TextView) findViewById( R.id.btnGames );
         btnAddPlayer.setOnClickListener( this );
+        btnChat.setOnClickListener( this );
         btnStatistics.setOnClickListener( this );
         btnCreateGame.setOnClickListener( this );
         btnTeamPlayers.setOnClickListener( this );
         btnGames.setOnClickListener( this );
-
         Intent intent = getIntent();
         key = intent.getExtras().getString("keyteam");
         teamRef = database.getReference("Teams/" + key);
@@ -68,6 +83,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         Toast.makeText(TeamDetails.this, "hghg         "+key, Toast.LENGTH_LONG).show();
         //for all players team
         database2 = FirebaseDatabase.getInstance().getReference("Teams/"+key+"/users");
+
+
     }
 
 
@@ -113,6 +130,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 t = dataSnapshot.getValue(Team.class);
+                teamName=t.name;
                 tvName.setText("team name: " + t.name);
                 photo= t.imgUrl;
                         Picasso
@@ -203,6 +221,35 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             intent.putExtra( "teamKey", key );
             startActivity( intent );
         }
+        if (v==btnChat)
+        {
+            Intent intent = new Intent( TeamDetails.this, ChatActivity.class );
+            intent.putExtra( "teamKey", key );
+            intent.putExtra( "teamName", teamName );
+            intent.putExtra( "profilePic", user2.imgUrl );
+            startActivity( intent );
+        }
+
+    }
+
+
+    public void retriveData() {
+        databaseUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        user = data.getValue(User.class);
+                    if (user.uid.equals( myUserId ))
+                    {
+                        user2 = user;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
 
     }
 

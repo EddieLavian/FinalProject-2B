@@ -19,8 +19,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.talyeh3.myapplication.Chat.ChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ToBeTest extends AppCompatActivity implements View.OnClickListener
      {
@@ -28,7 +34,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     TextView btnAllUsers;
     TextView btnOpenTeam;
     TextView btnMyTeams;
-
+    TextView btnChat;
 
     Dialog d;
     TextView logOut;
@@ -37,6 +43,9 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     ProgressDialog progressDialog;
     TextView btnAllPost;
     TextView btnWeather;
+    String name="";
+         private DatabaseReference databaseUser;
+         User user;
 
 
     @Override
@@ -44,12 +53,11 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_to_be_test );
 
-
-
+        databaseUser = FirebaseDatabase.getInstance().getReference("Users");
         firebaseAuth = FirebaseAuth.getInstance();
         btnAllPost = (TextView)findViewById(R.id.btnAllPost);
         btnWeather = (TextView)findViewById(R.id.btnWeather);
-
+         retriveData();
         btnMyTeams = (TextView)findViewById(R.id.btnMyTeams);
         progressDialog = new ProgressDialog(this);
 
@@ -81,6 +89,17 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ToBeTest.this,OpenTeamDetails.class);
+                startActivity(intent);
+
+            }
+        });
+
+        btnChat = (TextView)findViewById(R.id.btnChat);
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ToBeTest.this,ChatActivity.class);
+                intent.putExtra( "profilePic", user.imgUrl );
                 startActivity(intent);
 
             }
@@ -155,5 +174,25 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                  startActivity(intent);
              }
+         }
+
+
+
+         public void retriveData() {
+             databaseUser.addValueEventListener(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(DataSnapshot dataSnapshot) {
+                     // myId = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                     for (DataSnapshot data : dataSnapshot.getChildren()) {
+                         // if (!user.uid.equals( myUserId )&& notDuplicateUser==0)
+                         user = data.getValue(User.class);
+                     }
+                 }
+                 @Override
+                 public void onCancelled(DatabaseError databaseError) {
+                 }
+             });
+
+
          }
      }
