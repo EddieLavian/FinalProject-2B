@@ -56,7 +56,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_team_details);//try commit
-
+        getSupportActionBar().hide();
 
         databaseUser = FirebaseDatabase.getInstance().getReference("Users");
         this.retriveData();
@@ -227,6 +227,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             intent.putExtra( "teamKey", key );
             intent.putExtra( "teamName", teamName );
             intent.putExtra( "profilePic", user2.imgUrl );
+            intent.putExtra( "userName", user2.userName );
             startActivity( intent );
         }
 

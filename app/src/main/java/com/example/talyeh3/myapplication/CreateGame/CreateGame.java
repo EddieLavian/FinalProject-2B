@@ -68,7 +68,7 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_create_game );
-
+        getSupportActionBar().hide();
         etMinimumPlayers = (EditText) findViewById(R.id.etMinimumPlayers);
 //********************************date and time********************************
         mDisplayDate = (TextView) findViewById(R.id.btnDate);

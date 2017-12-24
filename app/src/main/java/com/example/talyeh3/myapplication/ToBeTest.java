@@ -44,17 +44,32 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     TextView btnAllPost;
     TextView btnWeather;
     String name="";
+    FirebaseUser us;
+         String myUserId;
          private DatabaseReference databaseUser;
-         User user;
+         User user,user2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_to_be_test );
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
+        if(firebaseUser!=null)
+        {
+            us= FirebaseAuth.getInstance().getCurrentUser();
+            myUserId = us.getUid();
+        }
+        else//registeration page
+        {
+            Intent intent = new Intent(ToBeTest.this, RegisterActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
 
         databaseUser = FirebaseDatabase.getInstance().getReference("Users");
-        firebaseAuth = FirebaseAuth.getInstance();
+
         btnAllPost = (TextView)findViewById(R.id.btnAllPost);
         btnWeather = (TextView)findViewById(R.id.btnWeather);
          retriveData();
@@ -72,17 +87,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
             }
         });
 
-        FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
-        if(firebaseUser!=null)
-        {
 
-        }
-        else//registeration page
-        {
-            Intent intent = new Intent(ToBeTest.this, RegisterActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
 
         btnOpenTeam = (TextView)findViewById(R.id.btnOpenTeam);
         btnOpenTeam.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +104,8 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ToBeTest.this,ChatActivity.class);
-                intent.putExtra( "profilePic", user.imgUrl );
+                intent.putExtra( "profilePic", user2.imgUrl );
+                intent.putExtra( "userName", user2.userName );
                 startActivity(intent);
 
             }
@@ -184,8 +190,11 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
                  public void onDataChange(DataSnapshot dataSnapshot) {
                      // myId = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                      for (DataSnapshot data : dataSnapshot.getChildren()) {
-                         // if (!user.uid.equals( myUserId )&& notDuplicateUser==0)
                          user = data.getValue(User.class);
+                         if (user.uid.equals( myUserId ))
+                         {
+                             user2 = user;
+                         }
                      }
                  }
                  @Override
@@ -195,4 +204,5 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
 
 
          }
+
      }

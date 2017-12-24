@@ -29,6 +29,7 @@ public class AllPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_post);
+        getSupportActionBar().hide();
 
         database = FirebaseDatabase.getInstance().getReference("Posts");
 

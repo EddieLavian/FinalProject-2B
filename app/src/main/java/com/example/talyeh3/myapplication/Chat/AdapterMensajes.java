@@ -39,16 +39,6 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
     @Override
     public HolderMensaje onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(c).inflate( R.layout.card_view_mensajes,parent,false);
-
-        ImageView imgProfile = (ImageView)v.findViewById(R.id.imgProfile);
-        Picasso
-                .with( c )
-                .load( profilePic )
-                //.load( listMensaje.get(listMensaje.get(position).getUrlFoto()).getFotoPerfil() )
-                .fit() // will explain later
-                .into( imgProfile );
-
-
         return new HolderMensaje(v);
     }
 
@@ -65,10 +55,7 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
             holder.getMensaje().setVisibility(View.VISIBLE);
         }
         if(listMensaje.get(position).getFotoPerfil().isEmpty()){
-
-
-
-
+            holder.getFotoMensajePerfil().setImageResource(R.mipmap.ic_launcher);
         }else{
             Glide.with(c).load(listMensaje.get(position).getFotoPerfil()).into(holder.getFotoMensajePerfil());
         }

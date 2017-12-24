@@ -51,14 +51,14 @@ public class ChatActivity extends AppCompatActivity {
     private String fotoPerfilCadena;
     String key="General Chat";
     String name="General Chat";
-    String profilePic="";
+    String profilePic="",userName="";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_chat );
-
+        getSupportActionBar().hide();
 
 
         fotoPerfil = (CircleImageView) findViewById(R.id.fotoPerfil);
@@ -75,6 +75,7 @@ public class ChatActivity extends AppCompatActivity {
             key = intent.getExtras().getString("teamKey");
             name = intent.getExtras().getString("teamName");
             profilePic = intent.getExtras().getString("profilePic");
+            userName = intent.getExtras().getString("userName");
             Toast.makeText(ChatActivity.this,"kkkkk"+ profilePic,Toast.LENGTH_SHORT).show();
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("chat/"+key);//Sala de chat (nombre)
@@ -84,6 +85,7 @@ public class ChatActivity extends AppCompatActivity {
         else
         {
             profilePic = intent.getExtras().getString("profilePic");
+            userName = intent.getExtras().getString("userName");
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("chat/GeneralChat");//Sala de chat (nombre)
             //Intent intentName = getIntent();//for name of user
@@ -99,14 +101,10 @@ public class ChatActivity extends AppCompatActivity {
         LinearLayoutManager l = new LinearLayoutManager(this);
         rvMensajes.setLayoutManager(l);
         rvMensajes.setAdapter(adapter);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();//
-        final String myUserName = user.getEmail();
-        final String myUserName2 = user.getDisplayName();
-        Toast.makeText(ChatActivity.this, myUserName,Toast.LENGTH_SHORT).show();
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),myUserName,profilePic,"1", ServerValue.TIMESTAMP));
+                databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),userName,profilePic,"1", ServerValue.TIMESTAMP));
                 txtMensaje.setText("");
             }
         });
@@ -183,7 +181,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri u = taskSnapshot.getDownloadUrl();
-                    MensajeEnviar m = new MensajeEnviar("Kevin te ha enviado una foto",u.toString(),tvName.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
+                    MensajeEnviar m = new MensajeEnviar("",u.toString(),userName+" changed team photo",profilePic,"2",ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                 }
             });
@@ -196,7 +194,7 @@ public class ChatActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri u = taskSnapshot.getDownloadUrl();
                     fotoPerfilCadena = u.toString();
-                    MensajeEnviar m = new MensajeEnviar("Kevin ha actualizado su foto de perfil",u.toString(),tvName.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
+                    MensajeEnviar m = new MensajeEnviar("",u.toString(),userName+" changed team photo",profilePic,"2",ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                     Glide.with(ChatActivity.this).load(u.toString()).into(fotoPerfil);
                 }
