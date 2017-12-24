@@ -227,7 +227,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void login()
     {
-        
+        if(etEmail.getText().length() < 1 || etPass.getText().length() < 1)
+        {
+            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         progressDialog.setMessage("Login Please Wait...");
         progressDialog.show();
@@ -239,7 +243,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                         if(task.isSuccessful())
                         {
-                            Toast.makeText(RegisterActivity.this, "auth_success!!!!!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "auth success",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RegisterActivity.this, ToBeTest.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
