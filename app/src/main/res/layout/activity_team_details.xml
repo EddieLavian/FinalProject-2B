@@ -106,6 +106,7 @@
                 android:text="Statistics" />
 
             <TextView
+                android:id="@+id/btnGallery"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

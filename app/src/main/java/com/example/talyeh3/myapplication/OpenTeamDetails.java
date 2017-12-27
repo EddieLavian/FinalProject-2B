@@ -68,6 +68,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
 
         getSupportActionBar().hide();
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
         progressDialog = new ProgressDialog( this );
         imgProfile = (ImageView) findViewById( R.id.imgProfile );
         btnChoose = (Button) findViewById( R.id.btnChoose );
@@ -127,7 +128,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         userRef2 = database.getReference( "Users/" + myUserId + "/teams/0" );
 
         // Toast.makeText(OpenTeamDetails.this,  userRef2.toString(), Toast.LENGTH_LONG).show();
-        u.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        u.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//נהות
         u.teams.add( t.key );
         userRef.setValue( u );
         if (userRef2 != null) {
@@ -139,12 +140,10 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         if (b == true) {
             t.imgUrl=generatedFilePath;
             teamRef.setValue( t );
-
-            finish();
             Intent intent = new Intent( OpenTeamDetails.this, OpenTeam.class );
             intent.putExtra( "teamKey", t.key );
             startActivity( intent );
-
+            //finish();
         }
 
 

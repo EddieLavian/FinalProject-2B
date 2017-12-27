@@ -55,7 +55,6 @@ public class OpenTeam extends AppCompatActivity {
         List<String> names = new AbstractList<String>() {
             public int size() { return users.size(); }
             public String get(int location) {
-
                 return users.get(location).userName;
             }
         };
@@ -63,7 +62,6 @@ public class OpenTeam extends AppCompatActivity {
         ArrayAdapter<String >adapter=new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, names );
         tv.setAdapter( adapter );
         image = (ImageView) findViewById( R.id.image);
-
         image.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,11 +73,8 @@ public class OpenTeam extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String s = tv.getText().toString();
-
             }
         } );
-
-
 */
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,10 +83,10 @@ public class OpenTeam extends AppCompatActivity {
                 User u = users.get(position);
                 Intent getIntent = getIntent();
                 teamKey = getIntent.getExtras().getString("teamKey");
-               Intent intent = new Intent(OpenTeam.this, ProfileActivity.class);
-               intent.putExtra("key", u.uid );
-               intent.putExtra("team",teamKey);
-               startActivity(intent);
+                Intent intent = new Intent(OpenTeam.this, ProfileActivity.class);
+                intent.putExtra("key", u.uid );
+                intent.putExtra("team",teamKey);
+                startActivity(intent);
 
             }
 
@@ -106,13 +101,11 @@ public class OpenTeam extends AppCompatActivity {
                 currentUser.removeValue();
                 currentTeam.removeValue();
                 return true;
-
-
             }
         });
 */
 
-     //   setupAutoComplete(tv,users);
+        //   setupAutoComplete(tv,users);
 
 
     }
@@ -125,8 +118,8 @@ public class OpenTeam extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 users = new ArrayList<User>();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        User u = data.getValue(User.class);
-                        int notDuplicateUser=0;
+                    User u = data.getValue(User.class);
+                    int notDuplicateUser=0;
                         /*
                         for (int i = 0; i < users.size();i++)
                         {
@@ -138,8 +131,8 @@ public class OpenTeam extends AppCompatActivity {
                         }
                         */
 
-                        if (!u.uid.equals( myUserId )&& notDuplicateUser==0)
-                            users.add(u);
+                    if (!u.uid.equals( myUserId )&& notDuplicateUser==0)
+                        users.add(u);
                 }
                 progressDialog.dismiss();
                 allUsersAdapter = new OpenTeamAdapter(OpenTeam.this, 0, 0, users);
@@ -159,15 +152,11 @@ public class OpenTeam extends AppCompatActivity {
         List<String> names = new AbstractList<String>() {
             public int size() { return users.size(); }
             public String get(int location) {
-
                 return users.get(location).userName;
             }
         };
         view.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names));
-
     }
     */
 
 }
-
-

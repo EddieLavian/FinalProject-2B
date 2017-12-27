@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +48,7 @@ public class MyTeams extends AppCompatActivity {
         }
 
 
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,6 +81,12 @@ public class MyTeams extends AppCompatActivity {
                for (DataSnapshot data : snapshot.getChildren()) {
                          Log.d("onDataChange", data.getValue().toString());
                         keyteam = (String) snapshot.child(String.valueOf(i)).getValue();
+                        if (keyteam==null)
+                        {
+                            Toast.makeText(MyTeams.this, "you dont have teams yet", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                            return;
+                        }
                         teamDatabase = FirebaseDatabase.getInstance().getReference("Teams/" + keyteam);
                   ValueEventListener valueEventListener = teamDatabase.addValueEventListener(new ValueEventListener() {
 

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.talyeh3.myapplication.Chat.ChatActivity;
 import com.example.talyeh3.myapplication.CreateGame.CreateGame;
 import com.example.talyeh3.myapplication.CreateGame.TeamGamesActivity;
+import com.example.talyeh3.myapplication.Gallery.GalleryActivity;
 import com.example.talyeh3.myapplication.Statistics.StatisticsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +29,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView tvName,btnAddPlayer,btnCreateGame,btnGames,btnStatistics,btnChat;
+    TextView tvName,btnAddPlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
     DatabaseReference teamRef;
@@ -69,9 +70,11 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnTeamPlayers=(ImageView) findViewById( R.id.btnTeamPlayers );
         btnStatistics=(TextView)findViewById( R.id.btnStatistics );
         btnChat=(TextView)findViewById( R.id.btnChat );
+        btnGallery=(TextView)findViewById( R.id.btnGallery );
         btnGames=(TextView) findViewById( R.id.btnGames );
         btnAddPlayer.setOnClickListener( this );
         btnChat.setOnClickListener( this );
+        btnGallery.setOnClickListener( this );
         btnStatistics.setOnClickListener( this );
         btnCreateGame.setOnClickListener( this );
         btnTeamPlayers.setOnClickListener( this );
@@ -224,6 +227,15 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         if (v==btnChat)
         {
             Intent intent = new Intent( TeamDetails.this, ChatActivity.class );
+            intent.putExtra( "teamKey", key );
+            intent.putExtra( "teamName", teamName );
+            intent.putExtra( "profilePic", user2.imgUrl );
+            intent.putExtra( "userName", user2.userName );
+            startActivity( intent );
+        }
+        if (v==btnGallery)
+        {
+            Intent intent = new Intent( TeamDetails.this, GalleryActivity.class );
             intent.putExtra( "teamKey", key );
             intent.putExtra( "teamName", teamName );
             intent.putExtra( "profilePic", user2.imgUrl );

@@ -118,6 +118,12 @@ public class TeamGamesActivity extends AppCompatActivity {
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Log.d( "onDataChange", data.getValue().toString() );
                     keyGame = (String) snapshot.child( String.valueOf( i ) ).getValue();
+                    if (keyGame==null)
+                    {
+                        Toast.makeText(TeamGamesActivity.this, "you dont have planing games yet", Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                        return;
+                    }
                     gameDatabase = FirebaseDatabase.getInstance().getReference( "Games/" + keyGame );
                     ValueEventListener valueEventListener = gameDatabase.addValueEventListener( new ValueEventListener() {
                         public void onDataChange(DataSnapshot snapshot) {

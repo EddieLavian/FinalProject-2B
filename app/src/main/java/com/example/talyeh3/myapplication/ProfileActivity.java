@@ -76,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                 t = dataSnapshot.getValue(Team.class);
 
-               tvTeam.setText("Team Name "+ t.name);
+                tvTeam.setText("Team Name "+ t.name);
 
 
             }
