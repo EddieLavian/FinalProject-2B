@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.talyeh3.myapplication.Chat.ChatActivity;
+import com.example.talyeh3.myapplication.Weather.WeatherMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -122,7 +123,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         btnWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ToBeTest.this,WeatherActivity.class);
+                Intent intent = new Intent(ToBeTest.this,WeatherMainActivity.class);
                 startActivity(intent);
             }
         });
