@@ -28,7 +28,7 @@ public class AdapterGallery extends RecyclerView.Adapter<HolderMensaje> {
 
 
 
-    private List<MensajeRecibir> listMensaje = new ArrayList<>();
+    private List<MensajeRecibir> listMensaje = new ArrayList<>();//create list
     private Context c;
     String profilePic="";
 
@@ -53,7 +53,7 @@ public class AdapterGallery extends RecyclerView.Adapter<HolderMensaje> {
     }
 
     @Override
-    public void onBindViewHolder(HolderMensaje holder, int position) {
+    public void onBindViewHolder(final HolderMensaje holder, final int position) {
         holder.getNombre().setText(listMensaje.get(position).getNombre());
         holder.getMensaje().setText(listMensaje.get(position).getMensaje());
         if(listMensaje.get(position).getType_mensaje().equals("2")){
@@ -71,8 +71,8 @@ public class AdapterGallery extends RecyclerView.Adapter<HolderMensaje> {
         holder.cardView.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(c, ToBeTest.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(c, BigPhoto.class);
+                intent.putExtra( "pic",listMensaje.get(position).getUrlFoto() );
                 c.startActivity(intent);
             }
         } );
