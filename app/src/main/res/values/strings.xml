@@ -1,4 +1,11 @@
 <resources>
+
+    <string name="action_add_favourite">Add to Favourites</string>
+    <string name="action_play_next">Play Next</string>
+    <string name="backdrop_title">LOVE MUSICS</string>
+    <string name="backdrop_subtitle">This season top 20 music</string>
+
+
     <string name="app_name">My Application</string>
     <string name="title_activity_to_be_test">ToBeTest</string>
 

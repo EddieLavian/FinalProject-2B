@@ -1,5 +1,6 @@
 package com.example.talyeh3.myapplication.Gallery;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,10 +21,13 @@ public class HolderMensaje extends RecyclerView.ViewHolder {
     private TextView hora;
     private CircleImageView fotoMensajePerfil;
     private ImageView fotoMensaje;
+    public ImageView mensajeFoto;
+    public CardView cardView;
 
     public HolderMensaje(View itemView) {
         super(itemView);
         nombre = (TextView) itemView.findViewById( R.id.nombreMensaje);
+        cardView = (CardView) itemView.findViewById( R.id.card_view);
         mensaje = (TextView) itemView.findViewById(R.id.mensajeMensaje);
         hora = (TextView) itemView.findViewById(R.id.horaMensaje);
         fotoMensajePerfil = (CircleImageView) itemView.findViewById(R.id.imgProfile);

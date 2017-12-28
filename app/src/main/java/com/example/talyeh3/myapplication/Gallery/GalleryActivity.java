@@ -1,15 +1,24 @@
 package com.example.talyeh3.myapplication.Gallery;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +39,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GalleryActivity extends AppCompatActivity {
 
-    private CircleImageView fotoPerfil;
     private TextView tvName;
     private RecyclerView rvMensajes;
-    private EditText txtMensaje;
-    private Button btnEnviar;
-    private AdapterMensajes adapter;
+    private AdapterGallery adapter;
     private ImageButton btnEnviarFoto;
 
     private FirebaseDatabase database;
@@ -43,8 +49,6 @@ public class GalleryActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private static final int PHOTO_SEND = 1;
-    private static final int PHOTO_PERFIL = 2;
-    private String fotoPerfilCadena;
     String key="General Chat";
     String name="General Chat";
     String profilePic="",userName="";
@@ -54,20 +58,16 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_gallery );
-        getSupportActionBar().hide();
-
-
-        fotoPerfil = (CircleImageView) findViewById(R.id.fotoPerfil);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         tvName = (TextView) findViewById(R.id.tvName);
         rvMensajes = (RecyclerView) findViewById(R.id.rvMensajes);
-        txtMensaje = (EditText) findViewById(R.id.txtMensaje);
-        btnEnviar = (Button) findViewById(R.id.btnEnviar);
         btnEnviarFoto = (ImageButton) findViewById(R.id.btnEnviarFoto);
-        fotoPerfilCadena = "";
+
+        initCollapsingToolbar();
         Intent intent = getIntent();
         if( intent.getExtras().getString("teamKey") != null)
         {
-
             key = intent.getExtras().getString("teamKey");
             name = intent.getExtras().getString("teamName");
             profilePic = intent.getExtras().getString("profilePic");
@@ -84,26 +84,18 @@ public class GalleryActivity extends AppCompatActivity {
             userName = intent.getExtras().getString("userName");
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("chat/GeneralChat");//Sala de chat (nombre)
-            //Intent intentName = getIntent();//for name of user
 
         }
-
-
-
-
         storage = FirebaseStorage.getInstance();
 
-        adapter = new AdapterMensajes(this);
-        LinearLayoutManager l = new LinearLayoutManager(this);
+        adapter = new AdapterGallery(this);
+       // LinearLayoutManager l = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager l = new GridLayoutManager(this, 2);
         rvMensajes.setLayoutManager(l);
+        rvMensajes.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        rvMensajes.setItemAnimator(new DefaultItemAnimator());
         rvMensajes.setAdapter(adapter);
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),userName,profilePic,"1", ServerValue.TIMESTAMP));
-                txtMensaje.setText("");
-            }
-        });
+
 
         btnEnviarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,15 +107,6 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
 
-        fotoPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                i.setType("image/jpeg");
-                i.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
-                startActivityForResult(Intent.createChooser(i,"Selecciona una foto"),PHOTO_PERFIL);
-            }
-        });
 
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -160,10 +143,43 @@ public class GalleryActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
     }
 
     private void setScrollbar(){
         rvMensajes.scrollToPosition(adapter.getItemCount()-1);
+    }
+
+
+    private void initCollapsingToolbar() {
+        final CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle(" ");
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        appBarLayout.setExpanded(true);
+
+        // hiding & showing the title when toolbar expanded & collapsed
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.setTitle(getString(R.string.app_name));
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbar.setTitle(" ");
+                    isShow = false;
+                }
+            }
+        });
     }
 
     @Override
@@ -177,24 +193,59 @@ public class GalleryActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri u = taskSnapshot.getDownloadUrl();
-                    MensajeEnviar m = new MensajeEnviar("",u.toString(),userName+" changed team photo",profilePic,"2",ServerValue.TIMESTAMP);
+                    MensajeEnviar m = new MensajeEnviar("",u.toString(),userName+" Uploded Photo",profilePic,"2",ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
-                }
-            });
-        }else if(requestCode == PHOTO_PERFIL && resultCode == RESULT_OK){
-            Uri u = data.getData();
-            storageReference = storage.getReference("foto_perfil");//imagenes_chat
-            final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri u = taskSnapshot.getDownloadUrl();
-                    fotoPerfilCadena = u.toString();
-                    MensajeEnviar m = new MensajeEnviar("",u.toString(),userName+" changed team photo",profilePic,"2",ServerValue.TIMESTAMP);
-                    databaseReference.push().setValue(m);
-                    Glide.with( GalleryActivity.this).load(u.toString()).into(fotoPerfil);
                 }
             });
         }
     }
+
+
+    /**
+     * RecyclerView item decoration - give equal margin around grid item
+     */
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
+                }
+            }
+        }
+    }
+
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round( TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+
 }
