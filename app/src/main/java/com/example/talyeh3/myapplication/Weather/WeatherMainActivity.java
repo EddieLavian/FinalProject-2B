@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,21 +24,20 @@ import com.example.talyeh3.myapplication.Weather.Util.Utils;
 import com.example.talyeh3.myapplication.Weather.data.CityPrefrences;
 import com.example.talyeh3.myapplication.Weather.data.JSONWeatherParser;
 import com.example.talyeh3.myapplication.Weather.data.WeatherHttpClient;
+import com.example.talyeh3.myapplication.Weather.model.CurrentCondition;
 import com.example.talyeh3.myapplication.Weather.model.Weather;
 import com.google.android.gms.ads.internal.gmsg.HttpClient;
 
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.util.Date;
+
 
 /**
  * Created by Eddie on 24/12/2017.
  */
 
-public class WeatherMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class WeatherMainActivity extends AppCompatActivity implements View.OnClickListener
+{
     private TextView cityName, temp, description, humidity, pressure, wind, sunrise, sunset, updated;
     private ImageView iconView;
     private Button btnChangeCity;
@@ -56,15 +56,13 @@ public class WeatherMainActivity extends AppCompatActivity implements View.OnCli
         humidity = (TextView)findViewById(R.id.humidText);
         pressure = (TextView)findViewById(R.id.pressureText);
         wind = (TextView)findViewById(R.id.windText);
-        //sunrise = (TextView)findViewById(R.id.riseText);
-        //sunset = (TextView)findViewById(R.id.setText);
-        //updated = (TextView)findViewById(R.id.updateText);
         iconView = (ImageView)findViewById(R.id.thumbnailIcon);
         btnChangeCity = (Button)findViewById(R.id.change_cityId);
 
         btnChangeCity.setOnClickListener(this);
 
         CityPrefrences cityPrefrences = new CityPrefrences(WeatherMainActivity.this);
+
 
         renderWeatherData(cityPrefrences.getCity());
     }
@@ -73,6 +71,7 @@ public class WeatherMainActivity extends AppCompatActivity implements View.OnCli
     {
         WeatherTask weatherTask = new WeatherTask();
         weatherTask.execute(new String[]{city + "&APPID="+ "a78e8b7d14f69cdf7ca3922fcf1bca25" + "&units= metric"});
+
     }
 
     @Override
@@ -102,8 +101,7 @@ public class WeatherMainActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-
-
+    // current weather
     private class WeatherTask extends AsyncTask<String, Void, Weather> // Params, Progress, Result
     {
         @Override
@@ -128,10 +126,6 @@ public class WeatherMainActivity extends AppCompatActivity implements View.OnCli
 
             DateFormat df = DateFormat.getDateInstance();
 
-            String sunriseDate = df.format(new Date(weather.place.getSunrise()));
-            String sunsetDate = df.format(new Date(weather.place.getSunset()));
-            String updateDate = df.format(new Date(weather.place.getLastUpdate()));
-
             DecimalFormat decimalFormat = new DecimalFormat("#.#"); // round to decimal point
 
             String tempFormat = decimalFormat.format(weather.currentCondition.getTemperature() - 274.4);
@@ -141,11 +135,7 @@ public class WeatherMainActivity extends AppCompatActivity implements View.OnCli
             humidity.setText("Humidity: " + weather.currentCondition.getHumidity() + "%");
             pressure.setText("Pressure: " + weather.currentCondition.getPressure() + "hPa");
             wind.setText("Wind: " + weather.wind.getSpeed()+ "mps");
-            //sunrise.setText("Sunrise: " + sunriseDate);
-            //sunset.setText("Sunset: " + sunsetDate);
-            //updated.setText("Last Updated: " + updateDate);
             description.setText("Condition: " + weather.currentCondition.getCondition() + "(" + weather.currentCondition.getDescription() + ")");
-
         }
 
         private void showInputDialog()
@@ -175,24 +165,7 @@ public class WeatherMainActivity extends AppCompatActivity implements View.OnCli
                 }
             });
             builder.setView(sView);
-            AlertDialog dialog = builder.create();
             builder.show();
-            /*final Spinner cityInput = new Spinner(WeatherMainActivity.this);
-            cityInput.set
-            //cityInput.setInputType(InputType.TYPE_CLASS_TEXT);
-            //cityInput.setHint("Jerusalem,IL");
-            builder.setView(cityInput);
-            builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    CityPrefrences cityPrefrences = new CityPrefrences(WeatherMainActivity.this);
-                    cityPrefrences.setCity(cityInput.getText().toString());
-
-                    String newCity = cityPrefrences.getCity();
-
-                    renderWeatherData(newCity);
-                }
-            });*/
         }
     }
 }

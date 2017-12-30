@@ -30,7 +30,7 @@
 
     <string-array name="city">
         <item>Jerusalem</item>
-        <item>Tel Aviv</item>
+        <item>Tel Aviv, IL</item>
         <item>Ashkelon</item>
         <item>Ashdod</item>
         <item>Haifa</item>
