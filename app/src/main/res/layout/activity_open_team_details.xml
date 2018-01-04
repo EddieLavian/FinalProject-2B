@@ -1,84 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:id="@+id/menu"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+
+
+<RelativeLayout
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:layout_weight="2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.talyeh3.myapplication.OpenTeamDetails">
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+    android:layout_height="0dp"
+    android:background="@drawable/banner">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156">
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:src="@drawable/ball"/>
 
-
-        <EditText
-            android:id="@+id/etTeamName"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="top"
-            android:hint="Team Name" />
-        <Button
-            android:id="@+id/btnChoose"
-            android:layout_width="100dp"
-            android:background="#119bc1"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Choose Photo" />
+            android:padding="5dp"
+            android:gravity="center_vertical"
+            android:text="Open Team"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="22sp"/>
+    </LinearLayout>
+</RelativeLayout>
+
+<LinearLayout
+    android:layout_weight="4"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#f7f6f6">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Team Name"
+        android:drawableLeft="@drawable/ellipse_03"
+        android:textAllCaps="false"
+        android:drawablePadding="16dp"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:clickable="true"
+        android:padding="10dp"
+        android:textColor="#a6aff1"
+        android:id="@+id/etTeamName"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:entries="@array/howMuchPlayers"
+        android:gravity="center"
+        android:hint="From"
+        android:inputType="number"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:textSize="30sp" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ellipse_05"
+        android:textAllCaps="false"
+        android:textColor="#a6aff1" />
+
+</LinearLayout>
+
+
+    <EditText
+        android:id="@+id/etMinimumPlayers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Minimum Players"
+        android:drawableLeft="@drawable/ellipse_06"
+        android:textAllCaps="false"
+        android:drawablePadding="16dp"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:clickable="true"
+        android:padding="10dp"
+        android:textColor="#a6aff1"
+        android:inputType="number"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/btnSave"
-            android:layout_width="100dp"
-            android:background="#119bc1"
+            android:layout_width="0dp"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="save" />
-        <ImageView
-            android:id="@+id/imgProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:hint="save"
+            android:drawableLeft="@drawable/ellipse_7"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#a6aff1"/>
+    <Button
 
-
-
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:entries="@array/howMuchPlayers"
-            android:gravity="center"
-            android:hint="From"
-            android:inputType="number"
-            android:selectAllOnFocus="false"
-            android:singleLine="false"
-            android:textSize="30sp" />
+        android:id="@+id/btnChoose"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:hint="Choose Photo"
+        android:drawableLeft="@drawable/ellipse_8"
+        android:textAllCaps="false"
+        android:drawablePadding="16dp"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:clickable="true"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#a6aff1"/>
 
 
     </LinearLayout>
-</ScrollView>
-</android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+</LinearLayout>

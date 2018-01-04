@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.talyeh3.myapplication.CreateGame.CreateGame;
 import com.example.talyeh3.myapplication.Statistics.Statistics;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,12 +43,9 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
     DatabaseReference teamRef, userRef, userRef2;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String myUserId = user.getUid();
-    String myUserName=user.getDisplayName();
     ArrayList<String> myTeams;
     User u;
-
     Spinner spin;
-
     ImageView imgProfile;
     String generatedFilePath = "https://firebasestorage.googleapis.com/v0/b/tobe-722db.appspot.com/o/images%2Fteam.png?alt=media&token=032ec4ea-80a1-476b-befc-c8caeda0c3a2";
     Button btnChoose;
@@ -65,17 +63,13 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         btnSave = (Button) findViewById( R.id.btnSave );
         btnSave.setOnClickListener( this );
         userRef = database.getReference( "Users/" + myUserId );
-
         getSupportActionBar().hide();
         mStorageRef = FirebaseStorage.getInstance().getReference();
-
         progressDialog = new ProgressDialog( this );
         imgProfile = (ImageView) findViewById( R.id.imgProfile );
         btnChoose = (Button) findViewById( R.id.btnChoose );
         btnChoose.setOnClickListener(this);
-
         spin = (Spinner) findViewById( R.id.spinner);
-
         this.retriveData();
     }
 
@@ -85,7 +79,6 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
             public void onDataChange(DataSnapshot dataSnapshot) {
                 u = dataSnapshot.getValue( User.class );
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -98,6 +91,11 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         if (view == btnSave)
         {
+            if(etTeamName.getText().length()<=0)
+            {
+                Toast.makeText(OpenTeamDetails.this, "Team Name Is Empty", Toast.LENGTH_LONG).show();
+                return;
+            }
         String uid = FirebaseAuth.getInstance().getCurrentUser().toString();
         List<String> players;
         players = new ArrayList<String>();
@@ -122,8 +120,6 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Statistics").child(myUserKey+t.key).setValue(s);
 
-
-
         myTeams = new ArrayList<String>();
         userRef2 = database.getReference( "Users/" + myUserId + "/teams/0" );
 
@@ -143,7 +139,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent( OpenTeamDetails.this, OpenTeam.class );
             intent.putExtra( "teamKey", t.key );
             startActivity( intent );
-            //finish();
+            finish();
         }
 
 
@@ -178,10 +174,10 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
                             Uri downloadUri = taskSnapshot.getMetadata().getDownloadUrl();
                             t.imgUrl= downloadUri.toString();
                             teamRef.setValue( t );
-                            finish();
                             Intent intent = new Intent( OpenTeamDetails.this, OpenTeam.class );
                             intent.putExtra( "teamKey", t.key );
                             startActivity( intent );
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

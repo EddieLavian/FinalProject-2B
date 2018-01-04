@@ -58,7 +58,6 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_gallery );
-//        getSupportActionBar().setTitle("");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -77,7 +76,6 @@ public class GalleryActivity extends AppCompatActivity {
             Toast.makeText( GalleryActivity.this,"kkkkk"+ profilePic,Toast.LENGTH_SHORT).show();
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("Gallery/"+key);//Sala de chat (nombre)
-//            tvName.setText(name);
 
         }
         else
