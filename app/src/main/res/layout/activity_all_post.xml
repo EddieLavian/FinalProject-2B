@@ -19,7 +19,9 @@
             android:background="#69a5f2"
             android:gravity="center"
             android:text="Add Post"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:visibility="invisible"
+            />
 
         <ListView
             android:layout_width="match_parent"

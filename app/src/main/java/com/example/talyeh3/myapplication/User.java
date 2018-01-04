@@ -16,7 +16,7 @@ public class User {
     public int age;
     public String city;
     public double rating;
-
+    public String managerSite;
     List<String> teams;
 
     public User()
@@ -24,8 +24,9 @@ public class User {
         //empty constructor becouse firebase needs
     }
 
-    public User(String uid, String userName, String email, int age, String key,List<String> teams,String imgUrl, String city, double rating){
+    public User(String uid, String userName, String email, int age, String key,List<String> teams,String imgUrl, String city, double rating, String managerSite){
         this.key = key;
+        this.managerSite=managerSite;
         this.imgUrl=imgUrl;
         this.teams=teams;
         this.uid = uid;

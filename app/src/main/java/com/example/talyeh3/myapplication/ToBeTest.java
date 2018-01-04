@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.Chat.ChatActivity;
 import com.example.talyeh3.myapplication.Weather.WeatherMainActivity;
@@ -104,6 +105,11 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(user2== null)
+                {
+                    Toast.makeText(ToBeTest.this, "The data will be updated now, please click again ", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent = new Intent(ToBeTest.this,ChatActivity.class);
                 intent.putExtra( "profilePic", user2.imgUrl );
                 intent.putExtra( "userName", user2.userName );

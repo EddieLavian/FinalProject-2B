@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             List<String> myTeams;
                             myTeams = new ArrayList<String>();
                             myTeams.add("-1");
-                            User u = new User(uid,etUserName.getText().toString(),etEmail.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0);
+                            User u = new User(uid,etUserName.getText().toString(),etEmail.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no");
                             DatabaseReference mDatabase;
                             mDatabase = FirebaseDatabase.getInstance().getReference();
                             mDatabase.child("Users").child(uid).setValue(u);
@@ -200,7 +200,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                     if(b==true)
                     {
-                        User u = new User(uid,etUserName.getText().toString(),etEmail.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0);
+                        User u = new User(uid,etUserName.getText().toString(),etEmail.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no");
                         DatabaseReference mDatabase;
                         mDatabase = FirebaseDatabase.getInstance().getReference();
                         mDatabase.child("Users").child(uid).setValue(u);

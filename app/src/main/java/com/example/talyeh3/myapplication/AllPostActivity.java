@@ -7,34 +7,63 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class AllPostActivity extends AppCompatActivity {
 
     ListView lv;
+    String maneger="";
     ArrayList<Post> posts;
     AllPostAdapter allPostAdapter;
     Button btnAddPost;
-    private DatabaseReference database;
-
+    String myUserId="";
+    private DatabaseReference database,databaseUser;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_post);
         getSupportActionBar().hide();
+        btnAddPost = (Button)findViewById(R.id.btnAddPost);
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
+        if(firebaseUser!=null)
+        {
+            myUserId =FirebaseAuth.getInstance().getCurrentUser().getUid();
+            databaseUser = FirebaseDatabase.getInstance().getReference("Users/"+myUserId+"/managerSite");
+            Toast.makeText(AllPostActivity.this, "jjj"+myUserId, Toast.LENGTH_LONG).show();
+            databaseUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {//only managers add post
+                    maneger = dataSnapshot.getValue(String.class);
+                    if (maneger.equals( "yes" ))
+                        btnAddPost.setVisibility(View.VISIBLE);
+                    else
+                        btnAddPost.setVisibility(View.INVISIBLE);
+
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }
 
         database = FirebaseDatabase.getInstance().getReference("Posts");
 
 
-        btnAddPost = (Button)findViewById(R.id.btnAddPost);
+
         btnAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +123,20 @@ public class AllPostActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
+
+/*
+    public void retrieveDataManeger()
+    {
+        databaseUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                maneger = dataSnapshot.getValue(String.class);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+    */
 }
