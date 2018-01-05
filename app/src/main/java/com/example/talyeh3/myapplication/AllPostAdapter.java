@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,6 +37,15 @@ public class AllPostAdapter extends ArrayAdapter<Post> {
         TextView tvTitle = (TextView)view.findViewById(R.id.tvTitle);
         Post temp = objects.get(position);
         tvTitle.setText(temp.title);
+        ImageView imgProfile = (ImageView)view.findViewById(R.id.imgProfile);
+
+
+        Picasso
+                .with( context )
+                .load( temp.imgUrl )
+                .fit() // will explain later
+                .into( imgProfile );
+
 
         return view;
     }

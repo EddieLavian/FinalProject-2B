@@ -47,8 +47,10 @@
             android:name=".Gallery.GalleryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Gallery.NewsDetails" />
-        <activity android:name=".Gallery.BigPhoto"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Gallery.BigPhoto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Posts.ThisPostActivity"></activity>
     </application>
 
 </manifest>

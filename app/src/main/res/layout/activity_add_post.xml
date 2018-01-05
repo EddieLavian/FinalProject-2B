@@ -26,6 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="title" />
+
+        <EditText
+            android:id="@+id/etSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="title" />
         <EditText
             android:id="@+id/etBody"
             android:layout_width="match_parent"
@@ -33,6 +39,15 @@
             android:layout_weight="1"
             android:gravity="top"
             android:hint="body" />
+
+        <Button
+            android:id="@+id/btnChoose"
+            android:layout_width="100dp"
+            android:background="#c1112e"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Choose" />
         <Button
             android:id="@+id/btnSave"
             android:layout_width="100dp"
@@ -41,7 +56,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="save" />
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 
 
 </android.support.constraint.ConstraintLayout>
