@@ -10,38 +10,42 @@ tools:context="com.example.talyeh3.myapplication.Posts.AllPostActivity">
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/header_cover_image"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/news" />
+
 
 
     <RelativeLayout
         android:id="@+id/profile_layout"
+        android:orientation="vertical"
+        android:padding="0dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/header_cover_image"
-        android:background="#ebc7eeff"
-        android:elevation="4dp"
-        android:paddingBottom="10dp">
+        android:layout_height="150dp"
+        android:background="@drawable/banner">
 
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="News"
-            android:textColor="#0094b6"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:src="@drawable/ball"/>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:text="All Posts"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="22sp"/>
+        </LinearLayout>
     </RelativeLayout>
+
 
     <Button
         android:id="@+id/btnAddPost"
