@@ -1,31 +1,19 @@
 package com.example.talyeh3.myapplication.Posts;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.talyeh3.myapplication.AllPostActivity;
-import com.example.talyeh3.myapplication.MyTeamsAdapter;
-import com.example.talyeh3.myapplication.Post;
-import com.example.talyeh3.myapplication.ProfilePage;
 import com.example.talyeh3.myapplication.R;
-import com.example.talyeh3.myapplication.Team;
-import com.example.talyeh3.myapplication.User;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class ThisPostActivity extends AppCompatActivity {
     TextView tvTitle,tvSubTitle,tvBody;
@@ -39,6 +27,9 @@ public class ThisPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_this_post );
+        getSupportActionBar().hide();
+
+
 
 
         imgProfile = (ImageView)findViewById( R.id.imgProfile);

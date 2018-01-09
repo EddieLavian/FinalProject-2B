@@ -1,4 +1,4 @@
-package com.example.talyeh3.myapplication;
+package com.example.talyeh3.myapplication.Posts;
 
 /**
  * Created by talyeh3 on 16/11/2017.

@@ -10,8 +10,7 @@
         android:id="@+id/lvUser"
         android:layout_width="match_parent"
         android:layout_height="74dp"
-        android:layout_margin="8dp"
-        android:background="#d6e7f9"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,26 +27,31 @@
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="0dp"
             android:layout_weight="2"
-            android:background="#d6e7f9"
-            android:fontFamily="sans-serif-condensed"
-            android:gravity="center"
-            android:hint="hello"
-            android:padding="0dp"
-            android:textColor="#666262"
-            android:textSize="16sp" />
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:background="#fff"
+            android:elevation="4dp"
+            android:padding="20dp"
+            android:text="Body" />
+
+
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imgProfile"
             android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:src="@drawable/profile"
+            android:src="@drawable/newside"
             app:border_color="#7a868f"
-            app:border_width="1dp" />
+            app:border_width="1dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:background="#fff"
+            android:elevation="4dp"
+            android:padding="20dp"
+            />
 
 
     </LinearLayout>

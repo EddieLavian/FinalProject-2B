@@ -27,8 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddPostActivity" />
-        <activity android:name=".AllPostActivity" />
+        <activity android:name=".Posts.AddPostActivity" />
+        <activity android:name=".Posts.AllPostActivity" />
         <activity android:name=".EditPostActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".OpenTeam" />

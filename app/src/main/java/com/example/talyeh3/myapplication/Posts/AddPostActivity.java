@@ -1,4 +1,4 @@
-package com.example.talyeh3.myapplication;
+package com.example.talyeh3.myapplication.Posts;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,14 +14,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.talyeh3.myapplication.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -40,7 +38,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
 
 
     ImageView imgProfile;
-    String generatedFilePath = "https://firebasestorage.googleapis.com/v0/b/tobe-722db.appspot.com/o/images%2Fteam.png?alt=media&token=032ec4ea-80a1-476b-befc-c8caeda0c3a2";
+    String generatedFilePath = "https://firebasestorage.googleapis.com/v0/b/tobe-722db.appspot.com/o/images%2Fnewside.png?alt=media&token=35abdf61-7b54-41fc-b27d-20894393b393";
     Button btnChoose;
     private static final int PICK_IMAGE_REQUEST = 234;
     private StorageReference mStorageRef;
@@ -50,8 +48,8 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_post);
-
+        setContentView( R.layout.activity_add_post);
+        getSupportActionBar().hide();
         database = FirebaseDatabase.getInstance();
         etTitle = (EditText) findViewById(R.id.etTitle);
         etSubtitle = (EditText) findViewById(R.id.etSubtitle);
