@@ -8,6 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
+
         <ImageView
             android:id="@+id/header_cover_image"
             android:layout_width="match_parent"
@@ -42,9 +45,37 @@
             android:background="#ebc7eeff"
             android:elevation="4dp"
             android:paddingBottom="24dp">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/btnEditPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
+        android:text="edit"
+        android:layout_toLeftOf="@+id/drop_down_option_menu"
+        android:src="@drawable/ic_action_team_players"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/btnDelitePost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_margin="10dp"
+        android:text="delite"
+        android:src="@drawable/ic_action_overflow"
+        android:visibility="invisible"/>
 
 
-
+</LinearLayout>
 
 
             <TextView

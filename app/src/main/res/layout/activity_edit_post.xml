@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.talyeh3.myapplication.EditPostActivity">
+    tools:context="com.example.talyeh3.myapplication.Posts.EditPostActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="title" />
+
+        <EditText
+            android:id="@+id/etSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="subtitle" />
         <EditText
             android:id="@+id/etBody"
             android:layout_width="match_parent"

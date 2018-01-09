@@ -80,12 +80,6 @@ public class AllPostActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*
-                Post p = posts.get(position);
-                Intent intent = new Intent(AllPostActivity.this, EditPostActivity.class);
-                intent.putExtra("key", p.key);
-                startActivity(intent);
-*/
                 Post p = posts.get(position);
                 Intent intent = new Intent(AllPostActivity.this,    ThisPostActivity.class);
                 intent.putExtra("key", p.key );
@@ -94,6 +88,7 @@ public class AllPostActivity extends AppCompatActivity {
             }
         });
 
+        /*
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -105,7 +100,10 @@ public class AllPostActivity extends AppCompatActivity {
 
             }
         });
+        */
     }
+
+
 
 
     public void retriveData() {

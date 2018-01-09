@@ -1,4 +1,4 @@
-package com.example.talyeh3.myapplication;
+package com.example.talyeh3.myapplication.Posts;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.talyeh3.myapplication.Posts.Post;
+import com.example.talyeh3.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class EditPostActivity extends AppCompatActivity implements View.OnClickListener{
 
-    EditText etTitle,etBody;
+    EditText etTitle,etBody,etSubTitle;
     Button btnSave;
     FirebaseDatabase database;
     DatabaseReference postRef;
@@ -26,11 +26,12 @@ public class EditPostActivity extends AppCompatActivity implements View.OnClickL
     Post p;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_post);
+        setContentView( R.layout.activity_edit_post);
 
         database = FirebaseDatabase.getInstance();
         etTitle = (EditText) findViewById(R.id.etTitle);
         etBody = (EditText) findViewById(R.id.etBody);
+        etSubTitle = (EditText) findViewById(R.id.etSubtitle);
         btnSave = (Button) findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
         Intent intent = getIntent();
@@ -51,6 +52,7 @@ public class EditPostActivity extends AppCompatActivity implements View.OnClickL
                 p = dataSnapshot.getValue(Post.class);
                 etBody.setText(p.body);
                 etTitle.setText(p.title);
+                etSubTitle.setText(p.subtitle);
 
             }
 
@@ -66,6 +68,7 @@ public class EditPostActivity extends AppCompatActivity implements View.OnClickL
         p.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         p.title = etTitle.getText().toString();
         p.body = etBody.getText().toString();
+        p.subtitle=etSubTitle.getText().toString();
         p.likes = 0;
         postRef.setValue(p);
 

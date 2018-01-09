@@ -29,7 +29,7 @@
         </activity>
         <activity android:name=".Posts.AddPostActivity" />
         <activity android:name=".Posts.AllPostActivity" />
-        <activity android:name=".EditPostActivity" />
+        <activity android:name=".Posts.EditPostActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".OpenTeam" />
         <activity android:name=".ProfileActivity" />
