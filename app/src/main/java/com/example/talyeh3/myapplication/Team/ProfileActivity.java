@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.talyeh3.myapplication.ProfilePage;
 import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.Statistics.Statistics;
 import com.example.talyeh3.myapplication.User;
@@ -16,17 +18,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextView tvUserName,tvAge,tvTeam;
-    Button btnSave;
+    TextView tvUserName,tvAge,tvCity;
+    TextView btnSave;
     FirebaseDatabase database;
     DatabaseReference userRef;
     DatabaseReference userRefTeam;
     String key,teamKey;
     User u;
     Team t;
+
+    String photo;
+    ImageView imgProfile;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_profile);
@@ -34,13 +41,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         database = FirebaseDatabase.getInstance();
         tvUserName = (TextView) findViewById(R.id.tvUserName);
 
-        tvTeam = (TextView) findViewById(R.id.tvTeam);
+        tvCity = (TextView) findViewById(R.id.tvCity);
 
 
         tvAge = (TextView) findViewById(R.id.tvAge);
-        btnSave = (Button) findViewById(R.id.btnSave);
+        btnSave = (TextView) findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
         Intent intent = getIntent();
+        photo = intent.getExtras().getString("photo");
+
+        imgProfile = (ImageView)findViewById( R.id.imgProfile);
+        Picasso
+                .with( ProfileActivity.this )
+                .load( photo)
+                .fit() // will explain later
+                .into( imgProfile );
 
         teamKey = intent.getExtras().getString("team");
         key = intent.getExtras().getString("key");
@@ -60,7 +75,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                 u = dataSnapshot.getValue(User.class);
                 tvUserName.setText(u.userName);
+                tvCity.setText( u.city );
                 tvAge.setText(String.valueOf(u.age));
+
 
             }
 
@@ -76,7 +93,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                 t = dataSnapshot.getValue(Team.class);
 
-                tvTeam.setText("Team Name "+ t.name);
+
 
 
             }

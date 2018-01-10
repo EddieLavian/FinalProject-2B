@@ -102,6 +102,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         {
             d= new Dialog(this);
             d.setContentView( R.layout.activity_all_users);
+
             d.setCancelable(true);
             lv = (ListView) d.findViewById( R.id.lv);
             this.retriveDataPlayers();

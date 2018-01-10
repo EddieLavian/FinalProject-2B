@@ -86,6 +86,7 @@ public class OpenTeam extends AppCompatActivity {
                 Intent intent = new Intent(OpenTeam.this, ProfileActivity.class);
                 intent.putExtra("key", u.uid );
                 intent.putExtra("team",teamKey);
+                intent.putExtra("photo", u.imgUrl );
                 startActivity(intent);
 
             }

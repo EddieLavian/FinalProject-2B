@@ -39,7 +39,7 @@ public class MyTeams extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_my_teams);
-
+        getSupportActionBar().hide();
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Users/"+myUserId+"/teams");
         lv = (ListView) findViewById( R.id.lv);
