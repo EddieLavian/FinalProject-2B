@@ -17,7 +17,7 @@ public class User {
     public String city;
     public double rating;
     public String managerSite;
-    List<String> teams;
+    public List<String> teams;
 
     public User()
     {

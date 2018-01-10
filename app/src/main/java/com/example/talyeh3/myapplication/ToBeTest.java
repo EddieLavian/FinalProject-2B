@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.Chat.ChatActivity;
 import com.example.talyeh3.myapplication.Posts.AllPostActivity;
+import com.example.talyeh3.myapplication.Team.MyTeams;
+import com.example.talyeh3.myapplication.Team.OpenTeamDetails;
 import com.example.talyeh3.myapplication.Weather.WeatherMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

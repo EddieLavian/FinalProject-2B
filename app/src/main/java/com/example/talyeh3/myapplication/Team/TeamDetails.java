@@ -1,4 +1,4 @@
-package com.example.talyeh3.myapplication;
+package com.example.talyeh3.myapplication.Team;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -12,11 +12,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.talyeh3.myapplication.AllUsersAdapter;
 import com.example.talyeh3.myapplication.Chat.ChatActivity;
 import com.example.talyeh3.myapplication.CreateGame.CreateGame;
 import com.example.talyeh3.myapplication.CreateGame.TeamGamesActivity;
 import com.example.talyeh3.myapplication.Gallery.GalleryActivity;
+import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.Statistics.StatisticsActivity;
+import com.example.talyeh3.myapplication.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

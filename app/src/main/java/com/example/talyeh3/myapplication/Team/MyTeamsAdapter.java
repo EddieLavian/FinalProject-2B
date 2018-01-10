@@ -1,4 +1,4 @@
-package com.example.talyeh3.myapplication;
+package com.example.talyeh3.myapplication.Team;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.talyeh3.myapplication.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class MyTeamsAdapter extends ArrayAdapter<Team> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.custom_team, parent, false);
+        View view = layoutInflater.inflate( R.layout.custom_team, parent, false);
         TextView tvTitle = (TextView)view.findViewById(R.id.tvTitle);
         // String  temp = objects.get(position);
         //tvTitle.setText(temp);

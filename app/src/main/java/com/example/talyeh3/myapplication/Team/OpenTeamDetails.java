@@ -1,4 +1,4 @@
-package com.example.talyeh3.myapplication;
+package com.example.talyeh3.myapplication.Team;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,8 +15,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.talyeh3.myapplication.CreateGame.CreateGame;
+import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.Statistics.Statistics;
+import com.example.talyeh3.myapplication.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

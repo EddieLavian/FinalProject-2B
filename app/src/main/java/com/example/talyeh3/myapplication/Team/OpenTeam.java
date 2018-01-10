@@ -1,4 +1,4 @@
-package com.example.talyeh3.myapplication;
+package com.example.talyeh3.myapplication.Team;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.talyeh3.myapplication.AllUsersAdapter;
+import com.example.talyeh3.myapplication.R;
+import com.example.talyeh3.myapplication.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,16 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OpenTeam extends AppCompatActivity {
 
     String teamKey;
     ListView lv;
     ArrayList<User> users;
-    OpenTeamAdapter allUsersAdapter;
+    AllUsersAdapter allUsersAdapter;
     TextView tvAddPlayer;
     ImageView image;
     private DatabaseReference database;
@@ -44,10 +43,11 @@ public class OpenTeam extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_open_team);
+        getSupportActionBar().hide();
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Users");
         lv = (ListView) findViewById( R.id.lv);
-        tvAddPlayer= (TextView) findViewById( R.id.tvAddPlayer);
+        //tvAddPlayer= (TextView) findViewById( R.id.tvAddPlayer);
         this.retriveData();
 
 
@@ -135,7 +135,7 @@ public class OpenTeam extends AppCompatActivity {
                         users.add(u);
                 }
                 progressDialog.dismiss();
-                allUsersAdapter = new OpenTeamAdapter(OpenTeam.this, 0, 0, users);
+                allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
                 lv.setAdapter(allUsersAdapter);
             }
 

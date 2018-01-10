@@ -31,11 +31,11 @@
         <activity android:name=".Posts.AllPostActivity" />
         <activity android:name=".Posts.EditPostActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".OpenTeam" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".OpenTeamDetails" />
-        <activity android:name=".MyTeams" />
-        <activity android:name=".TeamDetails" />
+        <activity android:name=".Team.OpenTeam" />
+        <activity android:name=".Team.ProfileActivity" />
+        <activity android:name=".Team.OpenTeamDetails" />
+        <activity android:name=".Team.MyTeams" />
+        <activity android:name=".Team.TeamDetails" />
         <activity android:name=".AllUsers" />
         <activity android:name=".ProfilePage" />
         <activity android:name=".Chat.ChatActivity" />

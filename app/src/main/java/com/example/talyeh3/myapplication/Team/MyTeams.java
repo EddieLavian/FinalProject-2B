@@ -1,4 +1,4 @@
-package com.example.talyeh3.myapplication;
+package com.example.talyeh3.myapplication.Team;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.talyeh3.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
