@@ -32,7 +32,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView tvName,btnAddPlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery;
+    TextView tvName,btnAddPlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
     DatabaseReference teamRef;
@@ -75,12 +75,14 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnChat=(TextView)findViewById( R.id.btnChat );
         btnGallery=(TextView)findViewById( R.id.btnGallery );
         btnGames=(TextView) findViewById( R.id.btnGames );
+        btnAutomaticElections=(TextView)findViewById(R.id.btnAutoElections);
         btnAddPlayer.setOnClickListener( this );
         btnChat.setOnClickListener( this );
         btnGallery.setOnClickListener( this );
         btnStatistics.setOnClickListener( this );
         btnCreateGame.setOnClickListener( this );
         btnTeamPlayers.setOnClickListener( this );
+        btnAutomaticElections.setOnClickListener( this );
         btnGames.setOnClickListener( this );
         Intent intent = getIntent();
         key = intent.getExtras().getString("keyteam");
@@ -245,6 +247,10 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             intent.putExtra( "profilePic", user2.imgUrl );
             intent.putExtra( "userName", user2.userName );
             startActivity( intent );
+        }
+        if(v == btnAutomaticElections)
+        {
+            Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
         }
 
     }

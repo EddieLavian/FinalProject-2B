@@ -68,14 +68,14 @@ android:layout_height="match_parent">
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_weight="5"
+        android:layout_width="68dp"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_weight="5"
         android:entries="@array/howMuchPlayers"
         android:gravity="center"
         android:hint="From"
         android:inputType="number"
+        android:padding="10dp"
         android:selectAllOnFocus="false"
         android:singleLine="false"
         android:textSize="30sp" />

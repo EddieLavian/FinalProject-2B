@@ -113,9 +113,9 @@ public class WeatherMainActivity extends AppCompatActivity implements View.OnCli
 
             weather = JSONWeatherParser.getWeather(data); // parse the data that we get
 
-            Log.v("Data: ", weather.place.getCity());
+//            Log.v("Data: ", weather.place.getCity());
 
-            new DownloadImageAsyncTask().execute(weather.iconData);
+//            new DownloadImageAsyncTask().execute(weather.iconData);
             return weather;
         }
 

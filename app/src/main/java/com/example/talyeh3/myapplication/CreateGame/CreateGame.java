@@ -45,11 +45,11 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
     private final int REQUEST_CODE_PLACEPICKER = 1;
 
     Button btnCreateGame;
-    FirebaseDatabase database;
-    DatabaseReference teamRef, gameRef, teamRef2;
+    public FirebaseDatabase database;
+    public DatabaseReference teamRef, gameRef, teamRef2;
     String userOpen = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-    ArrayList<String> games;
-    Team t;
+    public ArrayList<String> games;
+    public Team t;
     ProgressDialog progressDialog;
     String keyTeam;
     @Override
