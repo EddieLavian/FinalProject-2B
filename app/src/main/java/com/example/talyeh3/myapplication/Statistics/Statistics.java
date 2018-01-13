@@ -13,18 +13,21 @@ public class Statistics {
     public int games;
     public int goals;
     public int assist;
+    public int wins;
 
     public Statistics()
     {
         //empty constructor becouse firebase needs
     }
-    public Statistics(String key, String teamKey, String name, int games, int goals, int assist) {
+    public Statistics(String key, String teamKey, String name, int games, int goals, int assist, int wins)
+    {
         this.key = key;
         this.teamKey=teamKey;
         this.name=name;
         this.games=games;
         this.goals=goals;
         this.assist=assist;
+        this.wins = wins;
     }
 
 }

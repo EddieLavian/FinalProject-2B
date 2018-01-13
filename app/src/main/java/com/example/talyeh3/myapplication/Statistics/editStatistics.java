@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class editStatistics extends AppCompatActivity  implements View.OnClickListener{
     TextView tvName;
-    EditText etGames,etGoals,etAssists;
+    EditText etGames,etGoals,etAssists, etWins;
     Button btnSave;
     FirebaseDatabase database;
     DatabaseReference statisticRef;
@@ -34,6 +34,7 @@ public class editStatistics extends AppCompatActivity  implements View.OnClickLi
         etGames = (EditText) findViewById(R.id.etGames);
         etGoals = (EditText) findViewById(R.id.etGoals);
         etAssists = (EditText) findViewById(R.id.etAssists);
+        etWins = (EditText) findViewById(R.id.etWins);
         btnSave = (Button) findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
         Intent intent = getIntent();
@@ -55,6 +56,7 @@ public class editStatistics extends AppCompatActivity  implements View.OnClickLi
                     etGames.setText( String.valueOf( s.games ) );
                     etGoals.setText( String.valueOf( s.goals ) );
                     etAssists.setText( String.valueOf( s.assist ) );
+                    etWins.setText(String.valueOf(s.wins));
 
             }
 
@@ -72,6 +74,7 @@ public class editStatistics extends AppCompatActivity  implements View.OnClickLi
             s.assist = Integer.valueOf(  etAssists.getText().toString());
             s.goals = Integer.valueOf(  etGoals.getText().toString());
             s.games = Integer.valueOf(  etGames.getText().toString());
+            s.wins = Integer.valueOf( etWins.getText().toString());
             statisticRef.setValue(s);
             finish();
 

@@ -116,7 +116,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         statistics.add(myUserKey+t.key);
             statistics.remove( "-1" );
         t.statistics=statistics;
-        Statistics s=new Statistics( myUserKey+t.key,t.key,u.userName,0,0,0);
+        Statistics s=new Statistics( myUserKey+t.key,t.key,u.userName,0,0,0,0);
         DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Statistics").child(myUserKey+t.key).setValue(s);

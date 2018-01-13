@@ -74,6 +74,40 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:id="@+id/etWins"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:hint="Wins"
+                android:textAllCaps="false"
+                android:drawablePadding="16dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:clickable="true"
+                android:padding="10dp"
+                android:textColor="#a6aff1"
+                android:inputType="number"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Wins"
+                android:drawableLeft="@drawable/ellipse_8"
+                android:textAllCaps="false"
+                android:drawablePadding="16dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:clickable="true"
+                android:padding="10dp"
+                android:textColor="#a6aff1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
                 android:id="@+id/etGoals"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

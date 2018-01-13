@@ -119,9 +119,9 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 u = dataSnapshot.getValue(User.class);
-                tvUserName.setText("Player Name "+u.userName);
-                tvAge.setText("Player Age  "+String.valueOf(u.age));
-                tvCity.setText("Player city  "+String.valueOf(u.city));
+                tvUserName.setText(u.userName + ", " + String.valueOf(u.age)); // userName, age
+                //tvAge.setText(String.valueOf(u.age) + " years old");
+                tvCity.setText("From  "+String.valueOf(u.city));
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

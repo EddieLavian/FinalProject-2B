@@ -29,7 +29,7 @@
             android:background="#d6e7f9"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
-            android:hint="name"
+            android:hint="Name"
             android:padding="0dp"
             android:textColor="#666262"
             android:textSize="16sp" />
@@ -43,7 +43,21 @@
             android:background="#d6e7f9"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
-            android:hint="games"
+            android:hint="Games"
+            android:padding="0dp"
+            android:textColor="#666262"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvWins"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:layout_weight="2"
+            android:background="#d6e7f9"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:hint="Wins"
             android:padding="0dp"
             android:textColor="#666262"
             android:textSize="16sp" />
@@ -57,7 +71,7 @@
             android:background="#d6e7f9"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
-            android:hint="goals"
+            android:hint="Goals"
             android:padding="0dp"
             android:textColor="#666262"
             android:textSize="16sp" />
@@ -71,7 +85,7 @@
             android:background="#d6e7f9"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
-            android:hint="assists"
+            android:hint="Assists"
             android:padding="0dp"
             android:textColor="#666262"
             android:textSize="16sp" />

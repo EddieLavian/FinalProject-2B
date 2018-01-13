@@ -91,7 +91,7 @@ android:layout_height="match_parent">
             android:layout_below="@+id/tvCity"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
-            android:text="Age"
+            android:text=""
             android:textColor="#005d6e"
             android:textSize="14sp" />
 
@@ -116,7 +116,7 @@ android:layout_height="match_parent">
             android:clickable="true"
             android:elevation="4dp"
             android:padding="20dp"
-            android:text="Gallery" />
+            android:text="Upcoming Games" />
 
         <TextView
             android:id="@+id/tvTeams"

@@ -122,7 +122,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         userRef.setValue(u);
         String keyStatistics=key+t.key;
-        Statistics s=new Statistics( keyStatistics,t.key,u.userName,0,0,0);
+        Statistics s=new Statistics( keyStatistics,t.key,u.userName,0,0,0,0);
         DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Statistics").child(keyStatistics).setValue(s);

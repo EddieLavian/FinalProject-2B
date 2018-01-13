@@ -36,11 +36,13 @@ public class StatisticsAdapter extends ArrayAdapter<Statistics> {
         TextView tvGames = (TextView)view.findViewById(R.id.tvGames);
         TextView tvGoals = (TextView)view.findViewById(R.id.tvGoals);
         TextView tvAssists = (TextView)view.findViewById(R.id.tvAssists);
+        TextView tvWins = (TextView)view.findViewById(R.id.tvWins);
         Statistics temp = objects.get(position);
         tvName.setText(temp.name);
         tvGames.setText(String.valueOf(temp.games));
         tvGoals.setText(String.valueOf(temp.goals));
         tvAssists.setText(String.valueOf(temp.assist));
+        tvWins.setText(String.valueOf(temp.wins));
         return view;
 
     }
