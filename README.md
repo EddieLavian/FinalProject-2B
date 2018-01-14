@@ -39,7 +39,7 @@ Eddie Lavian
 | Diary |  [Teamup Calendar](https://teamup.com/ksr245rqo4i7dqs464) |
 
 
-## [Diagrams and Designs]()
+## [Diagrams and Designs](https://github.com/EddieLavian/FinalProject-2B/wiki)
 
 ## Iterations
 
