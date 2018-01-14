@@ -38,14 +38,10 @@ public class AllPostAdapter extends ArrayAdapter<Post> {
         LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
         View view = layoutInflater.inflate( R.layout.custom_post, parent, false);
 
-        long date = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy, hh:mm a");
-        String dateString = sdf.format(date);
-
         TextView tvTitle = (TextView)view.findViewById(R.id.tvTitle);
         tvTitle.setTypeface(null, Typeface.BOLD);
         Post temp = objects.get(position);
-        tvTitle.setText(temp.title + "\n" + dateString);
+        tvTitle.setText(temp.title + "\n" + temp.date);
         ImageView imgProfile = (ImageView)view.findViewById(R.id.imgProfile);
 
 

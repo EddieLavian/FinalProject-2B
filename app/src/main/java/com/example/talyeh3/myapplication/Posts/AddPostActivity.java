@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class AddPostActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etTitle,etBody,etSubtitle;
@@ -152,8 +153,12 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v == btnSave)
         {
+            long date = System.currentTimeMillis();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy, hh:mm a");
+            String dateString = sdf.format(date);
+
             String uid = FirebaseAuth.getInstance().getCurrentUser().toString();
-        Post p = new Post( uid, etTitle.getText().toString(), etBody.getText().toString(), 0, "", generatedFilePath,etSubtitle.getText().toString() );
+        Post p = new Post( uid, etTitle.getText().toString(), etBody.getText().toString(), 0, "", generatedFilePath,etSubtitle.getText().toString(), dateString );
         postRef = database.getReference( "Posts" ).push();
         p.key = postRef.getKey();
         uploadFile( p );
