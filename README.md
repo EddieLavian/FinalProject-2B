@@ -34,12 +34,12 @@ Eddie Lavian
  |Category|Link|
 |---|---|
 | Recommended IDE | [Android Studio](https://developer.android.com/studio/index.html) |
-| Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/EddieLavian/FinalProject-2B/issues) |
+| Issues | [![GitHub issues](	https://img.shields.io/bitbucket/issues-raw/atlassian/python-bitbucket.svg)](https://github.com/EddieLavian/FinalProject-2B/issues) |
 | Project Management Board| [Tasks](https://github.com/EddieLavian/FinalProject-2B/projects) |
 | Diary |  [Teamup Calendar](https://teamup.com/ksr245rqo4i7dqs464) |
 
 
-## [Diagrams and Designs]()
+## [Diagrams and Designs](https://github.com/EddieLavian/FinalProject-2B/wiki)
 
 ## Iterations
 
