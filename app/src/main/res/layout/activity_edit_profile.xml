@@ -48,7 +48,7 @@ android:layout_height="match_parent">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Team Name"
+        android:hint="Full Name"
         android:drawableLeft="@drawable/ellipse_03"
         android:textAllCaps="false"
         android:drawablePadding="16dp"
@@ -57,43 +57,14 @@ android:layout_height="match_parent">
         android:clickable="true"
         android:padding="10dp"
         android:textColor="#a6aff1"
-        android:id="@+id/etTeamName"/>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="68dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:entries="@array/howMuchPlayers"
-        android:gravity="center"
-        android:hint="From"
-        android:inputType="number"
-        android:padding="10dp"
-        android:selectAllOnFocus="false"
-        android:singleLine="false"
-        android:textSize="30sp" />
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:padding="10dp"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ellipse_05"
-        android:textAllCaps="false"
-        android:textColor="#a6aff1" />
-
-</LinearLayout>
+        android:id="@+id/etUserName"/>
 
 
     <EditText
-        android:id="@+id/etMinimumPlayers"
+        android:id="@+id/etAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Minimum Players"
+        android:hint="Age"
         android:drawableLeft="@drawable/ellipse_06"
         android:textAllCaps="false"
         android:drawablePadding="16dp"
@@ -103,6 +74,36 @@ android:layout_height="match_parent">
         android:padding="10dp"
         android:textColor="#a6aff1"
         android:inputType="number"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="68dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:entries="@array/city"
+            android:gravity="center"
+            android:hint="From"
+            android:inputType="number"
+            android:padding="10dp"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textSize="30sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ellipse_05"
+            android:textAllCaps="false"
+            android:textColor="#a6aff1" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -123,22 +124,22 @@ android:layout_height="match_parent">
             android:padding="10dp"
             android:layout_marginTop="20dp"
             android:textColor="#a6aff1"/>
-    <Button
+        <Button
 
-        android:id="@+id/btnChoose"
-        android:layout_width="0dp"
-        android:layout_weight="3"
-        android:layout_height="wrap_content"
-        android:hint="Choose Photo"
-        android:drawableLeft="@drawable/ellipse_8"
-        android:textAllCaps="false"
-        android:drawablePadding="16dp"
-        android:textSize="18sp"
-        android:gravity="start"
-        android:clickable="true"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:textColor="#a6aff1"/>
+            android:id="@+id/btnChoose"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:hint="Choose Photo"
+            android:drawableLeft="@drawable/ellipse_8"
+            android:textAllCaps="false"
+            android:drawablePadding="16dp"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:clickable="true"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#a6aff1"/>
 
 
     </LinearLayout>

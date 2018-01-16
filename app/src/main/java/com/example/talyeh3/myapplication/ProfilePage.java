@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.talyeh3.myapplication.Posts.EditPostActivity;
+import com.example.talyeh3.myapplication.Posts.ThisPostActivity;
 import com.example.talyeh3.myapplication.Team.MyTeamsAdapter;
 import com.example.talyeh3.myapplication.Team.Team;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,10 +31,11 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     TextView tvUserName,tvAge,tvCity,tvTeams;
     FirebaseDatabase database;
     DatabaseReference userRef;
+    ImageView editProfile;
     String key,photo;
     User u;
     ImageView imgProfile;
-
+    String myUserId;
 
     ListView lv;
     int i = 1;
@@ -40,7 +44,7 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     ArrayList<String> myTeams;
     MyTeamsAdapter allTeamsAdapter;
     private DatabaseReference database2,teamDatabase;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();//
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     Dialog d;
@@ -52,10 +56,12 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_profile_page);
+        getSupportActionBar().hide();
+        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         imgProfile = (ImageView)findViewById( R.id.imgProfile);
         database = FirebaseDatabase.getInstance();
         tvUserName = (TextView) findViewById( R.id.tvUserName);
-
+        editProfile = (ImageView) findViewById(R.id.editProfile);
        // tvTeam = (TextView) findViewById(R.id.tvTeam);
         tvTeams = (TextView) findViewById( R.id.tvTeams);
         tvCity = (TextView) findViewById( R.id.tvCity);
@@ -63,9 +69,22 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         Intent intent = getIntent();
         key = intent.getExtras().getString("key");
         photo = intent.getExtras().getString("photo");
+
+        if(myUserId.equals( key ))
+        {
+            editProfile.setVisibility( View.VISIBLE);
+            editProfile.setVisibility( View.VISIBLE);
+        }
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfilePage.this, EditProfileActivity.class);
+                intent.putExtra("key", key);
+                startActivity(intent);
+
+            }
+        });
         userRef = database.getReference("Users/" + key);
-
-
         tvTeams.setOnClickListener(this);
 
 
@@ -119,9 +138,15 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 u = dataSnapshot.getValue(User.class);
+                photo=u.imgUrl;
                 tvUserName.setText(u.userName + ", " + String.valueOf(u.age)); // userName, age
                 //tvAge.setText(String.valueOf(u.age) + " years old");
                 tvCity.setText("From  "+String.valueOf(u.city));
+                Picasso
+                        .with( ProfilePage.this )
+                        .load( photo)
+                        .fit() // will explain later
+                        .into( imgProfile );
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

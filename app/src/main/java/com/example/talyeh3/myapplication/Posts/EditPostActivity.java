@@ -27,7 +27,7 @@ public class EditPostActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_edit_post);
-
+        getSupportActionBar().hide();
         database = FirebaseDatabase.getInstance();
         etTitle = (EditText) findViewById(R.id.etTitle);
         etBody = (EditText) findViewById(R.id.etBody);

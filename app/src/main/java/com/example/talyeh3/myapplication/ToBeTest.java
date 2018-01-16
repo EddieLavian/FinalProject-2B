@@ -32,7 +32,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     TextView btnChat;
 
     Dialog d;
-    TextView logOut;
+    TextView logOut,MyProfile;
     Button btnMenu;
     int mode=0; // o means register 1 means login
     ProgressDialog progressDialog;
@@ -43,7 +43,6 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
          String myUserId;
          private DatabaseReference databaseUser;
          User user,user2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +160,9 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
              d.setCancelable(true);
 
              logOut = (TextView) d.findViewById(R.id.logOut);
+             MyProfile = (TextView) d.findViewById(R.id.MyProfile);
              logOut.setOnClickListener(this);
+             MyProfile.setOnClickListener(this);
              d.show();
 
          }
@@ -178,6 +179,13 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
                  firebaseAuth.signOut();
                  Intent intent = new Intent(ToBeTest.this,RegisterActivity.class);
                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                 startActivity(intent);
+             }
+             if(view==MyProfile)
+             {
+                 Intent intent = new Intent(ToBeTest.this, ProfilePage.class);
+                 intent.putExtra("key", myUserId);
+                 d.dismiss();
                  startActivity(intent);
              }
          }
