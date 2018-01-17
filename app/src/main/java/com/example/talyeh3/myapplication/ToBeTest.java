@@ -40,9 +40,9 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     TextView btnWeather;
     String name="";
     FirebaseUser us;
-         String myUserId;
-         private DatabaseReference databaseUser;
-         User user,user2;
+    String myUserId;
+    private DatabaseReference databaseUser;
+    User user,user2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

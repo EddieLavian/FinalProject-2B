@@ -109,7 +109,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         List<String> statistics;
         statistics= new ArrayList<String>();
         statistics.add( "-1" );
-        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString(),statistics);
+        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString(),statistics,myUserKey);
         teamRef = database.getReference( "Teams" ).push();
             userRef = database.getReference( "Users/" + myUserId );
         t.key = teamRef.getKey();

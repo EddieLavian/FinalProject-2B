@@ -32,18 +32,19 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView tvName,btnAddPlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections;
+    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
     DatabaseReference teamRef;
-    ImageView user_profile_photo;
+    ImageView user_profile_photo,btnMenu;
     Team t;
     String key;
     String photo="";
     String teamName;
     private DatabaseReference databaseUser;
 
-    Dialog d;
+    Dialog d,menu;
+
     int firstPress=0,addPlayer=0;
     ListView lv;
     int i = 0;
@@ -51,8 +52,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     ArrayList<User> users;
     String keyUser="";
     AllUsersAdapter allPlayersAdapter;
-    FirebaseUser us = FirebaseAuth.getInstance().getCurrentUser();
-    String myUserId = us.getUid();
+    String myUserId;
 
 
 
@@ -62,13 +62,16 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         setContentView( R.layout.activity_team_details);//try commit
         getSupportActionBar().hide();
 
+        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseUser = FirebaseDatabase.getInstance().getReference("Users");
         this.retriveData();
         Toast.makeText(TeamDetails.this, "sd  "+firstPress,Toast.LENGTH_SHORT).show();
         user_profile_photo=(ImageView)findViewById( R.id.user_profile_photo);
         database = FirebaseDatabase.getInstance();
+        btnAddPlayer = (TextView) findViewById( R.id.btnAddPlayer);
+        btnDelitePlayer = (TextView) findViewById( R.id.btnDelitePlayer);
         tvName = (TextView) findViewById( R.id.tvName);
-        btnAddPlayer=(TextView)findViewById( R.id.btnAddPlayer );
+        btnMenu=(ImageView) findViewById( R.id.btnMenu );
         btnCreateGame=(TextView)findViewById( R.id.btnCreateGame );
         btnTeamPlayers=(ImageView) findViewById( R.id.btnTeamPlayers );
         btnStatistics=(TextView)findViewById( R.id.btnStatistics );
@@ -76,12 +79,13 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnGallery=(TextView)findViewById( R.id.btnGallery );
         btnGames=(TextView) findViewById( R.id.btnGames );
         btnAutomaticElections=(TextView)findViewById(R.id.btnAutoElections);
-        btnAddPlayer.setOnClickListener( this );
         btnChat.setOnClickListener( this );
         btnGallery.setOnClickListener( this );
         btnStatistics.setOnClickListener( this );
         btnCreateGame.setOnClickListener( this );
+        btnMenu.setOnClickListener( this );
         btnTeamPlayers.setOnClickListener( this );
+        btnAddPlayer.setOnClickListener( this );
         btnAutomaticElections.setOnClickListener( this );
         btnGames.setOnClickListener( this );
         Intent intent = getIntent();
@@ -148,7 +152,16 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                         .fit() // will explain later
                         .into(user_profile_photo );
 
+
+
+                if (t.manager.equals( myUserId ))
+                {
+                    btnAddPlayer.setVisibility( View.VISIBLE);
+                    btnDelitePlayer.setVisibility( View.VISIBLE);
+                }
+
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -252,6 +265,10 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         {
             Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
         }
+        if (v==btnMenu)
+        {
+            menu();
+        }
 
     }
 
@@ -276,7 +293,17 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    public void menu()
+    {
+        menu= new Dialog(this);
+        menu.setContentView(R.layout.menuteamlayout);
+        menu.setCancelable(true);
+        btnLeave = (TextView) menu.findViewById( R.id.btnLeave);
+        btnLeave.setOnClickListener( this );
 
+        menu.show();
+
+    }
 
 
 
