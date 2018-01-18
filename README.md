@@ -2,7 +2,7 @@
 
 ### Soccer application - To Be part of the game
 
-![Logo](https://github.com/EddieLavian/FinalProject-2B/blob/master/logo.png)![](https://github.com/EddieLavian/FinalProject-2B/blob/master/ball.png)
+![Logo](https://github.com/EddieLavian/FinalProject-2B/blob/master/logo.png)<img src="https://github.com/EddieLavian/FinalProject-2B/blob/master/ball.png" width="100" height="100">
 
 
 ## Disclaimer
