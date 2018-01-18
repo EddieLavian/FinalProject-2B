@@ -1,6 +1,6 @@
 # 2B
 
-### Soccer application - To be part of the game
+### Soccer application - To Be part of the game
 
 ![github project settings](https://github.com/EddieLavian/FinalProject-2B/blob/master/logo.png)
 
