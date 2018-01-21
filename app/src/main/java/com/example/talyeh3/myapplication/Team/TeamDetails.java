@@ -45,7 +45,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
     Dialog d,menu;
 
-    int firstPress=0,addPlayer=0;
+    int firstPress=0;
     ListView lv;
     int i = 0;
     private DatabaseReference database2,teamDatabase;
@@ -86,6 +86,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnMenu.setOnClickListener( this );
         btnTeamPlayers.setOnClickListener( this );
         btnAddPlayer.setOnClickListener( this );
+        btnDelitePlayer.setOnClickListener( this );
         btnAutomaticElections.setOnClickListener( this );
         btnGames.setOnClickListener( this );
         Intent intent = getIntent();
@@ -212,12 +213,20 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
 
     public void onClick(View v) {
-        if (v==btnAddPlayer)
+        if (v==btnAddPlayer )
         {
             startActivity(getIntent());
-            addPlayer=1;
             Intent intent = new Intent( TeamDetails.this, OpenTeam.class );
             intent.putExtra( "teamKey", t.key );
+            finish();
+            startActivity( intent );
+        }
+        if (v==btnDelitePlayer )
+        {
+            startActivity(getIntent());
+            Intent intent = new Intent( TeamDetails.this, OpenTeam.class );
+            intent.putExtra( "teamKey", t.key );
+            intent.putExtra( "delete","del" );
             finish();
             startActivity( intent );
         }

@@ -2,14 +2,22 @@ package com.example.talyeh3.myapplication.Team;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.AllUsersAdapter;
 import com.example.talyeh3.myapplication.R;
@@ -21,92 +29,74 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OpenTeam extends AppCompatActivity {
+    MaterialSearchView searchView;
+    ListView lstView;
 
     String teamKey;
+    TextView tvTitle;
     ListView lv;
     ArrayList<User> users;
     AllUsersAdapter allUsersAdapter;
     TextView tvAddPlayer;
     ImageView image;
-    private DatabaseReference database;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String myUserId = user.getUid();
+    private DatabaseReference database,userRefTeam;
+    ArrayList<String> usersInTeam;
+    String myUserId;
     Button btn;
     String keyUser="";
     ProgressDialog progressDialog;
     int i = 0;
+    String delete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_open_team);
-        getSupportActionBar().hide();
+
+       // Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
+       // getSupportActionBar().setTitle("Material Search");
+       // toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+
+        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();;
+        //getSupportActionBar().hide();
+
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Users");
         lv = (ListView) findViewById( R.id.lv);
-        //tvAddPlayer= (TextView) findViewById( R.id.tvAddPlayer);
+        Intent getIntent = getIntent();
+        teamKey = getIntent.getExtras().getString("teamKey");
+        delete = getIntent.getExtras().getString("delete");
+
+        userRefTeam = FirebaseDatabase.getInstance().getReference("Teams/"+teamKey+"/users");
+        tvTitle = (TextView)findViewById(R.id.tvTitle);
+        if (delete!=null)
+        {
+            tvTitle.setText( "Choose Player To Delete " );
+        }
         this.retriveData();
-
-
-/*
-        List<String> names = new AbstractList<String>() {
-            public int size() { return users.size(); }
-            public String get(int location) {
-                return users.get(location).userName;
-            }
-        };
-        final AutoCompleteTextView tv = (AutoCompleteTextView) findViewById( R.id.autoCompleteTextView);
-        ArrayAdapter<String >adapter=new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, names );
-        tv.setAdapter( adapter );
-        image = (ImageView) findViewById( R.id.image);
-        image.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tv.showDropDown();
-            }
-        } );
-        btn= (Button) findViewById( R.id.btn);
-        btn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String s = tv.getText().toString();
-            }
-        } );
-*/
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User u = users.get(position);
-                Intent getIntent = getIntent();
-                teamKey = getIntent.getExtras().getString("teamKey");
                 Intent intent = new Intent(OpenTeam.this, ProfileActivity.class);
                 intent.putExtra("key", u.uid );
                 intent.putExtra("team",teamKey);
                 intent.putExtra("photo", u.imgUrl );
+                if(delete!=null)
+                    intent.putExtra("delete", "del");
                 startActivity(intent);
 
             }
 
         });
-/*
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                User u =users.get(position);
-                DatabaseReference currentUser = FirebaseDatabase.getInstance().getReference("Users/teams/" +teamKey);
-                DatabaseReference currentTeam = FirebaseDatabase.getInstance().getReference("Teams/users/" + u.uid);
-                currentUser.removeValue();
-                currentTeam.removeValue();
-                return true;
-            }
-        });
-*/
-
-        //   setupAutoComplete(tv,users);
 
 
     }
@@ -114,6 +104,26 @@ public class OpenTeam extends AppCompatActivity {
     public void retriveData() {
         progressDialog.setMessage("load Please Wait...");
         progressDialog.show();
+
+
+        userRefTeam.addValueEventListener(new ValueEventListener() {
+
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                usersInTeam = new ArrayList<String>();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String u = String.valueOf( data.getValue( ) );
+
+                    Toast.makeText( OpenTeam.this, "sd  " + u, Toast.LENGTH_SHORT ).show();
+                    usersInTeam.add( u );
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -121,23 +131,88 @@ public class OpenTeam extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User u = data.getValue(User.class);
                     int notDuplicateUser=0;
-                        /*
-                        for (int i = 0; i < users.size();i++)
-                        {
-                            if (u.uid.equals(users.get(i).uid))
-                            {
-                                users.remove( i );
-                                notDuplicateUser=-1;
+                    if (delete==null){//add players
+                        for (int i = 0; i < usersInTeam.size(); i++) {
+                            if (usersInTeam.get( i ).equals( u.uid )) {
+                                notDuplicateUser = -1;
                             }
                         }
-                        */
-
-                    if (!u.uid.equals( myUserId )&& notDuplicateUser==0)
-                        users.add(u);
+                        if (notDuplicateUser==0 )
+                            users.add(u);
+                    }
+                    else//delite players
+                    {
+                        for (int i = 0; i < usersInTeam.size(); i++) {
+                            if (usersInTeam.get( i ).equals( u.uid )&&!usersInTeam.get( i ).equals(myUserId)) {//in the team but not me
+                                users.add(u);
+                                break;
+                            }
+                        }
+                    }
                 }
                 progressDialog.dismiss();
+              // allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
+              //  lv.setAdapter(allUsersAdapter);
+
+                lstView = (ListView)findViewById(R.id.lv);
                 allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
-                lv.setAdapter(allUsersAdapter);
+                lstView.setAdapter(allUsersAdapter);
+
+
+                searchView = (MaterialSearchView)findViewById(R.id.search_view);
+
+                searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+
+                    public void onSearchViewShown() {
+
+                    }
+
+
+                    public void onSearchViewClosed() {
+
+                        //If closed Search View , lstView will return default
+                        lstView = (ListView)findViewById(R.id.lv);
+                         //ArrayAdapter adapter = new ArrayAdapter(OpenTeam.this,android.R.layout.simple_list_item_1,lstSource);
+                        allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
+                         lstView.setAdapter(allUsersAdapter);
+
+
+                    }
+                });
+
+                searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+
+                    public boolean onQueryTextChange(String newText) {
+                        if(newText != null && !newText.isEmpty()){
+                            List<User> lstFound = new ArrayList<User>();
+                            int i=0;
+                            for(User item:users ){
+                                    if(item.userName.contains( newText ) )
+                                        lstFound.add(item);
+
+
+                            }
+
+                            allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, lstFound);
+                            lstView.setAdapter(allUsersAdapter);
+                        }
+                        else{
+                            //if search text is null
+                            //return default
+                            allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
+                            lstView.setAdapter(allUsersAdapter);
+                        }
+                        return true;
+                    }
+
+                });
+
+                allUsersAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -147,17 +222,30 @@ public class OpenTeam extends AppCompatActivity {
         });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-    /*
-    private void setupAutoComplete(AutoCompleteTextView view, List<User> objects) {
-        List<String> names = new AbstractList<String>() {
-            public int size() { return users.size(); }
-            public String get(int location) {
-                return users.get(location).userName;
-            }
-        };
-        view.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names));
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item,menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        searchView.setMenuItem(item);
+        return true;
     }
-    */
 
 }

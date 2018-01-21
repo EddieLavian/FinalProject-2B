@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.ProfilePage;
 import com.example.talyeh3.myapplication.R;
@@ -25,11 +26,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     TextView tvUserName,tvAge,tvCity;
     TextView btnSave;
     FirebaseDatabase database;
-    DatabaseReference userRef;
-    DatabaseReference userRefTeam;
+    DatabaseReference userRef,userRef2,userRefTeam;
     String key,teamKey;
     User u;
     Team t;
+    String delete;
 
     String photo;
     ImageView imgProfile;
@@ -49,7 +50,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         btnSave.setOnClickListener(this);
         Intent intent = getIntent();
         photo = intent.getExtras().getString("photo");
-
+        delete=intent.getExtras().getString("delete");
+        Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
         imgProfile = (ImageView)findViewById( R.id.imgProfile);
         Picasso
                 .with( ProfileActivity.this )
@@ -61,73 +63,73 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         key = intent.getExtras().getString("key");
         userRef = database.getReference("Users/" + key);
         userRefTeam = database.getReference("Teams/" + teamKey);
+        userRef2 = database.getReference( "Users/" + key + "/teams/0" );
         this.retrieveData();
     }
 
 
     public void retrieveData()
     {
-
-
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 u = dataSnapshot.getValue(User.class);
                 tvUserName.setText(u.userName);
                 tvCity.setText( u.city );
                 tvAge.setText(String.valueOf(u.age));
-
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
         userRefTeam.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 t = dataSnapshot.getValue(Team.class);
-
-
-
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
 
 
     public void onClick(View v) {
-        userRefTeam = database.getReference("Teams/" + t.key);
+
+
         t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        t.users.add(u.uid);
-        String myUserKey = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String myUserMail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        t.statistics.add(key+t.key);
+        if (delete!=null)//delete player to the team
+        {
+            t.users.remove( u.uid );
+            u.teams.remove(t.key);
+            t.statistics.remove(key+t.key);
+            String keyStatistics=key+t.key;
 
-
+            DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
+            statisticsPlayer.setValue(null);
+        }
+        else if (delete== null )//add player to the team
+        {
+            t.users.add(u.uid);
+            u.teams.add(t.key);
+            t.statistics.add(key+t.key);
+            String keyStatistics=key+t.key;
+            Statistics s=new Statistics( keyStatistics,t.key,u.userName,0,0,0,0);
+            DatabaseReference mDatabase;
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("Statistics").child(keyStatistics).setValue(s);
+        }
 
         userRefTeam.setValue(t);
-        userRef = database.getReference("Users/" + key);
-        u.teams.add(t.key);
-
         userRef.setValue(u);
-        String keyStatistics=key+t.key;
-        Statistics s=new Statistics( keyStatistics,t.key,u.userName,0,0,0,0);
-        DatabaseReference mDatabase;
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Statistics").child(keyStatistics).setValue(s);
-
-
+        if (userRef2!=null)
+        {
+            if (userRef2.getKey().equals( "0" ))
+                userRef2.removeValue();
+        }
 
         finish();
     }
