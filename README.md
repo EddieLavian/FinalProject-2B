@@ -1,7 +1,7 @@
 # 2B
 
-### Soccer Application
 ## To Be part of the game
+### Soccer Application
 
 ![Logo](https://github.com/EddieLavian/FinalProject-2B/blob/master/logo.png)
 
