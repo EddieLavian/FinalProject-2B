@@ -44,7 +44,7 @@ public class TeamGamesActivity extends AppCompatActivity {
         setContentView( R.layout.activity_team_games );
         Intent intent = getIntent();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        myUserId = user.getUid();
+        myUserId = user.getDisplayName();
         keyTeam = intent.getExtras().getString("teamKey");
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Teams/"+keyTeam+"/games");
@@ -56,7 +56,7 @@ public class TeamGamesActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                checkIfAttending=false;
                 g = games.get(position);
                 attendingDatabase = FirebaseDatabase.getInstance();
                 attendingRef = attendingDatabase.getReference("Games/" + g.key);
@@ -129,7 +129,8 @@ public class TeamGamesActivity extends AppCompatActivity {
                                 Log.d( "onStart", snapshot.toString() );
 
                             }
-                            TeamGamesAdapter.notifyDataSetChanged();
+                            if (TeamGamesAdapter!=null)
+                                 TeamGamesAdapter.notifyDataSetChanged();
                             progressDialog.dismiss();
                         }
 

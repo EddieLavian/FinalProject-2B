@@ -53,6 +53,8 @@ public class OpenTeam extends AppCompatActivity {
     ProgressDialog progressDialog;
     int i = 0;
     String delete;
+   public boolean autocompliteUse;
+    List<User> lstFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class OpenTeam extends AppCompatActivity {
        // setSupportActionBar(toolbar);
        // getSupportActionBar().setTitle("Material Search");
        // toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
-
+        autocompliteUse=false;
         myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();;
         //getSupportActionBar().hide();
 
@@ -85,7 +87,16 @@ public class OpenTeam extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                User u = users.get(position);
+                User u;
+                if (autocompliteUse==false)
+                {
+                    u = users.get(position);
+                }
+                else
+                {
+                    u = lstFound.get( position );
+                }
+
                 Intent intent = new Intent(OpenTeam.this, ProfileActivity.class);
                 intent.putExtra("key", u.uid );
                 intent.putExtra("team",teamKey);
@@ -140,7 +151,7 @@ public class OpenTeam extends AppCompatActivity {
                         if (notDuplicateUser==0 )
                             users.add(u);
                     }
-                    else//delite players
+                    else//delite players list
                     {
                         for (int i = 0; i < usersInTeam.size(); i++) {
                             if (usersInTeam.get( i ).equals( u.uid )&&!usersInTeam.get( i ).equals(myUserId)) {//in the team but not me
@@ -189,13 +200,14 @@ public class OpenTeam extends AppCompatActivity {
 
                     public boolean onQueryTextChange(String newText) {
                         if(newText != null && !newText.isEmpty()){
-                            List<User> lstFound = new ArrayList<User>();
+                            lstFound = new ArrayList<User>();
                             int i=0;
                             for(User item:users ){
                                     if(item.userName.contains( newText ) )
+                                    {
                                         lstFound.add(item);
-
-
+                                        autocompliteUse =true;
+                                    }
                             }
 
                             allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, lstFound);

@@ -90,6 +90,19 @@
             android:textColor="#666262"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/tvPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="#d6e7f9"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:hint="hello"
+            android:padding="0dp"
+            android:textColor="#666262"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
     <LinearLayout
