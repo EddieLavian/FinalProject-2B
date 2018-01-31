@@ -59,7 +59,7 @@ public class ThisPostActivity extends AppCompatActivity {
         {
             myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             databaseUser = FirebaseDatabase.getInstance().getReference("Users/"+myUserId+"/managerSite");
-            Toast.makeText(ThisPostActivity.this, "jjj"+myUserId, Toast.LENGTH_LONG).show();
+           // Toast.makeText(ThisPostActivity.this, "jjj"+myUserId, Toast.LENGTH_LONG).show();
             databaseUser.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {//only managers add post
@@ -85,7 +85,7 @@ public class ThisPostActivity extends AppCompatActivity {
         }
 
 
-        Toast.makeText(ThisPostActivity.this,key, Toast.LENGTH_LONG).show();
+     //   Toast.makeText(ThisPostActivity.this,key, Toast.LENGTH_LONG).show();
 
         Picasso
                 .with( ThisPostActivity.this )

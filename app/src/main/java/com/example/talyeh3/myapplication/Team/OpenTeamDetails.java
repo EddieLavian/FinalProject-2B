@@ -94,7 +94,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         {
             if(etTeamName.getText().length()<=0)
             {
-                Toast.makeText(OpenTeamDetails.this, "Team Name Is Empty", Toast.LENGTH_LONG).show();
+               // Toast.makeText(OpenTeamDetails.this, "Team Name Is Empty", Toast.LENGTH_LONG).show();
                 return;
             }
         String uid = FirebaseAuth.getInstance().getCurrentUser().toString();
@@ -111,7 +111,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         statistics.add( "-1" );
         Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString(),statistics,myUserKey);
         teamRef = database.getReference( "Teams" ).push();
-            userRef = database.getReference( "Users/" + myUserId );
+        userRef = database.getReference( "Users/" + myUserId );
         t.key = teamRef.getKey();
         statistics.add(myUserKey+t.key);
             statistics.remove( "-1" );
@@ -169,7 +169,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),"File Uploaded",Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(),"File Uploaded",Toast.LENGTH_LONG).show();
 
 
                             Uri downloadUri = taskSnapshot.getMetadata().getDownloadUrl();
@@ -185,7 +185,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
                         @Override
                         public void onFailure(@NonNull Exception exception) {
                             progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),exception.getMessage(),Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(),exception.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {

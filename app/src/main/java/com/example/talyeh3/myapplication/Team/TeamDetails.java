@@ -35,12 +35,14 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
-    DatabaseReference teamRef;
+    DatabaseReference teamRef,userRef;
     ImageView user_profile_photo,btnMenu;
     Team t;
     String key;
     String photo="";
     String teamName;
+    User u;
+
     private DatabaseReference databaseUser;
 
     Dialog d,menu;
@@ -65,7 +67,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseUser = FirebaseDatabase.getInstance().getReference("Users");
         this.retriveData();
-        Toast.makeText(TeamDetails.this, "sd  "+firstPress,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(TeamDetails.this, "sd  "+firstPress,Toast.LENGTH_SHORT).show();
         user_profile_photo=(ImageView)findViewById( R.id.user_profile_photo);
         database = FirebaseDatabase.getInstance();
         btnAddPlayer = (TextView) findViewById( R.id.btnAddPlayer);
@@ -91,9 +93,10 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnGames.setOnClickListener( this );
         Intent intent = getIntent();
         key = intent.getExtras().getString("keyteam");
+        userRef = database.getReference("Users/" + myUserId);
         teamRef = database.getReference("Teams/" + key);
         this.retrieveData();
-        Toast.makeText(TeamDetails.this, "hghg         "+key, Toast.LENGTH_LONG).show();
+        //Toast.makeText(TeamDetails.this, "hghg         "+key, Toast.LENGTH_LONG).show();
         //for all players team
         database2 = FirebaseDatabase.getInstance().getReference("Teams/"+key+"/users");
 
@@ -114,13 +117,13 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             lv = (ListView) d.findViewById( R.id.lv);
             this.retriveDataPlayers();
             d.show();
-            Toast.makeText(TeamDetails.this, "a"+firstPress,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(TeamDetails.this, "a"+firstPress,Toast.LENGTH_SHORT).show();
         }
 
         else
             {
             d.show();
-                Toast.makeText(TeamDetails.this, "b",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(TeamDetails.this, "b",Toast.LENGTH_SHORT).show();
         }
         d.setOnKeyListener(new Dialog.OnKeyListener() {
             @Override
@@ -139,6 +142,17 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
     public void retrieveData()
     {
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                u = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
         teamRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -220,6 +234,54 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             intent.putExtra( "teamKey", t.key );
             finish();
             startActivity( intent );
+        }
+        if (v==btnLeave)
+        {
+            Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
+
+            //t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            /*
+            if (t.users.size()<=1)
+            {
+
+                DatabaseReference team = FirebaseDatabase.getInstance().getReference().getRoot().child("Teams/"+t.key);//remove team if no have players
+                team.setValue(null);
+                if (u.teams.size()<=1)
+                {
+                    u.teams.add( "-1" );
+                }
+                userRef.setValue( u );
+                u.teams.remove(t.key);
+                finish();
+                return;
+            }
+            */
+            if (t.manager.equals( myUserId ) )
+            {
+
+                if (t.users.size()>1)
+                t.manager=t.users.get( 1 ) ;
+            }
+
+            if (u.teams.size()<=2)
+            {
+                Toast.makeText(TeamDetails.this, u.teams.size() +"   llllllllllllllllllllllllllllllllllll  ",Toast.LENGTH_SHORT).show();
+                DatabaseReference mDatabase;
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("Users").child("teams").child( "0" ).setValue("-1");
+            //    Toast.makeText(TeamDetails.this, myUserId +"   llllllllllllllllllllllllllllllllllll  "+ t.manager,Toast.LENGTH_SHORT).show();
+            }
+                t.users.remove( u.uid );
+                u.teams.remove(t.key);
+                t.statistics.remove(myUserId+t.key);
+                String keyStatistics=myUserId+t.key;
+
+                DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
+                statisticsPlayer.setValue(null);
+                userRef.setValue( u );
+                teamRef.setValue( t );
+                finish();
+
         }
         if (v==btnDelitePlayer )
         {

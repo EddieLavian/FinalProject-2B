@@ -94,7 +94,7 @@ public class StatisticsActivity extends AppCompatActivity{
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Log.d("onDataChange", data.getValue().toString());
                     keyStatistic = (String) snapshot.child(String.valueOf(i)).getValue();
-                    Toast.makeText(StatisticsActivity.this, i+keyStatistic, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(StatisticsActivity.this, i+keyStatistic, Toast.LENGTH_LONG).show();
                     statisticsDatabase = FirebaseDatabase.getInstance().getReference("Statistics/" + keyStatistic);
 
                     ValueEventListener valueEventListener = statisticsDatabase.addValueEventListener(new ValueEventListener() {

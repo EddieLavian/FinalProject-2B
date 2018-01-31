@@ -183,7 +183,7 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Delite Players"
+                android:text="Delete Players"
                 android:visibility="invisible"/>
 
         </LinearLayout>

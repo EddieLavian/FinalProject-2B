@@ -1,5 +1,6 @@
 package com.example.talyeh3.myapplication.CreateGame;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,13 +39,17 @@ public class TeamGamesActivity extends AppCompatActivity {
     Game g;
     Boolean ifAttending=true,checkIfAttending=false,first=true;
     String myUserId;
+    Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_team_games );
         Intent intent = getIntent();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        myUserId = user.getDisplayName();
+        dialog= new Dialog(this);
+
+        myUserId = user.getUid();
         keyTeam = intent.getExtras().getString("teamKey");
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Teams/"+keyTeam+"/games");
@@ -53,15 +58,18 @@ public class TeamGamesActivity extends AppCompatActivity {
         {
             this.retriveData();
         }
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 checkIfAttending=false;
                 g = games.get(position);
+                TeamGamesAdapter = new TeamGamesAdapter( TeamGamesActivity.this, 0, 0, games,ifAttending ,myUserId,dialog,g.key);
+                lv.setAdapter( TeamGamesAdapter );
                 attendingDatabase = FirebaseDatabase.getInstance();
                 attendingRef = attendingDatabase.getReference("Games/" + g.key);
                 AlertDialog.Builder builder = new AlertDialog.Builder(TeamGamesActivity.this);
-                for (int i = 0 ; i<g.whoIsComming.size();i++)
+                for (int i = 1 ; i<g.whoIsComming.size();i++)
                 {
                     if(g.whoIsComming.get( i ).equals( myUserId ))
                     {
@@ -86,13 +94,10 @@ public class TeamGamesActivity extends AppCompatActivity {
                     builder.setCancelable(true);
                     builder.setPositiveButton("Yes", new HandleAlertDialogListener());
                     builder.setNegativeButton("Cancel", new HandleAlertDialogListener());
-                    AlertDialog dialog=builder.create();
-                    dialog.show();
+                    AlertDialog dialogAlert=builder.create();
+                    dialogAlert.show();
                 }
             }
-
-
-
 
 
         });
@@ -115,8 +120,9 @@ public class TeamGamesActivity extends AppCompatActivity {
                     keyGame = (String) snapshot.child( String.valueOf( i ) ).getValue();
                     if (keyGame==null)
                     {
-                        Toast.makeText(TeamGamesActivity.this, "you dont have planing games yet", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(TeamGamesActivity.this, "you dont have planing games yet", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
+                        finish();
                         return;
                     }
                     gameDatabase = FirebaseDatabase.getInstance().getReference( "Games/" + keyGame );
@@ -139,8 +145,9 @@ public class TeamGamesActivity extends AppCompatActivity {
                     } );
                     i++;
                 }
-                TeamGamesAdapter = new TeamGamesAdapter( TeamGamesActivity.this, 0, 0, games,ifAttending ,myUserId);
+                TeamGamesAdapter = new TeamGamesAdapter( TeamGamesActivity.this, 0, 0, games,ifAttending ,myUserId,dialog,"no");
                 lv.setAdapter( TeamGamesAdapter );
+
             }
             public void onCancelled(DatabaseError databaseError) {
 

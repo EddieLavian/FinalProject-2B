@@ -245,6 +245,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void login()
     {
+
         if(etEmail.getText().length() < 1 || etPass.getText().length() < 1)
         {
             Toast.makeText(RegisterActivity.this, "Some Fields Are Empty", Toast.LENGTH_LONG).show();

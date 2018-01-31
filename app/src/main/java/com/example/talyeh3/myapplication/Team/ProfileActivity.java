@@ -51,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Intent intent = getIntent();
         photo = intent.getExtras().getString("photo");
         delete=intent.getExtras().getString("delete");
-        Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
+       // Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
         imgProfile = (ImageView)findViewById( R.id.imgProfile);
         Picasso
                 .with( ProfileActivity.this )
@@ -101,7 +101,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        if (delete!=null)//delete player to the team
+        if (delete!=null)//delete player from the team
         {
             t.users.remove( u.uid );
             u.teams.remove(t.key);

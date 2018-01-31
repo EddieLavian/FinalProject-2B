@@ -73,7 +73,7 @@ public class GalleryActivity extends AppCompatActivity {
             name = intent.getExtras().getString("teamName");
             profilePic = intent.getExtras().getString("profilePic");
             userName = intent.getExtras().getString("userName");
-            Toast.makeText( GalleryActivity.this,"kkkkk"+ profilePic,Toast.LENGTH_SHORT).show();
+            //Toast.makeText( GalleryActivity.this,"kkkkk"+ profilePic,Toast.LENGTH_SHORT).show();
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("Gallery/"+key);//Sala de chat (nombre)
 

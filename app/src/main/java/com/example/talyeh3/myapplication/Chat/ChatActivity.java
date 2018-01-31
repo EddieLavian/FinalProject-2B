@@ -76,7 +76,7 @@ public class ChatActivity extends AppCompatActivity {
             name = intent.getExtras().getString("teamName");
             profilePic = intent.getExtras().getString("profilePic");
             userName = intent.getExtras().getString("userName");
-            Toast.makeText(ChatActivity.this,"kkkkk"+ profilePic,Toast.LENGTH_SHORT).show();
+           // Toast.makeText(ChatActivity.this,"kkkkk"+ profilePic,Toast.LENGTH_SHORT).show();
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("chat/"+key);//Sala de chat (nombre)
             tvName.setText(name);
@@ -181,7 +181,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri u = taskSnapshot.getDownloadUrl();
-                    MensajeEnviar m = new MensajeEnviar("",u.toString(),userName+" changed team photo",profilePic,"2",ServerValue.TIMESTAMP);
+                    MensajeEnviar m = new MensajeEnviar("",u.toString(),userName+" Uploaded photo",profilePic,"2",ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                 }
             });
