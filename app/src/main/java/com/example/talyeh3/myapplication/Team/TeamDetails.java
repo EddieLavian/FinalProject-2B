@@ -1,12 +1,19 @@
 package com.example.talyeh3.myapplication.Team;
 
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,8 +24,10 @@ import com.example.talyeh3.myapplication.Chat.ChatActivity;
 import com.example.talyeh3.myapplication.CreateGame.CreateGame;
 import com.example.talyeh3.myapplication.CreateGame.TeamGamesActivity;
 import com.example.talyeh3.myapplication.Gallery.GalleryActivity;
+import com.example.talyeh3.myapplication.ProfilePage;
 import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.Statistics.StatisticsActivity;
+import com.example.talyeh3.myapplication.ToBeTest;
 import com.example.talyeh3.myapplication.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -56,7 +65,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     AllUsersAdapter allPlayersAdapter;
     String myUserId;
 
-
+    TextView btnCancel;
+    TextView btnPush;
 
     User user,user2;
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +110,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         //for all players team
         database2 = FirebaseDatabase.getInstance().getReference("Teams/"+key+"/users");
 
-
+        notification();
     }
 
 
@@ -136,6 +146,24 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 }
                 return true;
             }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                User u = users.get(position);
+                Intent intent = new Intent(TeamDetails.this, ProfilePage.class);
+                intent.putExtra("key", u.uid );
+                intent.putExtra("photo", u.imgUrl );
+                startActivity(intent);
+
+
+            }
+
+
+
+
+
         });
     }
 
@@ -268,8 +296,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 Toast.makeText(TeamDetails.this, u.teams.size() +"   llllllllllllllllllllllllllllllllllll  ",Toast.LENGTH_SHORT).show();
                 DatabaseReference mDatabase;
                 mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Users").child("teams").child( "0" ).setValue("-1");
-            //    Toast.makeText(TeamDetails.this, myUserId +"   llllllllllllllllllllllllllllllllllll  "+ t.manager,Toast.LENGTH_SHORT).show();
+                mDatabase.child("Users").child( myUserId ).child("teams").child( "0" ).setValue("-1");
+                userRef.setValue( u );
             }
                 t.users.remove( u.uid );
                 u.teams.remove(t.key);
@@ -377,5 +405,53 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     }
 
 
+    public  void notification()
+    {
+        btnCancel = (TextView) findViewById(R.id.btnCancel);
+        btnPush = (TextView) findViewById(R.id.btnPush);
 
-}
+        btnPush.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //phase 1
+                int icon = android.R.drawable.star_on;
+                String ticket = " this is ticket message";
+                long when = System.currentTimeMillis();
+                String title = "title";
+                String ticker = "ticker";
+                String text = "text";
+                //phase 2
+                Intent intent = new Intent(TeamDetails.this, ToBeTest.class);
+                intent.putExtra("key", "Uzi oranim");
+                PendingIntent pendingIntent = PendingIntent.getActivity(TeamDetails.this, 0, intent, 0);
+                NotificationManager notificationManager = (NotificationManager) getSystemService( Context.NOTIFICATION_SERVICE);
+
+
+                //phase 3
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
+                Notification notification = builder.setContentIntent(pendingIntent)
+                        .setSmallIcon(icon).setTicker(ticker).setWhen(when)
+                        .setAutoCancel(true).setContentTitle(title).
+                                setSmallIcon(android.R.drawable.star_on)
+                        .setContentText("content text").build();
+
+                notificationManager.notify(1, notification);
+            }
+        });
+
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancel(1);
+
+
+            }
+        });
+    }
+    }
+
+
