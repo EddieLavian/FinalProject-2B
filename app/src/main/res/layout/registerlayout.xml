@@ -54,19 +54,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="6dp">
+
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:textAllCaps="false"
-                android:drawablePadding="16dp"
-                android:textSize="18sp"
-                android:gravity="start"
                 android:clickable="true"
+                android:drawablePadding="16dp"
+                android:gravity="start"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:padding="10dp"
+                android:textAllCaps="false"
                 android:textColor="#a6aff1"
-                android:hint="Email"/>
+                android:textSize="18sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

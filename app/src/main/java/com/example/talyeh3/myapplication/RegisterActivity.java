@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     FirebaseAuth firebaseAuth;
     Button btnMainRegister,btnMainLogin,btnChoose;
     ImageView imgProfile;
-    EditText etEmail,etPass,etUserName,etAge, etRePass;
+    EditText etEmailLogin,etPassLogin,etUserName,etAge, etRePass, etEmailReg, etPassReg;
     Dialog d;
     CardView cvLogIn;
     Button btnReg,btnLogin;
@@ -72,8 +72,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         tvRegister = (TextView)findViewById(R.id.tvRegister);
        tvRegister.setOnClickListener(this);
 
-        etEmail=(EditText)findViewById(R.id.etEmail);
-        etPass=(EditText)findViewById(R.id.etPass);
+        etEmailLogin=(EditText)findViewById(R.id.etEmailLogin);
+        etPassLogin=(EditText)findViewById(R.id.etPassLogin);
         cvLogIn = (CardView)findViewById(R.id.cvLogIn);
         cvLogIn.setOnClickListener(this);
     }
@@ -89,8 +89,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         d.setContentView(R.layout.registerlayout);
         d.setTitle("Register");
         d.setCancelable(true);
-        etEmail=(EditText)d.findViewById(R.id.etEmail);
-        etPass=(EditText)d.findViewById(R.id.etPass);
+        etEmailReg=(EditText)d.findViewById(R.id.etEmailReg);
+        etPassReg=(EditText)d.findViewById(R.id.etPassReg);
         etAge=(EditText)d.findViewById(R.id.etAge);
         etRePass=(EditText)d.findViewById(R.id.etRePass);
         etUserName=(EditText)d.findViewById(R.id.etUserName);
@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             List<String> myTeams;
                             myTeams = new ArrayList<String>();
                             myTeams.add("-1");
-                            User u = new User(uid,etUserName.getText().toString(),etEmail.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no");
+                            User u = new User(uid,etUserName.getText().toString(),etEmailLogin.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no");
                             DatabaseReference mDatabase;
                             mDatabase = FirebaseDatabase.getInstance().getReference();
                             mDatabase.child("Users").child(uid).setValue(u);
@@ -159,22 +159,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void register()
     {
 
-        if(etUserName.getText().length() < 1 || etEmail.getText().length() < 1 || etPass.getText().length() < 1 || etRePass.getText().length() < 1 || etAge.getText().length()< 1)
+        if(etUserName.getText().length() < 1 || etEmailReg.getText().length() < 1 || etPassReg.getText().length() < 1 || etRePass.getText().length() < 1 || etAge.getText().length()< 1)
         {
-            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty!!!", Toast.LENGTH_LONG).show();
             return;
         }
-        else if(etPass.getText().toString().length() < 6)
+        else if(etPassReg.getText().toString().length() < 6)
         {
             Toast.makeText(RegisterActivity.this, "Password must be six Charcters or more.", Toast.LENGTH_LONG).show();
             return;
         }
-        else if(!etPass.getText().toString().equals(etRePass.getText().toString()))
+        else if(!etPassReg.getText().toString().equals(etRePass.getText().toString()))
         {
             Toast.makeText(RegisterActivity.this, "Not same passwords. Please try again", Toast.LENGTH_LONG).show();
             return;
         }
-        else if(!etEmail.getText().toString().matches(emailPattern))
+        else if(!etEmailReg.getText().toString().matches(emailPattern))
         {
             Toast.makeText(RegisterActivity.this, "Invalid email", Toast.LENGTH_LONG).show();
             return;
@@ -182,7 +182,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         progressDialog.setMessage("Registering Please Wait...");
         progressDialog.show();
 
-        firebaseAuth.createUserWithEmailAndPassword(etEmail.getText().toString(),etPass.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.createUserWithEmailAndPassword(etEmailReg.getText().toString(),etPassReg.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -218,7 +218,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                     if(b==true)
                     {
-                        User u = new User(uid,etUserName.getText().toString(),etEmail.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no");
+                        User u = new User(uid,etUserName.getText().toString(),etEmailReg.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no");
                         DatabaseReference mDatabase;
                         mDatabase = FirebaseDatabase.getInstance().getReference();
                         mDatabase.child("Users").child(uid).setValue(u);
@@ -245,17 +245,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void login()
     {
-
-        if(etEmail.getText().length() < 1 || etPass.getText().length() < 1)
+        if(etEmailLogin.getText().length() < 1 || etEmailLogin.getText().length() < 1)
         {
-            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty... etEmailLogin.getText().length() = " + etEmailLogin.getText().length(), Toast.LENGTH_LONG).show();
             return;
         }
 
         progressDialog.setMessage("Login Please Wait...");
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(),etPass.getText().toString())
+        firebaseAuth.signInWithEmailAndPassword(etEmailLogin.getText().toString(),etPassLogin.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(Task<AuthResult> task) {
@@ -326,13 +325,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         {
             createRegisterDialog();
         }
-        else if (btnReg==v)
-        {
-            register();
-        }
         else if(v==cvLogIn)
         {
             login();
+        }
+        else if (btnReg==v)
+        {
+            register();
         }
         else if(v==btnChoose)
         {

@@ -16,28 +16,28 @@
         app:srcCompat="@drawable/logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/etEmail"/>
+        android:layout_above="@+id/etEmailLogin"/>
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etEmailLogin"
         android:layout_width="250dp"
         android:layout_height="40dp"
+        android:layout_above="@+id/etPassLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_user"
         android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:textSize="16dp"
-        android:layout_marginBottom="35dp"
-        android:layout_above="@+id/etPass"
-        android:layout_centerHorizontal="true" />
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textSize="16dp" />
 
     <EditText
-        android:id="@+id/etPass"
+        android:id="@+id/etPassLogin"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_above="@+id/cvLogIn"
-        android:layout_alignStart="@+id/etEmail"
+        android:layout_alignStart="@+id/etEmailLogin"
         android:layout_marginBottom="39dp"
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_pass"
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBottom="@+id/cardView"
-            android:layout_alignEnd="@+id/etEmail"
+            android:layout_alignEnd="@+id/etEmailLogin"
             android:layout_marginBottom="1dp">
 
             <TextView

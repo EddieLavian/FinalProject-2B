@@ -8,7 +8,8 @@ import java.util.List;
  * Created by talyeh3 on 16/11/2017.
  */
 
-public class User {
+public class User
+{
     public String key,imgUrl;
     public String uid;
     public String userName;
