@@ -233,24 +233,6 @@ public class OpenTeam extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

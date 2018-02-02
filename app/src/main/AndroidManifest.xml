@@ -43,7 +43,9 @@
         <activity android:name=".CreateGame.TeamGamesActivity" />
         <activity android:name=".Statistics.StatisticsActivity" />
         <activity android:name=".Statistics.editStatistics" />
-        <activity android:name=".Weather.WeatherMainActivity" />
+        <activity android:name=".Weather.WeatherActivity">
+
+        </activity>
         <activity
             android:name=".Gallery.GalleryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
