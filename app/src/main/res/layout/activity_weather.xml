@@ -21,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
-        android:text="choose place"
+        android:text="Select location"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
