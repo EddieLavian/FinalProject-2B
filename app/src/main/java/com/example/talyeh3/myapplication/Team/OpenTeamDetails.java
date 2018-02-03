@@ -222,13 +222,4 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
-
-
-
-
-
-
-
-
 }
