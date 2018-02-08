@@ -1,4 +1,4 @@
-# 2B
+# ToBe
 
 ## ToBe - part of the game
 ### Soccer with friends application
