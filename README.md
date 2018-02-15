@@ -1,6 +1,6 @@
 # ToBe
 
-## ToBe - part of the game
+## ToBe - Part Of The Game
 ### Soccer with friends application
 
 ![Logo](https://github.com/EddieLavian/FinalProject-2B/blob/master/logo.png)
