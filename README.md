@@ -1,7 +1,7 @@
-# 2B
+# ToBe
 
-## To Be part of the game
-### Soccer Application
+## ToBe - Part Of The Game
+### Soccer with friends application
 
 ![Logo](https://github.com/EddieLavian/FinalProject-2B/blob/master/logo.png)
 
