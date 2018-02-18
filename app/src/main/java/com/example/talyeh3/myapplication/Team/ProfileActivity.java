@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.ProfilePage;
 import com.example.talyeh3.myapplication.R;
+import com.example.talyeh3.myapplication.Rating.Rating;
 import com.example.talyeh3.myapplication.Statistics.Statistics;
 import com.example.talyeh3.myapplication.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -107,9 +111,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             u.teams.remove(t.key);
             t.statistics.remove(key+t.key);
             String keyStatistics=key+t.key;
-
             DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
             statisticsPlayer.setValue(null);
+
+            DatabaseReference ratingPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Rating/"+keyStatistics);//remove Statistics player from team
+            ratingPlayer.setValue(null);
         }
         else if (delete== null )//add player to the team
         {
@@ -121,6 +127,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             DatabaseReference mDatabase;
             mDatabase = FirebaseDatabase.getInstance().getReference();
             mDatabase.child("Statistics").child(keyStatistics).setValue(s);
+
+
+            List<String> whoIsRating;
+            List<Integer> Rate;//the players will rate to this list
+            Rate= new ArrayList<Integer>();
+            whoIsRating= new ArrayList<String>();
+            whoIsRating.add( "-1" );
+            Rate.add( -1 );
+
+            t.rating.add(key+t.key);
+            Rating r=new Rating( keyStatistics,t.key,u.userName,0,Rate,whoIsRating);
+            DatabaseReference rDatabase;
+            rDatabase = FirebaseDatabase.getInstance().getReference();
+            rDatabase.child("Rating").child(keyStatistics).setValue(r);
         }
 
         userRefTeam.setValue(t);

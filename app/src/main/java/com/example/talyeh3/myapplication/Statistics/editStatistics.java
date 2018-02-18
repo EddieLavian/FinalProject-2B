@@ -23,7 +23,7 @@ public class editStatistics extends AppCompatActivity  implements View.OnClickLi
     DatabaseReference statisticRef;
     String key;
     Statistics s;
-    Boolean first=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );

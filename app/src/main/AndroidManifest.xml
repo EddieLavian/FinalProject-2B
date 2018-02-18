@@ -43,9 +43,7 @@
         <activity android:name=".CreateGame.TeamGamesActivity" />
         <activity android:name=".Statistics.StatisticsActivity" />
         <activity android:name=".Statistics.editStatistics" />
-        <activity android:name=".Weather.WeatherActivity">
-
-        </activity>
+        <activity android:name=".Weather.WeatherActivity" />
         <activity
             android:name=".Gallery.GalleryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -54,7 +52,9 @@
             android:name=".Gallery.BigPhoto"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Posts.ThisPostActivity" />
-        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".Rating.RatingActivity" />
+        <activity android:name=".Rating.EditRating"></activity>
     </application>
 
 </manifest>

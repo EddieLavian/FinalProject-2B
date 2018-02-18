@@ -120,7 +120,7 @@ public class TeamGamesActivity extends AppCompatActivity {
                     keyGame = (String) snapshot.child( String.valueOf( i ) ).getValue();
                     if (keyGame==null)
                     {
-                       // Toast.makeText(TeamGamesActivity.this, "you dont have planing games yet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TeamGamesActivity.this, "you dont have planing games yet", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
                         finish();
                         return;

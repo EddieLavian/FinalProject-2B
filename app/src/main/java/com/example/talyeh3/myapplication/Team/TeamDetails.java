@@ -26,6 +26,7 @@ import com.example.talyeh3.myapplication.CreateGame.TeamGamesActivity;
 import com.example.talyeh3.myapplication.Gallery.GalleryActivity;
 import com.example.talyeh3.myapplication.ProfilePage;
 import com.example.talyeh3.myapplication.R;
+import com.example.talyeh3.myapplication.Rating.RatingActivity;
 import com.example.talyeh3.myapplication.Statistics.StatisticsActivity;
 import com.example.talyeh3.myapplication.ToBeTest;
 import com.example.talyeh3.myapplication.User;
@@ -41,7 +42,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections;
+    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections,btnRating;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
     DatabaseReference teamRef,userRef;
@@ -91,6 +92,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnGallery=(TextView)findViewById( R.id.btnGallery );
         btnGames=(TextView) findViewById( R.id.btnGames );
         btnAutomaticElections=(TextView)findViewById(R.id.btnAutoElections);
+        btnRating=(TextView)findViewById(R.id.btnRating);
         btnChat.setOnClickListener( this );
         btnGallery.setOnClickListener( this );
         btnStatistics.setOnClickListener( this );
@@ -100,6 +102,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnAddPlayer.setOnClickListener( this );
         btnDelitePlayer.setOnClickListener( this );
         btnAutomaticElections.setOnClickListener( this );
+        btnRating.setOnClickListener( this );
         btnGames.setOnClickListener( this );
         Intent intent = getIntent();
         key = intent.getExtras().getString("keyteam");
@@ -363,6 +366,12 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         if(v == btnAutomaticElections)
         {
             Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
+        }
+        if(v == btnRating)
+        {
+            Intent intent = new Intent( TeamDetails.this, RatingActivity.class );
+            intent.putExtra( "teamKey", key );
+            startActivity( intent );
         }
         if (v==btnMenu)
         {

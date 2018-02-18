@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.R;
+import com.example.talyeh3.myapplication.Rating.Rating;
 import com.example.talyeh3.myapplication.Statistics.Statistics;
 import com.example.talyeh3.myapplication.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -106,10 +107,16 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         games.add("-1");
         String myUserKey = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String myUserMail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
         List<String> statistics;
         statistics= new ArrayList<String>();
         statistics.add( "-1" );
-        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString(),statistics,myUserKey);
+
+        List<String> rating;
+        rating= new ArrayList<String>();
+        rating.add( "-1" );
+
+        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString(),statistics,myUserKey,rating);
         teamRef = database.getReference( "Teams" ).push();
         userRef = database.getReference( "Users/" + myUserId );
         t.key = teamRef.getKey();
@@ -120,6 +127,22 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Statistics").child(myUserKey+t.key).setValue(s);
+
+
+            List<String> whoIsRating;
+            List<Integer> Rate;//the players will rate to this list
+            Rate= new ArrayList<Integer>();
+            whoIsRating= new ArrayList<String>();
+            whoIsRating.add( "-1" );
+            Rate.add( -1 );
+
+            rating.add(myUserKey+t.key);
+            rating.remove( "-1" );
+            t.rating=rating;
+            Rating r=new Rating( myUserKey+t.key,t.key,u.userName,0,Rate,whoIsRating);
+            DatabaseReference rDatabase;
+            rDatabase = FirebaseDatabase.getInstance().getReference();
+            rDatabase.child("Rating").child(myUserKey+t.key).setValue(r);
 
         myTeams = new ArrayList<String>();
         userRef2 = database.getReference( "Users/" + myUserId + "/teams/0" );
