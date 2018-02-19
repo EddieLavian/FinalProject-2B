@@ -99,7 +99,7 @@
             android:layout_marginTop="5dp"
             android:orientation="vertical">
 
-            <TextView
+            <Button
                 android:id="@+id/tvPlayers"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -110,8 +110,8 @@
                 android:padding="20dp"
                 android:text="Who Is Comming" />
 
-            <TextView
-                android:id="@+id/btnGallery"
+            <Button
+                android:id="@+id/tvAcceptArrive"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -122,6 +122,19 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:text="Accept arrive" />
+
+            <Button
+                android:id="@+id/btnForce"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Automatic elections" />
         </LinearLayout>
 
     </LinearLayout>

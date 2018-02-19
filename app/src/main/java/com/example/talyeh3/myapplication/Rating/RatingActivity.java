@@ -95,7 +95,7 @@ public class RatingActivity extends AppCompatActivity {
                             Rating r = snapshot.getValue( Rating.class );
                             for (int j =0; j<ratings.size();j++)//for not duplicate on the screen
                             {
-                                if(ratings.get( j ).key.equals( r.key ))
+                                if(ratings.get( j ).key.equals( r.key )&&!ratings.get( j ).equals( null ))
                                 {
                                     ratings.remove( j );
                                 }
