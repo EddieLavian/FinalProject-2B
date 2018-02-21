@@ -7,22 +7,13 @@
 
 
     <TextView
-        android:id="@+id/city_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/btnPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
-        android:text="Select location"
+        android:text="Tap here to change location"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -30,12 +21,20 @@
         android:layout_width="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/city_field"
+        android:layout_below="@+id/btnPlace"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="13sp"
-/>
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/city_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/updated_field"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/weather_icon"
@@ -87,5 +86,6 @@
         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceMedium"
         />
+
 
 </RelativeLayout>
