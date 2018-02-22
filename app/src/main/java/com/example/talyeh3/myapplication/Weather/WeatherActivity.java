@@ -41,6 +41,8 @@ public class WeatherActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_weather);
 
+        // get permissions to user location
+        //ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
 
