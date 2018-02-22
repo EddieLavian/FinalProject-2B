@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -43,6 +44,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     String myUserId;
     private DatabaseReference databaseUser;
     User user,user2;
+    private static final int REQUEST_LOCATION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,9 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         }
 
         databaseUser = FirebaseDatabase.getInstance().getReference("Users");
+
+        // get permissions to user location
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         btnAllPost = (TextView)findViewById(R.id.btnAllPost);
         btnWeather = (TextView)findViewById(R.id.btnWeather);

@@ -32,8 +32,8 @@ public class WeatherActivity extends AppCompatActivity {
     TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField,btnPlace;
     private final int REQUEST_CODE_PLACEPICKER = 1;
     Typeface weatherFont;
-    double latitude; // 31.7812552
-    double longitude; //35.200588;
+    double latitude; // 31.7812552 - jerusalem
+    double longitude; //35.200588 - jerusalem
     LocationManager locationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,32 +54,32 @@ public class WeatherActivity extends AppCompatActivity {
         weatherIcon = (TextView)findViewById(R.id.weather_icon);
         weatherIcon.setTypeface(weatherFont);
 
+
+        // check if the user give permmision to his location
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps();
+        }
+        else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            getLocation();
+        }
+
+
+        // the weather that show first in the weather activity
         WheaterApp.placeIdTask asyncTask =new WheaterApp.placeIdTask(new WheaterApp.AsyncResponse() {
             public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
 
-               // cityField.setText(weather_city);
+                cityField.setText(weather_city);
                 updatedField.setText(weather_updatedOn);
                 detailsField.setText(weather_description);
                 currentTemperatureField.setText(weather_temperature);
                 humidity_field.setText("Humidity: "+weather_humidity);
                 pressure_field.setText("Pressure: "+weather_pressure);
                 weatherIcon.setText(Html.fromHtml(weather_iconText));
-
             }
         });
-        asyncTask.execute("31.7812552", "35.200588"); //  asyncTask.execute("Latitude", "Longitude") // this is in jerusalem
+        asyncTask.execute(lat, lon); //  asyncTask.execute("Latitude", "Longitude") // this is in jerusalem
 
-/*
-        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            buildAlertMessageNoGps();
-
-        } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            getLocation();
-        }
-*/
 
         btnPlace = (TextView) findViewById(R.id.btnPlace);
         btnPlace.setOnClickListener(new View.OnClickListener() {
@@ -113,8 +113,8 @@ public class WeatherActivity extends AppCompatActivity {
         String address = placeSelected.getAddress().toString();
         latitude = placeSelected.getLatLng().latitude;
         longitude = placeSelected.getLatLng().longitude;
-        TextView enterCurrentLocation = (TextView) findViewById(R.id.btnPlace);
-        enterCurrentLocation.setText(name + ", " + address);
+        //TextView enterCurrentLocation = (TextView) findViewById(R.id.btnPlace);
+       // enterCurrentLocation.setText(name + ", " + address);
     }
 
 
@@ -125,7 +125,7 @@ public class WeatherActivity extends AppCompatActivity {
             WheaterApp.placeIdTask asyncTask =new WheaterApp.placeIdTask(new WheaterApp.AsyncResponse() {
                 public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
 
-                  //  cityField.setText(weather_city);
+                    cityField.setText(weather_city);
                     updatedField.setText(weather_updatedOn);
                     detailsField.setText(weather_description);
                     currentTemperatureField.setText(weather_temperature);
@@ -139,7 +139,7 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
-/*
+
     protected void buildAlertMessageNoGps() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -164,7 +164,7 @@ public class WeatherActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
                 (WeatherActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
+            Toast.makeText(this,"Unknown locaton. Please accept the request ",Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(WeatherActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         } else {
@@ -180,10 +180,6 @@ public class WeatherActivity extends AppCompatActivity {
 
                 lat = String.valueOf(latitude);
                 lon = String.valueOf(longitude);
-
-                cityField.setText("Your current location is"+ "\n" + "Lattitude = " + lat
-                        + "\n" + "Longitude = " + lon);
-
             }
             else  if (location1 != null) {
                 latitude = location.getLatitude();
@@ -191,9 +187,6 @@ public class WeatherActivity extends AppCompatActivity {
 
                 lat = String.valueOf(latitude);
                 lon = String.valueOf(longitude);
-
-                cityField.setText("Your current location is"+ "\n" + "Lattitude = " + lat
-                        + "\n" + "Longitude = " + lon);
             }
             else  if (location2 != null) {
                 latitude = location.getLatitude();
@@ -201,16 +194,10 @@ public class WeatherActivity extends AppCompatActivity {
 
                 lat = String.valueOf(latitude);
                 lon = String.valueOf(longitude);
-
-                cityField.setText("Your current location is"+ "\n" + "Lattitude = " + lat
-                        + "\n" + "Longitude = " + lon);
             }
             else{
-
                 Toast.makeText(this,"Unble to Trace your location",Toast.LENGTH_SHORT).show();
-
             }
         }
     }
-*/
 }
