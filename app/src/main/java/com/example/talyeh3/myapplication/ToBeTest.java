@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static android.Manifest.permission.SEND_SMS;
+
 public class ToBeTest extends AppCompatActivity implements View.OnClickListener
      {
     FirebaseAuth firebaseAuth;
@@ -45,6 +47,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     private DatabaseReference databaseUser;
     User user,user2;
     private static final int REQUEST_LOCATION = 1;
+    private static final int REQUEST_SMS = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
 
         // get permissions to user location
         ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        //ActivityCompat.requestPermissions(this, new String[]{SEND_SMS}, REQUEST_SMS);
 
         btnAllPost = (TextView)findViewById(R.id.btnAllPost);
         btnWeather = (TextView)findViewById(R.id.btnWeather);

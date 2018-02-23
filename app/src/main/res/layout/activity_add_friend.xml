@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFE"
+    tools:context=".AddFriendsActivity">
+
+    <LinearLayout
+        android:layout_width="273dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/phone_number_edit_text"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/border"
+            android:hint="Enter phone number"
+            android:inputType="phone"
+            android:padding="10dp" />
+
+        <ImageView
+            android:id="@+id/add_contact_image_view"
+            android:layout_width="67dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_1" />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/message_edit_text"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="10dp"
+        android:layout_gravity="center_vertical"
+        android:maxLines="5"
+        android:text="אני רוצה להזמין אותך להיות חלק מהאפליקציה ToBe הורד עכשיו מהחנות"
+        android:hint="Enter your message here"
+        android:background="@drawable/border"/>
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="Send SMS"
+        android:background="@drawable/border"/>
+
+    <TextView
+        android:id="@+id/message_status_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="Message not sent yet."
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorPrimaryDark" />
+<!--
+    <TextView
+        android:id="@+id/delivery_status_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="Message not delivered yet."
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorPrimaryDark" />
+        -->
+</LinearLayout>

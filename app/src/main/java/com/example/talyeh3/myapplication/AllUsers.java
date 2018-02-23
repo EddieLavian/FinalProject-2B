@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.talyeh3.myapplication.Posts.AddPostActivity;
+import com.example.talyeh3.myapplication.Posts.AllPostActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,11 +29,11 @@ import java.util.ArrayList;
 
 public class AllUsers extends AppCompatActivity {
 
-
     ListView lv;
     ArrayList<User> users;
     AllUsersAdapter allUsersAdapter;
     TextView tvUserName;
+    Button btnAddFriend;
     private DatabaseReference database;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     ProgressDialog progressDialog;
@@ -43,6 +46,8 @@ public class AllUsers extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference("Users");
         lv = (ListView) findViewById(R.id.lv);
         tvUserName= (TextView) findViewById(R.id.tvUserName);
+        btnAddFriend = (Button)findViewById(R.id.btnAddFriend);
+
         this.retriveData();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,7 +61,16 @@ public class AllUsers extends AppCompatActivity {
             }
         });
 
+        btnAddFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AllUsers.this,AddFriendsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
 
     public void retriveData() {
         progressDialog.setMessage("load Please Wait...");

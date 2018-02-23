@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -56,6 +57,7 @@
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".Rating.RatingActivity" />
         <activity android:name=".Rating.EditRating"></activity>
+        <activity android:name="AddFriendsActivity"></activity>
     </application>
 
 </manifest>

@@ -1,74 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.example.talyeh3.myapplication.Posts.AllPostActivity">
-
-<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-
+    android:layout_height="match_parent"
+    tools:context="com.example.talyeh3.myapplication.Posts.AllPostActivity">
 
     <RelativeLayout
-        android:id="@+id/profile_layout"
-        android:orientation="vertical"
-        android:padding="0dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@drawable/banner">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/profile_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:padding="10dp"
-                android:src="@drawable/ball"/>
+            android:layout_height="150dp"
+            android:background="@drawable/banner"
+            android:orientation="vertical"
+            android:padding="0dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:gravity="center_vertical"
-                android:text="All Players"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="22sp"/>
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ball" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="All Players"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btnAddFriend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="#69a5f2"
+            android:gravity="center"
+            android:text="Add Friends"
+            android:textSize="30sp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+
+            <ListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+
+
         </LinearLayout>
+
     </RelativeLayout>
 
-
-
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/profile_layout"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical">
-
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/lv"
-            >
-        </ListView>
-
-
-
-
-    </LinearLayout>
-</RelativeLayout>
 </android.support.constraint.ConstraintLayout>
 
 
