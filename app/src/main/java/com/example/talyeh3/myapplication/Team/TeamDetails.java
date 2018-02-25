@@ -343,6 +343,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         {
             Intent intent = new Intent( TeamDetails.this, TeamGamesActivity.class );
             intent.putExtra( "teamKey", key );
+            intent.putExtra( "k", t.howMouchPlayers );
+            Toast.makeText(TeamDetails.this,  t.howMouchPlayers,Toast.LENGTH_SHORT).show();
             startActivity( intent );
         }
         if (v==btnChat)

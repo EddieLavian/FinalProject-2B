@@ -148,7 +148,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Rate.add( -1 );
 
             t.rating.add(key+t.key);
-            Rating r=new Rating( keyStatistics,t.key,u.userName,0,Rate,whoIsRating);
+            Rating r=new Rating( keyStatistics,t.key,u.userName,0,Rate,whoIsRating,u.imgUrl);
             DatabaseReference rDatabase;
             rDatabase = FirebaseDatabase.getInstance().getReference();
             rDatabase.child("Rating").child(keyStatistics).setValue(r);

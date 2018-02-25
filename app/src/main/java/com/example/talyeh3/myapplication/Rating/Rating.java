@@ -13,6 +13,7 @@ public class Rating {
     public int avgRating;
     public List<String> whoIsRating;
     public List<Integer> rating;
+    public String imgUrl;
 
 
 
@@ -21,8 +22,9 @@ public class Rating {
         //empty constructor becouse firebase needs
     }
 
-    public Rating(String key, String teamKey, String name,int avgRating, List<Integer> rating, List<String> whoIsRating)
+    public Rating(String key, String teamKey, String name,int avgRating, List<Integer> rating, List<String> whoIsRating,String imgUrl)
     {
+        this.imgUrl=imgUrl;
         this.key = key;
         this.teamKey=teamKey;
         this.name=name;

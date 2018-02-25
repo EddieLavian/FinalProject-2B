@@ -116,7 +116,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         rating= new ArrayList<String>();
         rating.add( "-1" );
 
-        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,spin.getSelectedItem().toString(),statistics,myUserKey,rating);
+        Team t = new Team( uid, etTeamName.getText().toString(), players,games, "", generatedFilePath ,String.valueOf( spin.getSelectedItem().toString().charAt( 0 ) ),statistics,myUserKey,rating);
         teamRef = database.getReference( "Teams" ).push();
         userRef = database.getReference( "Users/" + myUserId );
         t.key = teamRef.getKey();
@@ -139,7 +139,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
             rating.add(myUserKey+t.key);
             rating.remove( "-1" );
             t.rating=rating;
-            Rating r=new Rating( myUserKey+t.key,t.key,u.userName,0,Rate,whoIsRating);
+            Rating r=new Rating( myUserKey+t.key,t.key,u.userName,0,Rate,whoIsRating,u.imgUrl);
             DatabaseReference rDatabase;
             rDatabase = FirebaseDatabase.getInstance().getReference();
             rDatabase.child("Rating").child(myUserKey+t.key).setValue(r);
