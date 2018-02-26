@@ -33,6 +33,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     TextView btnOpenTeam;
     TextView btnMyTeams;
     TextView btnChat;
+    TextView btnAddFriends;
 
     Dialog d;
     TextView logOut,MyProfile;
@@ -89,7 +90,6 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
 
             }
         });
-
 
 
         btnOpenTeam = (TextView)findViewById(R.id.btnOpenTeam);
@@ -153,6 +153,25 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
             public void onClick(View v) {
                 Intent intent = new Intent(ToBeTest.this,AllUsers.class);
                 startActivity(intent);
+
+            }
+        });
+
+        btnAddFriends = (TextView)findViewById(R.id.btnAddFriends);
+        btnAddFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "בוא להיות חלק מהמשחק. הורד את ToBe עכשיו מהחנות");
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+
+ /*
+                Intent intent = new Intent(AllUsers.this,AddFriendsActivity.class);
+                startActivity(intent);
+ */
 
             }
         });

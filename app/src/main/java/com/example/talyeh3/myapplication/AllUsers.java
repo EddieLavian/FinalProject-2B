@@ -33,7 +33,6 @@ public class AllUsers extends AppCompatActivity {
     ArrayList<User> users;
     AllUsersAdapter allUsersAdapter;
     TextView tvUserName;
-    Button btnAddFriend;
     private DatabaseReference database;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     ProgressDialog progressDialog;
@@ -46,7 +45,6 @@ public class AllUsers extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference("Users");
         lv = (ListView) findViewById(R.id.lv);
         tvUserName= (TextView) findViewById(R.id.tvUserName);
-        btnAddFriend = (Button)findViewById(R.id.btnAddFriend);
 
         this.retriveData();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,14 +55,6 @@ public class AllUsers extends AppCompatActivity {
                 Intent intent = new Intent(AllUsers.this, ProfilePage.class);
                 intent.putExtra("key", u.uid );
                 intent.putExtra("photo", u.imgUrl );
-                startActivity(intent);
-            }
-        });
-
-        btnAddFriend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AllUsers.this,AddFriendsActivity.class);
                 startActivity(intent);
             }
         });
