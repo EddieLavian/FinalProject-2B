@@ -161,14 +161,23 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         btnAddFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+        // Ask you only once how you want to share //
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "בוא להיות חלק מהמשחק. הורד את ToBe עכשיו מהחנות");
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
 
- /*
+
+/*  //Ask you how you want to share again and again //
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.project_id)));
+ */
+
+ /* // Intent to new wendw with sms sender
                 Intent intent = new Intent(AllUsers.this,AddFriendsActivity.class);
                 startActivity(intent);
  */
