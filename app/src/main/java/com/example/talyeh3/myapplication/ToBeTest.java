@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import static android.Manifest.permission.SEND_SMS;
 
@@ -50,10 +51,17 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
     private static final int REQUEST_LOCATION = 1;
     private static final int REQUEST_SMS = 0;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_to_be_test );
+
+        FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
+
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
         if(firebaseUser!=null)
