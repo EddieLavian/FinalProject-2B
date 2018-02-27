@@ -11,7 +11,7 @@ android:layout_height="match_parent">
     android:layout_width="match_parent"
     android:layout_height="74dp"
     android:layout_marginTop="5dp"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:gravity="center"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -25,12 +25,13 @@ android:layout_height="match_parent">
     <TextView
 
         android:id="@+id/tvUserName"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:elevation="4dp"
         android:padding="0dp"
-        android:text="Body" />
+        android:text="Body"
+        android:gravity="center"/>
 
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
