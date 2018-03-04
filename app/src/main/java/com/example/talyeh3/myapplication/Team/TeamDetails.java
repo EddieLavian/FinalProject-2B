@@ -75,8 +75,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_team_details);//try commit
 
-        FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
+        //FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
+       // FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
 
         getSupportActionBar().hide();
 

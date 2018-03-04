@@ -60,7 +60,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         setContentView( R.layout.activity_to_be_test );
 
         FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
+        //FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();

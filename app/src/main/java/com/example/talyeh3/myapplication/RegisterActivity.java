@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -57,12 +58,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     FirebaseDatabase database;
     Spinner spin;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    private DatabaseReference mUserDatabase;
 
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
         mStorageRef = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
 
+
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child( "Users" );
         progressDialog = new ProgressDialog(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -126,7 +130,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             List<String> myTeams;
                             myTeams = new ArrayList<String>();
                             myTeams.add("-1");
-                            User u = new User(uid,etUserName.getText().toString(),etEmailLogin.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no");
+                            String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                            User u = new User(uid,etUserName.getText().toString(),etEmailLogin.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no",deviceToken);
                             DatabaseReference mDatabase;
                             mDatabase = FirebaseDatabase.getInstance().getReference();
                             mDatabase.child("Users").child(uid).setValue(u);
@@ -218,7 +223,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                     if(b==true)
                     {
-                        User u = new User(uid,etUserName.getText().toString(),etEmailReg.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no");
+                        String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                        User u = new User(uid,etUserName.getText().toString(),etEmailReg.getText().toString(),Integer.valueOf(etAge.getText().toString()),"",myTeams,generatedFilePath, spin.getSelectedItem().toString(),0,"no",deviceToken);
                         DatabaseReference mDatabase;
                         mDatabase = FirebaseDatabase.getInstance().getReference();
                         mDatabase.child("Users").child(uid).setValue(u);
@@ -261,10 +267,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                         if(task.isSuccessful())
                         {
-                            Toast.makeText(RegisterActivity.this, "auth success",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RegisterActivity.this, ToBeTest.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                            String current_user_id =firebaseAuth.getCurrentUser().getUid();
+                            String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                            mUserDatabase.child( current_user_id ).child( "device_token" ).setValue( deviceToken ).addOnSuccessListener( new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(RegisterActivity.this, "auth success",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegisterActivity.this, ToBeTest.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
+                            } );
+
+
 
                         }
                         else
