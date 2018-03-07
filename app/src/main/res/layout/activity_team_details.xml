@@ -218,6 +218,18 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:text="Push" />
+
+            <TextView
+                android:id="@+id/btnPermissions"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Permissions"
+                android:visibility="invisible"/>
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

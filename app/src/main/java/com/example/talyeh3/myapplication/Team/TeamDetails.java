@@ -43,7 +43,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections,btnRating;
+    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections;
+    TextView btnRating, btnPermissions;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
     DatabaseReference teamRef,userRef;
@@ -98,6 +99,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnGames=(TextView) findViewById( R.id.btnGames );
         btnAutomaticElections=(TextView)findViewById(R.id.btnAutoElections);
         btnRating=(TextView)findViewById(R.id.btnRating);
+        btnPermissions = (TextView)findViewById(R.id.btnPermissions);
+
         btnChat.setOnClickListener( this );
         btnGallery.setOnClickListener( this );
         btnStatistics.setOnClickListener( this );
@@ -109,6 +112,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnAutomaticElections.setOnClickListener( this );
         btnRating.setOnClickListener( this );
         btnGames.setOnClickListener( this );
+        btnPermissions.setOnClickListener(this);
+
         Intent intent = getIntent();
         key = intent.getExtras().getString("keyteam");
         userRef = database.getReference("Users/" + myUserId);
@@ -209,6 +214,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 {
                     btnAddPlayer.setVisibility( View.VISIBLE);
                     btnDelitePlayer.setVisibility( View.VISIBLE);
+                    btnPermissions.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -385,10 +391,21 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             menu();
         }
 
+        if(v == btnPermissions)
+        {
+            startActivity(getIntent());
+            Intent intent = new Intent( TeamDetails.this, OpenTeam.class );
+            intent.putExtra( "teamKey", t.key );
+            intent.putExtra( "permissions","per" );
+            finish();
+            startActivity( intent );
+        }
+
     }
 
 
-    public void retriveData() {
+    public void retriveData()
+    {
         databaseUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -404,8 +421,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-
     }
 
     public void menu()

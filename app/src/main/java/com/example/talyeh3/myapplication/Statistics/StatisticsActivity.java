@@ -32,14 +32,15 @@ public class StatisticsActivity extends AppCompatActivity{
     String keyTeam="";
     ProgressDialog progressDialog;
     Button btnSortGames,btnSortAssists,btnSortGolas;
+    int x = 2;
 
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_statistics );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_statistics);
 /*
         btnSortGames=(Button) findViewById( R.id.btnSortGames );
         btnSortAssists=(Button)findViewById( R.id.btnSortAssists );
@@ -52,30 +53,28 @@ public class StatisticsActivity extends AppCompatActivity{
         keyTeam = intent.getExtras().getString("teamKey");
 
         progressDialog = new ProgressDialog(this);
-        database = FirebaseDatabase.getInstance().getReference("Teams/"+keyTeam+"/statistics");
-        lv = (ListView) findViewById( R.id.lv);
-        if(database!=null)
-        {
+        database = FirebaseDatabase.getInstance().getReference("Teams/" + keyTeam + "/statistics");
+        lv = (ListView) findViewById(R.id.lv);
+        if (database != null) {
             this.retriveData();
         }
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Statistics s = statistics.get(position);
-                Intent intent = new Intent(StatisticsActivity.this, editStatistics.class);
-                intent.putExtra("keyStatistic", s.key );
-                startActivity(intent);
+        if (x != 2) // if user dont have permmision he can't edit statistics.
+        {
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Statistics s = statistics.get(position);
+                    Intent intent = new Intent(StatisticsActivity.this, editStatistics.class);
+                    intent.putExtra("keyStatistic", s.key);
+                    startActivity(intent);
 
 
-            }
+                }
 
 
-
-
-
-        });
-
+            });
+        }
     }
 
 

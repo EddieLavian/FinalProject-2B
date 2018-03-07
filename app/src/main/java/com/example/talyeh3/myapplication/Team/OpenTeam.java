@@ -53,6 +53,7 @@ public class OpenTeam extends AppCompatActivity {
     ProgressDialog progressDialog;
     int i = 0;
     String delete;
+    String permissions;
    public boolean autocompliteUse;
     List<User> lstFound;
 
@@ -75,12 +76,17 @@ public class OpenTeam extends AppCompatActivity {
         Intent getIntent = getIntent();
         teamKey = getIntent.getExtras().getString("teamKey");
         delete = getIntent.getExtras().getString("delete");
+        permissions = getIntent.getExtras().getString("permissions");
 
         userRefTeam = FirebaseDatabase.getInstance().getReference("Teams/"+teamKey+"/users");
         tvTitle = (TextView)findViewById(R.id.tvTitle);
         if (delete!=null)
         {
             tvTitle.setText( "Choose Player To Delete " );
+        }
+        else if(permissions != null)
+        {
+            tvTitle.setText( "Give Permissions " );
         }
         this.retriveData();
 
@@ -103,6 +109,8 @@ public class OpenTeam extends AppCompatActivity {
                 intent.putExtra("photo", u.imgUrl );
                 if(delete!=null)
                     intent.putExtra("delete", "del");
+                else if(permissions != null)
+                    intent.putExtra("permissions", "per");
                 startActivity(intent);
 
             }
@@ -142,7 +150,7 @@ public class OpenTeam extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User u = data.getValue(User.class);
                     int notDuplicateUser=0;
-                    if (delete==null){//add players
+                    if (delete==null && permissions == null){ //add players list
                         for (int i = 0; i < usersInTeam.size(); i++) {
                             if (usersInTeam.get( i ).equals( u.uid )) {
                                 notDuplicateUser = -1;
@@ -151,10 +159,11 @@ public class OpenTeam extends AppCompatActivity {
                         if (notDuplicateUser==0 )
                             users.add(u);
                     }
-                    else//delite players list
+                    else if(delete != null || permissions != null)//delite and permissions players list
                     {
                         for (int i = 0; i < usersInTeam.size(); i++) {
-                            if (usersInTeam.get( i ).equals( u.uid )&&!usersInTeam.get( i ).equals(myUserId)) {//in the team but not me
+                            if (usersInTeam.get( i ).equals( u.uid )&&!usersInTeam.get( i ).equals(myUserId))
+                            {//in the team but not me
                                 users.add(u);
                                 break;
                             }

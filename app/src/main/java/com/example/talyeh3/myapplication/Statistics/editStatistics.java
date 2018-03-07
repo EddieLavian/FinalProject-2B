@@ -68,6 +68,7 @@ public class editStatistics extends AppCompatActivity  implements View.OnClickLi
     }
 
     public void onClick(View v) {
+
         if (v==btnSave)
         {
             statisticRef = database.getReference("Statistics/" + s.key);

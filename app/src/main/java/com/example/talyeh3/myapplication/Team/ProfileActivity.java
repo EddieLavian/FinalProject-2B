@@ -35,6 +35,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     User u;
     Team t;
     String delete;
+    String permissions;
 
     String photo;
     ImageView imgProfile;
@@ -56,6 +57,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         photo = intent.getExtras().getString("photo");
         delete=intent.getExtras().getString("delete");
        // Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
+        permissions = intent.getExtras().getString("permissions");
+        
         imgProfile = (ImageView)findViewById( R.id.imgProfile);
         Picasso
                 .with( ProfileActivity.this )
@@ -128,7 +131,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             DatabaseReference ratingPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Rating/"+keyStatistics);//remove Statistics player from team
             ratingPlayer.setValue(null);
         }
-        else if (delete== null )//add player to the team
+        else if (delete== null && permissions == null )//add player to the team
         {
             t.users.add(u.uid);
             u.teams.add(t.key);
@@ -152,6 +155,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             DatabaseReference rDatabase;
             rDatabase = FirebaseDatabase.getInstance().getReference();
             rDatabase.child("Rating").child(keyStatistics).setValue(r);
+        }
+        else if(permissions != null)
+        {
+            t.permissions.add(key);
         }
 
         userRefTeam.setValue(t);
