@@ -30,6 +30,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity {
@@ -52,14 +54,16 @@ public class ChatActivity extends AppCompatActivity {
     String key="General Chat";
     String name="General Chat";
     String profilePic="",userName="";
-
-
+    String myUserId;
+    private DatabaseReference mNotificationDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_chat );
         getSupportActionBar().hide();
 
+        mNotificationDatabase = FirebaseDatabase.getInstance().getReference().child( "notifications" );
+        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         fotoPerfil = (CircleImageView) findViewById(R.id.fotoPerfil);
         tvName = (TextView) findViewById(R.id.tvName);
@@ -79,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
            // Toast.makeText(ChatActivity.this,"kkkkk"+ profilePic,Toast.LENGTH_SHORT).show();
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("chat/"+key);//Sala de chat (nombre)
+
             tvName.setText(name);
 
         }
@@ -106,6 +111,20 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),userName,profilePic,"1", ServerValue.TIMESTAMP));
                 txtMensaje.setText("");
+
+
+
+                HashMap<String,String> notificationData = new HashMap<>(  );
+                notificationData.put( "from",myUserId );
+                notificationData.put( "type","hello" );
+                mNotificationDatabase.child( myUserId ).push().setValue( notificationData ).addOnSuccessListener( new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+
+                    }
+                } );
+
             }
         });
 
