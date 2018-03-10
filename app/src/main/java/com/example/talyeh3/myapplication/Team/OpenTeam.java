@@ -45,8 +45,8 @@ public class OpenTeam extends AppCompatActivity {
     AllUsersAdapter allUsersAdapter;
     TextView tvAddPlayer;
     ImageView image;
-    private DatabaseReference database,userRefTeam;
-    ArrayList<String> usersInTeam;
+    private DatabaseReference database,userRefTeam,perRefTeam;
+    ArrayList<String> usersInTeam,perInTeam;
     String myUserId;
     Button btn;
     String keyUser="";
@@ -67,7 +67,7 @@ public class OpenTeam extends AppCompatActivity {
        // getSupportActionBar().setTitle("Material Search");
        // toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         autocompliteUse=false;
-        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();;
+        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         //getSupportActionBar().hide();
 
         progressDialog = new ProgressDialog(this);
@@ -79,6 +79,7 @@ public class OpenTeam extends AppCompatActivity {
         permissions = getIntent.getExtras().getString("permissions");
 
         userRefTeam = FirebaseDatabase.getInstance().getReference("Teams/"+teamKey+"/users");
+        perRefTeam = FirebaseDatabase.getInstance().getReference("Teams/"+teamKey+"/permissions");
         tvTitle = (TextView)findViewById(R.id.tvTitle);
         if (delete!=null)
         {
@@ -125,6 +126,27 @@ public class OpenTeam extends AppCompatActivity {
         progressDialog.show();
 
 
+
+
+        perRefTeam.addValueEventListener(new ValueEventListener() {
+
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                perInTeam = new ArrayList<String>();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String u = String.valueOf( data.getValue( ) );
+
+                    //Toast.makeText( OpenTeam.this, "sd  " + u, Toast.LENGTH_SHORT ).show();
+                    perInTeam.add( u );
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
         userRefTeam.addValueEventListener(new ValueEventListener() {
 
 
@@ -150,7 +172,28 @@ public class OpenTeam extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User u = data.getValue(User.class);
                     int notDuplicateUser=0;
-                    if (delete==null && permissions == null){ //add players list
+
+                    if (permissions!=null)
+                    {
+
+                        for (int i = 0; i < usersInTeam.size(); i++) {
+                            if (usersInTeam.get(i).equals(u.uid) && !usersInTeam.get(i).equals(myUserId)) {//in the team but not me
+                                users.add(u);
+                                break;
+                            }
+                        }
+
+                        for (int i = 0; i < perInTeam.size(); i++)
+                        {
+                            if (perInTeam.get( i ).equals( u.uid )&&!perInTeam.get( i ).equals(myUserId))
+                            {//in the team but not me
+                                users.remove(u);
+                                break;
+                            }
+                        }
+                    }
+
+                    else if (delete==null){ //add players list
                         for (int i = 0; i < usersInTeam.size(); i++) {
                             if (usersInTeam.get( i ).equals( u.uid )) {
                                 notDuplicateUser = -1;
@@ -159,7 +202,7 @@ public class OpenTeam extends AppCompatActivity {
                         if (notDuplicateUser==0 )
                             users.add(u);
                     }
-                    else if(delete != null || permissions != null)//delite and permissions players list
+                    else if(delete != null)//delite players list
                     {
                         for (int i = 0; i < usersInTeam.size(); i++) {
                             if (usersInTeam.get( i ).equals( u.uid )&&!usersInTeam.get( i ).equals(myUserId))

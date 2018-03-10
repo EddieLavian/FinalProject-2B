@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         delete=intent.getExtras().getString("delete");
        // Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
         permissions = intent.getExtras().getString("permissions");
-        
+
         imgProfile = (ImageView)findViewById( R.id.imgProfile);
         Picasso
                 .with( ProfileActivity.this )

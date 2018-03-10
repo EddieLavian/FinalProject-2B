@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.R;
+import com.example.talyeh3.myapplication.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +34,11 @@ public class StatisticsActivity extends AppCompatActivity{
     String keyTeam="";
     ProgressDialog progressDialog;
     Button btnSortGames,btnSortAssists,btnSortGolas;
-    int x = 2;
+
+    int x = 1;
+    private DatabaseReference permissionDatabase;
+    ArrayList<String> perInTeam;
+    String myUserId;
 
 
 
@@ -54,30 +60,67 @@ public class StatisticsActivity extends AppCompatActivity{
 
         progressDialog = new ProgressDialog(this);
         database = FirebaseDatabase.getInstance().getReference("Teams/" + keyTeam + "/statistics");
+        permissionDatabase = FirebaseDatabase.getInstance().getReference("Teams/" + keyTeam + "/permissions");
         lv = (ListView) findViewById(R.id.lv);
-        if (database != null) {
-            this.retriveData();
-        }
 
-        if (x != 2) // if user dont have permmision he can't edit statistics.
+
+
+
+        permissionDatabase.addValueEventListener(new ValueEventListener()
         {
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Statistics s = statistics.get(position);
-                    Intent intent = new Intent(StatisticsActivity.this, editStatistics.class);
-                    intent.putExtra("keyStatistic", s.key);
-                    startActivity(intent);
 
+            public void onDataChange(DataSnapshot snapshot) {
+                perInTeam = new ArrayList<String>();
 
+                //////////////////////////////////////////////////////////////////////////
+                // Permissions //
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String u = String.valueOf( data.getValue( ) );
+
+                    //Toast.makeText( OpenTeam.this, "sd  " + u, Toast.LENGTH_SHORT ).show();
+                    perInTeam.add( u );
                 }
 
 
-            });
+                myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                for (int i = 0; i < perInTeam.size(); i++)
+                {
+                    //Toast.makeText(StatisticsActivity.this, perInTeam.get(i), Toast.LENGTH_LONG).show();
+                    if (perInTeam.get(i).equals(myUserId)) {//in the team but not me
+                        x = 2;
+                        break;
+                    }
+                }
+
+                if (x == 2) // if user have permmision he can edit statistics
+                {
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Statistics s = statistics.get(position);
+                            Intent intent = new Intent(StatisticsActivity.this, editStatistics.class);
+                            intent.putExtra("keyStatistic", s.key);
+                            startActivity(intent);
+
+
+                        }
+
+
+                    });
+                }
+                /////////////////////////////////////////////////////////////////////////
+            }
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        if (database != null) {
+            this.retriveData();
         }
     }
-
-
 
 
 
@@ -85,11 +128,15 @@ public class StatisticsActivity extends AppCompatActivity{
         progressDialog.setMessage("load Please Wait...");
         progressDialog.show();
 
-        database.addValueEventListener(new ValueEventListener() {
+        database.addValueEventListener(new ValueEventListener()
+        {
 
             public void onDataChange(DataSnapshot snapshot) {
                 myStatistics = new ArrayList<String>();
                 statistics = new ArrayList<Statistics>();
+
+
+
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Log.d("onDataChange", data.getValue().toString());
                     keyStatistic = (String) snapshot.child(String.valueOf(i)).getValue();
