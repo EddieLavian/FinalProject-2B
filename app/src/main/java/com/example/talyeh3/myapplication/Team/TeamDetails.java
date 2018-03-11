@@ -342,6 +342,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         {
             Intent intent = new Intent( TeamDetails.this, CreateGame.class );
             intent.putExtra( "teamKey", key );
+            intent.putExtra( "teamName", teamName );
             startActivity( intent );
         }
         if (v==btnStatistics)

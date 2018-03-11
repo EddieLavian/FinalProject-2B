@@ -22,6 +22,7 @@ import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.Team.Team;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class CreateGame extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, View.OnClickListener {
@@ -52,6 +54,13 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
     public Team t;
     ProgressDialog progressDialog;
     String keyTeam;
+    String teamName;
+
+    String myUserId;
+    private DatabaseReference mUserDatabase;
+    private DatabaseReference mNotificationDatabase;
+    ArrayList<String > usersInTeam;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -118,19 +127,48 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
         //********************************Firbase Push********************************
         Intent intent = getIntent();
         keyTeam = intent.getExtras().getString("teamKey");
+        teamName = intent.getExtras().getString("teamName");
         //Toast.makeText(CreateGame.this, "hghg         "+keyTeam, Toast.LENGTH_LONG).show();
         database = FirebaseDatabase.getInstance();
         btnCreateGame = (Button) findViewById( R.id.btnCreateGame );
         btnCreateGame.setOnClickListener(this );
         teamRef = database.getReference( "Teams/" + keyTeam );
+        getUsersInTeam();
+
 
         progressDialog = new ProgressDialog( this );
+
+        mNotificationDatabase = FirebaseDatabase.getInstance().getReference().child( "notifications" );
+        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         this.retriveData();
 
 
 
     }
+
+
+    public void getUsersInTeam()
+    {
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child( "Teams/"+keyTeam+"/users/" );
+
+        mUserDatabase.addValueEventListener(new ValueEventListener() {//users in team
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                usersInTeam = new ArrayList<String>();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String s = String.valueOf( data.getValue() );
+                    usersInTeam.add(s);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
@@ -180,7 +218,7 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
         {
             if(etMinimumPlayers.getText().length()<=0 || btnLocation.getText().toString().equals( "" )||mDisplayDate.getText().toString().equals( "" )||mDisplayTime.getText().toString().equals( "" ) )
             {
-                //Toast.makeText(CreateGame.this, "Some Fields Are Empty", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreateGame.this, "Some Fields Are Empty", Toast.LENGTH_LONG).show();
                 return;
             }
             String uid = FirebaseAuth.getInstance().getCurrentUser().toString();
@@ -190,7 +228,7 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
             Game g = new Game( mDisplayDate.getText().toString(), mDisplayTime.getText().toString(), btnLocation.getText().toString(),  Integer.valueOf(etMinimumPlayers.getText().toString()), "" ,keyTeam,userOpen,0,whoIsComming);
           gameRef = database.getReference( "Games" ).push();
             g.key = gameRef.getKey();
-           // Toast.makeText(CreateGame.this, "hghg", Toast.LENGTH_LONG).show();
+
 
             teamRef = database.getReference( "Teams/" +keyTeam );
             teamRef2 = database.getReference( "Teams/" + keyTeam + "/games/0" );
@@ -202,6 +240,27 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
             if (teamRef2 != null) {
                 teamRef2.removeValue();
             }
+
+            if (usersInTeam!=null)
+            {
+                for (int i = 0 ; i < usersInTeam.size(); i++) {
+                    //  if (!myUserId.equals(  usersInTeam.get( i )))
+                    {
+                        HashMap<String, String> notificationData = new HashMap<>();
+                        notificationData.put( "from", myUserId );
+                        notificationData.put( "type", "Created a new game in Team "+teamName );
+                        mNotificationDatabase.child( usersInTeam.get( i ) ).push().setValue( notificationData ).addOnSuccessListener( new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                            }
+                        } );
+                    }
+                }
+            }
+
+
+
+
                 finish();
         }
 
