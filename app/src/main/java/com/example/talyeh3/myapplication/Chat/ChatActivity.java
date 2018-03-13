@@ -15,8 +15,13 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.example.talyeh3.myapplication.Posts.AllPostActivity;
+import com.example.talyeh3.myapplication.Posts.AllPostAdapter;
+import com.example.talyeh3.myapplication.Posts.Post;
 import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.RegisterActivity;
+import com.example.talyeh3.myapplication.ToBeTest;
+import com.example.talyeh3.myapplication.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,9 +31,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -53,6 +62,12 @@ public class ChatActivity extends AppCompatActivity {
     String name="General Chat";
     String profilePic="",userName="";
 
+    String myUserId;
+    private DatabaseReference mUserDatabase;
+    private DatabaseReference mNotificationDatabase;
+    ArrayList<String > usersInTeam;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +75,8 @@ public class ChatActivity extends AppCompatActivity {
         setContentView( R.layout.activity_chat );
         getSupportActionBar().hide();
 
+        mNotificationDatabase = FirebaseDatabase.getInstance().getReference().child( "notifications" );
+        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         fotoPerfil = (CircleImageView) findViewById(R.id.fotoPerfil);
         tvName = (TextView) findViewById(R.id.tvName);
@@ -73,12 +90,33 @@ public class ChatActivity extends AppCompatActivity {
         {
 
             key = intent.getExtras().getString("teamKey");
+            mUserDatabase = FirebaseDatabase.getInstance().getReference().child( "Teams/"+key+"/users/" );
+
+            mUserDatabase.addValueEventListener(new ValueEventListener() {//users in team
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    usersInTeam = new ArrayList<String>();
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        String s = String.valueOf( data.getValue() );
+                        usersInTeam.add(s);
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+
             name = intent.getExtras().getString("teamName");
             profilePic = intent.getExtras().getString("profilePic");
             userName = intent.getExtras().getString("userName");
            // Toast.makeText(ChatActivity.this,"kkkkk"+ profilePic,Toast.LENGTH_SHORT).show();
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("chat/"+key);//Sala de chat (nombre)
+
             tvName.setText(name);
 
         }
@@ -106,6 +144,25 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),userName,profilePic,"1", ServerValue.TIMESTAMP));
                 txtMensaje.setText("");
+
+
+            if (usersInTeam!=null)
+            {
+                for (int i = 0 ; i < usersInTeam.size(); i++) {
+                  //  if (!myUserId.equals(  usersInTeam.get( i )))
+                    {
+                    HashMap<String, String> notificationData = new HashMap<>();
+                    notificationData.put( "from", myUserId );
+                    notificationData.put( "type", "Sent you a message in team "+name );
+                    mNotificationDatabase.child( usersInTeam.get( i ) ).push().setValue( notificationData ).addOnSuccessListener( new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }
+                    } );
+                }
+                }
+            }
+
             }
         });
 
