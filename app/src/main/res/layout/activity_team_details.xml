@@ -193,7 +193,7 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Add Permissions"
+                android:text="Permissions"
                 android:visibility="invisible"/>
 
 

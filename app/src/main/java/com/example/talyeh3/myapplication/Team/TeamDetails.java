@@ -27,7 +27,9 @@ import com.example.talyeh3.myapplication.Gallery.GalleryActivity;
 import com.example.talyeh3.myapplication.ProfilePage;
 import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.Rating.RatingActivity;
+import com.example.talyeh3.myapplication.Statistics.Statistics;
 import com.example.talyeh3.myapplication.Statistics.StatisticsActivity;
+import com.example.talyeh3.myapplication.Statistics.editStatistics;
 import com.example.talyeh3.myapplication.ToBeTest;
 import com.example.talyeh3.myapplication.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +45,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections;
+    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery;
     TextView btnRating, btnPermissions;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
@@ -57,6 +59,10 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
     private DatabaseReference databaseUser;
 
+    int x = 1;
+    private DatabaseReference permissionDatabase;
+    ArrayList<String> perInTeam;
+
     Dialog d,menu;
 
     int firstPress=0;
@@ -68,16 +74,13 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     AllUsersAdapter allPlayersAdapter;
     String myUserId;
 
-    TextView btnCancel;
-    TextView btnPush;
-
     User user,user2;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_team_details);//try commit
 
         //FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
-       // FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
+        // FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
 
         getSupportActionBar().hide();
 
@@ -120,6 +123,47 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         //Toast.makeText(TeamDetails.this, "hghg         "+key, Toast.LENGTH_LONG).show();
         //for all players team
         database2 = FirebaseDatabase.getInstance().getReference("Teams/"+key+"/users");
+        permissionDatabase = FirebaseDatabase.getInstance().getReference("Teams/" + key + "/permissions");
+
+
+        permissionDatabase.addValueEventListener(new ValueEventListener()
+        {
+
+            public void onDataChange(DataSnapshot snapshot) {
+                perInTeam = new ArrayList<String>();
+
+                //////////////////////////////////////////////////////////////////////////
+                // Permissions //
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String u = String.valueOf( data.getValue( ) );
+
+                    //Toast.makeText( OpenTeam.this, "sd  " + u, Toast.LENGTH_SHORT ).show();
+                    perInTeam.add( u );
+                }
+
+
+                myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                for (int i = 0; i < perInTeam.size(); i++)
+                {
+                    //Toast.makeText(StatisticsActivity.this, perInTeam.get(i), Toast.LENGTH_LONG).show();
+                    if (perInTeam.get(i).equals(myUserId)) {//in the team but not me
+                        x = 2;
+                        break;
+                    }
+                }
+
+                if (x == 2) // if user have permmision he can edit statistics
+                {
+                    btnAddPlayer.setVisibility( View.VISIBLE);
+                    btnDelitePlayer.setVisibility( View.VISIBLE);
+                    btnPermissions.setVisibility(View.VISIBLE);
+                }
+                /////////////////////////////////////////////////////////////////////////
+            }
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //notification();
     }
@@ -142,9 +186,9 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         }
 
         else
-            {
+        {
             d.show();
-                //Toast.makeText(TeamDetails.this, "b",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(TeamDetails.this, "b",Toast.LENGTH_SHORT).show();
         }
         d.setOnKeyListener(new Dialog.OnKeyListener() {
             @Override
@@ -200,21 +244,21 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 teamName=t.name;
                 tvName.setText("team name: " + t.name);
                 photo= t.imgUrl;
-                        Picasso
+                Picasso
                         .with( TeamDetails.this )
                         .load( photo)
                         .fit() // will explain later
                         .into(user_profile_photo );
 
 
-
+/*
                 if (t.manager.equals( myUserId ))
                 {
                     btnAddPlayer.setVisibility( View.VISIBLE);
                     btnDelitePlayer.setVisibility( View.VISIBLE);
                     btnPermissions.setVisibility(View.VISIBLE);
                 }
-
+*/
             }
 
 
@@ -300,7 +344,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             {
 
                 if (t.users.size()>1)
-                t.manager=t.users.get( 1 ) ;
+                    t.manager=t.users.get( 1 ) ;
             }
 
             if (u.teams.size()<=2)
@@ -311,16 +355,16 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 mDatabase.child("Users").child( myUserId ).child("teams").child( "0" ).setValue("-1");
                 userRef.setValue( u );
             }
-                t.users.remove( u.uid );
-                u.teams.remove(t.key);
-                t.statistics.remove(myUserId+t.key);
-                String keyStatistics=myUserId+t.key;
+            t.users.remove( u.uid );
+            u.teams.remove(t.key);
+            t.statistics.remove(myUserId+t.key);
+            String keyStatistics=myUserId+t.key;
 
-                DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
-                statisticsPlayer.setValue(null);
-                userRef.setValue( u );
-                teamRef.setValue( t );
-                finish();
+            DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
+            statisticsPlayer.setValue(null);
+            userRef.setValue( u );
+            teamRef.setValue( t );
+            finish();
 
         }
         if (v==btnDelitePlayer )
@@ -340,7 +384,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         {
             Intent intent = new Intent( TeamDetails.this, CreateGame.class );
             intent.putExtra( "teamKey", key );
-            intent.putExtra( "teamName", teamName );
             startActivity( intent );
         }
         if (v==btnStatistics)
@@ -391,14 +434,10 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             startActivity(getIntent());
             Intent intent = new Intent( TeamDetails.this, OpenTeam.class );
             intent.putExtra( "teamKey", t.key );
+            intent.putExtra( "permissions","per" );
             finish();
             startActivity( intent );
         }
-
-    }
-
-    public void permission()
-    {
 
     }
 
@@ -408,7 +447,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        user = data.getValue(User.class);
+                    user = data.getValue(User.class);
                     if (user.uid.equals( myUserId ))
                     {
                         user2 = user;
@@ -481,5 +520,3 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     }
     */
 }
-
-
