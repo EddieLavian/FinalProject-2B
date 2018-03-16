@@ -105,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
     public void onClick(View v) {
-
+        Toast.makeText(ProfileActivity.this,  String.valueOf( u.teams.size() ), Toast.LENGTH_LONG).show();
         if (u==null|| t== null)
         {
              Toast.makeText(ProfileActivity.this,  "try again", Toast.LENGTH_LONG).show();
@@ -116,12 +116,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (delete!=null)//delete player from the team
         {
             t.users.remove( u.uid );
-            if (!u.teams.get(1).equals( null ))
-                u.teams.remove(t.key);
-            else
+
+            if (u.teams.size()==2)//the size 2 but only 1 team???
             {
-                u.teams.set(0,"-1"  );
+                u.teams.set( 0, "-1" );
+                u.teams.remove(t.key);
             }
+            else
+                u.teams.remove(t.key);
+
             t.statistics.remove(key+t.key);
             t.rating.remove(key+t.key);
             String keyStatistics=key+t.key;
