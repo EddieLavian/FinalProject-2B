@@ -30,10 +30,6 @@
             app:border_color="#fff"
             app:border_width="2dp" />
 
-
-
-
-
         <RelativeLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
@@ -141,19 +137,6 @@
                 android:text="Games" />
 
             <TextView
-                android:id="@+id/btnAutoElections"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
-                android:background="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:text="Automatic elections" />
-
-            <TextView
                 android:id="@+id/btnRating"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -176,6 +159,7 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:text="Chat" />
+
             <TextView
                 android:id="@+id/btnAddPlayer"
                 android:layout_width="fill_parent"
@@ -187,6 +171,7 @@
                 android:padding="20dp"
                 android:text="Add Players"
                 android:visibility="invisible"/>
+
             <TextView
                 android:id="@+id/btnDelitePlayer"
                 android:layout_width="fill_parent"
@@ -198,26 +183,6 @@
                 android:padding="20dp"
                 android:text="Delete Players"
                 android:visibility="invisible"/>
-            <TextView
-                android:id="@+id/btnCancel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:text="Cancel" />
-            <TextView
-                android:id="@+id/btnPush"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:text="Push" />
 
             <TextView
                 android:id="@+id/btnPermissions"
@@ -230,6 +195,8 @@
                 android:padding="20dp"
                 android:text="Permissions"
                 android:visibility="invisible"/>
+
+
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>
