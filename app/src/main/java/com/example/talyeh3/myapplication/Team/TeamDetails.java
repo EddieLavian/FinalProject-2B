@@ -271,7 +271,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         if (v==btnAddPlayer )
         {
-            Toast.makeText(TeamDetails.this, (String.valueOf( u.teams.size() ) ),Toast.LENGTH_SHORT).show();
             startActivity(getIntent());
             Intent intent = new Intent( TeamDetails.this, OpenTeam.class );
             intent.putExtra( "teamKey", t.key );
@@ -280,6 +279,25 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         }
         if (v==btnLeave)
         {
+            Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
+
+            //t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            /*
+            if (t.users.size()<=1)
+            {
+
+                DatabaseReference team = FirebaseDatabase.getInstance().getReference().getRoot().child("Teams/"+t.key);//remove team if no have players
+                team.setValue(null);
+                if (u.teams.size()<=1)
+                {
+                    u.teams.add( "-1" );
+                }
+                userRef.setValue( u );
+                u.teams.remove(t.key);
+                finish();
+                return;
+            }
+            */
             if (t.manager.equals( myUserId ) )
             {
 
@@ -287,20 +305,16 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 t.manager=t.users.get( 1 ) ;
             }
 
-            if (u.teams.size()==2)//the size 2 but only 1 team???
+            if (u.teams.size()<=2)
             {
-                u.teams.set( 0, "-1" );
-                u.teams.remove(t.key);
+                Toast.makeText(TeamDetails.this, u.teams.size() +"   llllllllllllllllllllllllllllllllllll  ",Toast.LENGTH_SHORT).show();
+                DatabaseReference mDatabase;
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("Users").child( myUserId ).child("teams").child( "0" ).setValue("-1");
+                userRef.setValue( u );
             }
-            else
-                u.teams.remove(t.key);
-
-            if (t.users.size()==1)
-                t.users.set( 0,"-1" );
-            else
                 t.users.remove( u.uid );
-
-
+                u.teams.remove(t.key);
                 t.statistics.remove(myUserId+t.key);
                 String keyStatistics=myUserId+t.key;
 
