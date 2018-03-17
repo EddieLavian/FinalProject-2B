@@ -466,8 +466,27 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         menu= new Dialog(this);
         menu.setContentView(R.layout.menuteamlayout);
         menu.setCancelable(true);
+
         btnLeave = (TextView) menu.findViewById( R.id.btnLeave);
+        btnAddPlayer = (TextView) menu.findViewById( R.id.btnAddPlayer);
+        btnDelitePlayer = (TextView) menu.findViewById( R.id.btnDelitePlayer);
+        btnPermissions = (TextView) menu.findViewById( R.id.btnPermissions);
+
         btnLeave.setOnClickListener( this );
+
+        if (x == 2) // if user have permission
+        {
+
+            btnAddPlayer.setOnClickListener( this );
+            btnDelitePlayer.setOnClickListener( this );
+            btnPermissions.setOnClickListener( this );
+        }
+        else // if user don't have permission
+        {
+            btnAddPlayer.setVisibility( View.INVISIBLE);
+            btnDelitePlayer.setVisibility( View.INVISIBLE);
+            btnPermissions.setVisibility(View.INVISIBLE);
+        }
 
         menu.show();
 

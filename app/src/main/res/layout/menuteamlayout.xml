@@ -4,6 +4,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/btnAddPlayer"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ellipse_04"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/down_arrow2"
+        android:padding="10dp"
+        android:text="Add Players"
+        android:textColor="#3c464f"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/btnDelitePlayer"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ellipse_05"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/down_arrow2"
+        android:padding="10dp"
+        android:text="Delete Players"
+        android:textColor="#3c464f"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/btnPermissions"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ellipse_06"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/down_arrow2"
+        android:padding="10dp"
+        android:text="Permissions"
+        android:textColor="#3c464f"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/btnLeave"
