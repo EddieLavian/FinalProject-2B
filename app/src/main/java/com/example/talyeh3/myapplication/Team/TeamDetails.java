@@ -43,7 +43,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
-    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery, btnAutomaticElections;
+    TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery;
     TextView btnRating, btnPermissions;
     ImageView btnTeamPlayers;
     FirebaseDatabase database;
@@ -97,7 +97,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnChat=(TextView)findViewById( R.id.btnChat );
         btnGallery=(TextView)findViewById( R.id.btnGallery );
         btnGames=(TextView) findViewById( R.id.btnGames );
-        btnAutomaticElections=(TextView)findViewById(R.id.btnAutoElections);
         btnRating=(TextView)findViewById(R.id.btnRating);
         btnPermissions = (TextView)findViewById(R.id.btnPermissions);
 
@@ -109,7 +108,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnTeamPlayers.setOnClickListener( this );
         btnAddPlayer.setOnClickListener( this );
         btnDelitePlayer.setOnClickListener( this );
-        btnAutomaticElections.setOnClickListener( this );
         btnRating.setOnClickListener( this );
         btnGames.setOnClickListener( this );
         btnPermissions.setOnClickListener(this);
@@ -123,7 +121,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         //for all players team
         database2 = FirebaseDatabase.getInstance().getReference("Teams/"+key+"/users");
 
-        notification();
+//        notification();
     }
 
 
@@ -377,10 +375,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             intent.putExtra( "userName", user2.userName );
             startActivity( intent );
         }
-        if(v == btnAutomaticElections)
-        {
-            Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
-        }
         if(v == btnRating)
         {
             Intent intent = new Intent( TeamDetails.this, RatingActivity.class );
@@ -437,20 +431,20 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
         btnLeave.setOnClickListener( this );
 
-        if (x == 2) // if user have permission
+        //if (x == 2) // if user have permission
         {
 
             btnAddPlayer.setOnClickListener( this );
             btnDelitePlayer.setOnClickListener( this );
             btnPermissions.setOnClickListener( this );
         }
-        else // if user don't have permission
+ /*       else // if user don't have permission
         {
             btnAddPlayer.setVisibility( View.INVISIBLE);
             btnDelitePlayer.setVisibility( View.INVISIBLE);
             btnPermissions.setVisibility(View.INVISIBLE);
         }
-
+*/
         menu.show();
 
     }
@@ -458,8 +452,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
     public  void notification()
     {
-        btnCancel = (TextView) findViewById(R.id.btnCancel);
-        btnPush = (TextView) findViewById(R.id.btnPush);
 
         btnPush.setOnClickListener(new View.OnClickListener() {
             @Override
