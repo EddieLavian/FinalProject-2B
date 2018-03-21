@@ -27,7 +27,9 @@ import com.example.talyeh3.myapplication.Gallery.GalleryActivity;
 import com.example.talyeh3.myapplication.ProfilePage;
 import com.example.talyeh3.myapplication.R;
 import com.example.talyeh3.myapplication.Rating.RatingActivity;
+import com.example.talyeh3.myapplication.Statistics.Statistics;
 import com.example.talyeh3.myapplication.Statistics.StatisticsActivity;
+import com.example.talyeh3.myapplication.Statistics.editStatistics;
 import com.example.talyeh3.myapplication.ToBeTest;
 import com.example.talyeh3.myapplication.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +44,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class TeamDetails extends AppCompatActivity implements View.OnClickListener{
+public class TeamDetails extends AppCompatActivity implements View.OnClickListener
+{
     TextView btnLeave,tvName,btnAddPlayer,btnDelitePlayer,btnCreateGame,btnGames,btnStatistics,btnChat,btnGallery;
     TextView btnRating, btnPermissions;
     ImageView btnTeamPlayers;
@@ -68,10 +71,13 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     AllUsersAdapter allPlayersAdapter;
     String myUserId;
 
-    TextView btnCancel;
-    TextView btnPush;
-
     User user,user2;
+
+
+    int per = 1;
+    private DatabaseReference permissionDatabase;
+    ArrayList<String> perInTeam;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_team_details);//try commit
@@ -120,8 +126,46 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         //Toast.makeText(TeamDetails.this, "hghg         "+key, Toast.LENGTH_LONG).show();
         //for all players team
         database2 = FirebaseDatabase.getInstance().getReference("Teams/"+key+"/users");
+        permissionDatabase = FirebaseDatabase.getInstance().getReference("Teams/" + key + "/permissions");
 
-//        notification();
+        permissionDatabase.addValueEventListener(new ValueEventListener()
+        {
+
+            public void onDataChange(DataSnapshot snapshot) {
+                perInTeam = new ArrayList<String>();
+
+                //////////////////////////////////////////////////////////////////////////
+                // Permissions //
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String u = String.valueOf( data.getValue( ) );
+
+                    //Toast.makeText( OpenTeam.this, "sd  " + u, Toast.LENGTH_SHORT ).show();
+                    perInTeam.add( u );
+                }
+
+
+                myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                for (int i = 0; i < perInTeam.size(); i++)
+                {
+                    //Toast.makeText(StatisticsActivity.this, perInTeam.get(i), Toast.LENGTH_LONG).show();
+                    if (perInTeam.get(i).equals(myUserId)) {//in the team but not me
+                        per = 2;
+                        break;
+                    }
+                }
+
+                if (per == 2) // if user have permmision he can see this buttons
+                {
+                    btnAddPlayer.setVisibility( View.VISIBLE);
+                    btnDelitePlayer.setVisibility( View.VISIBLE);
+                    btnPermissions.setVisibility(View.VISIBLE);
+                }
+                /////////////////////////////////////////////////////////////////////////
+            }
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -207,14 +251,14 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                         .into(user_profile_photo );
 
 
-
+/*
                 if (t.manager.equals( myUserId ))
                 {
                     btnAddPlayer.setVisibility( View.VISIBLE);
                     btnDelitePlayer.setVisibility( View.VISIBLE);
                     btnPermissions.setVisibility(View.VISIBLE);
                 }
-
+*/
             }
 
 
@@ -431,70 +475,21 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
         btnLeave.setOnClickListener( this );
 
-        //if (x == 2) // if user have permission
+        if (per == 2) // if user have permission
         {
 
             btnAddPlayer.setOnClickListener( this );
             btnDelitePlayer.setOnClickListener( this );
             btnPermissions.setOnClickListener( this );
         }
- /*       else // if user don't have permission
+        else // if user don't have permission
         {
             btnAddPlayer.setVisibility( View.INVISIBLE);
             btnDelitePlayer.setVisibility( View.INVISIBLE);
             btnPermissions.setVisibility(View.INVISIBLE);
         }
-*/
         menu.show();
-
     }
-
-
-    public  void notification()
-    {
-
-        btnPush.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //phase 1
-                int icon = android.R.drawable.star_on;
-                String ticket = " this is ticket message";
-                long when = System.currentTimeMillis();
-                String title = "title";
-                String ticker = "ticker";
-                String text = "text";
-                //phase 2
-                Intent intent = new Intent(TeamDetails.this, ToBeTest.class);
-                intent.putExtra("key", "Uzi oranim");
-                PendingIntent pendingIntent = PendingIntent.getActivity(TeamDetails.this, 0, intent, 0);
-                NotificationManager notificationManager = (NotificationManager) getSystemService( Context.NOTIFICATION_SERVICE);
-
-
-                //phase 3
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
-                Notification notification = builder.setContentIntent(pendingIntent)
-                        .setSmallIcon(icon).setTicker(ticker).setWhen(when)
-                        .setAutoCancel(true).setContentTitle(title).
-                                setSmallIcon(android.R.drawable.star_on)
-                        .setContentText("content text").build();
-
-                notificationManager.notify(1, notification);
-            }
-        });
-
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancel(1);
-
-
-            }
-        });
-    }
-    }
+}
 
 

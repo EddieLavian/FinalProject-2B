@@ -35,7 +35,7 @@ public class StatisticsActivity extends AppCompatActivity{
     ProgressDialog progressDialog;
     Button btnSortGames,btnSortAssists,btnSortGolas;
 
-    int x = 1;
+    int per = 1;
     private DatabaseReference permissionDatabase;
     ArrayList<String> perInTeam;
     String myUserId;
@@ -87,12 +87,12 @@ public class StatisticsActivity extends AppCompatActivity{
                 {
                     //Toast.makeText(StatisticsActivity.this, perInTeam.get(i), Toast.LENGTH_LONG).show();
                     if (perInTeam.get(i).equals(myUserId)) {//in the team but not me
-                        x = 2;
+                        per = 2;
                         break;
                     }
                 }
 
-                if (x == 2) // if user have permmision he can edit statistics
+                if (per == 2) // if user have permmision he can edit statistics
                 {
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
