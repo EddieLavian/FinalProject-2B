@@ -93,8 +93,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         //Toast.makeText(TeamDetails.this, "sd  "+firstPress,Toast.LENGTH_SHORT).show();
         user_profile_photo=(ImageView)findViewById( R.id.user_profile_photo);
         database = FirebaseDatabase.getInstance();
-        btnAddPlayer = (TextView) findViewById( R.id.btnAddPlayer);
-        btnDelitePlayer = (TextView) findViewById( R.id.btnDelitePlayer);
+//        btnAddPlayer = (TextView) findViewById( R.id.btnAddPlayer);
+//        btnDelitePlayer = (TextView) findViewById( R.id.btnDelitePlayer);
         tvName = (TextView) findViewById( R.id.tvName);
         btnMenu=(ImageView) findViewById( R.id.btnMenu );
         btnCreateGame=(TextView)findViewById( R.id.btnCreateGame );
@@ -104,7 +104,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnGallery=(TextView)findViewById( R.id.btnGallery );
         btnGames=(TextView) findViewById( R.id.btnGames );
         btnRating=(TextView)findViewById(R.id.btnRating);
-        btnPermissions = (TextView)findViewById(R.id.btnPermissions);
+//        btnPermissions = (TextView)findViewById(R.id.btnPermissions);
 
         btnChat.setOnClickListener( this );
         btnGallery.setOnClickListener( this );
@@ -112,11 +112,11 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         btnCreateGame.setOnClickListener( this );
         btnMenu.setOnClickListener( this );
         btnTeamPlayers.setOnClickListener( this );
-        btnAddPlayer.setOnClickListener( this );
-        btnDelitePlayer.setOnClickListener( this );
+//        btnAddPlayer.setOnClickListener( this );
+//        btnDelitePlayer.setOnClickListener( this );
         btnRating.setOnClickListener( this );
         btnGames.setOnClickListener( this );
-        btnPermissions.setOnClickListener(this);
+//        btnPermissions.setOnClickListener(this);
 
         Intent intent = getIntent();
         key = intent.getExtras().getString("keyteam");
@@ -153,13 +153,14 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                         break;
                     }
                 }
-
+/*
                 if (per == 2) // if user have permmision he can see this buttons
                 {
                     btnAddPlayer.setVisibility( View.VISIBLE);
                     btnDelitePlayer.setVisibility( View.VISIBLE);
                     btnPermissions.setVisibility(View.VISIBLE);
                 }
+*/
                 /////////////////////////////////////////////////////////////////////////
             }
             public void onCancelled(DatabaseError databaseError) {
@@ -322,7 +323,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         if (v==btnLeave)
         {
             Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
-
             //t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             /*
             if (t.users.size()<=1)
@@ -342,9 +342,10 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             */
             if (t.manager.equals( myUserId ) )
             {
-
                 if (t.users.size()>1)
-                t.manager=t.users.get( 1 ) ;
+                    t.manager=t.users.get( 1 ) ;
+                else
+                    t.manager= "-1";
             }
 
             if (u.teams.size()<=2)

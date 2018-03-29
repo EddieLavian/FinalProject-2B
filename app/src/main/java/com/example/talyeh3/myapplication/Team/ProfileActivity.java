@@ -59,6 +59,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
        // Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
         permissions = intent.getExtras().getString("permissions");
 
+        if (delete!=null)
+        {
+            btnSave.setText("Delete This Player From Your Team");
+        }
+
         imgProfile = (ImageView)findViewById( R.id.imgProfile);
         Picasso
                 .with( ProfileActivity.this )
@@ -116,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (delete!=null)//delete player from the team
         {
             t.users.remove( u.uid );
+            t.permissions.remove(u.uid);
 
             if (u.teams.size()==2)//the size 2 but only 1 team???
             {
@@ -127,6 +133,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             t.statistics.remove(key+t.key);
             t.rating.remove(key+t.key);
+            t.permissions.remove(key+t.key);
             String keyStatistics=key+t.key;
             DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
             statisticsPlayer.setValue(null);

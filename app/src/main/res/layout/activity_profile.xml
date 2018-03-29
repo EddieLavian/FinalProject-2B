@@ -43,7 +43,7 @@ android:layout_height="match_parent">
         android:elevation="4dp"
         android:paddingBottom="24dp">
 
-
+<!--
         <ImageView
             android:id="@+id/add_friend"
             android:layout_width="30dp"
@@ -61,6 +61,7 @@ android:layout_height="match_parent">
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_action_overflow" />
+-->
 
         <TextView
             android:id="@+id/tvUserName"
