@@ -44,18 +44,18 @@ android:layout_height="match_parent">
         android:paddingBottom="24dp">
 
 
-        <ImageView
-            android:id="@+id/editProfile"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_toLeftOf="@+id/drop_down_option_menu"
-            android:src="@drawable/ic_action_team_players"
-            android:visibility="invisible"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/editProfile"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_toLeftOf="@+id/drop_down_option_menu"-->
+            <!--android:src="@drawable/ic_action_team_players"-->
+            <!--android:visibility="invisible"/>-->
 
         <ImageView
-            android:id="@+id/drop_down_option_menu"
+            android:id="@+id/editProfile"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
