@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class TeamGamesActivity extends AppCompatActivity implements com.example.talyeh3.myapplication.CreateGame.TeamGamesAdapter.customButtonListener {
     ListView lv,lv1,lv2;
@@ -97,28 +98,47 @@ public class TeamGamesActivity extends AppCompatActivity implements com.example.
             public void onDataChange(DataSnapshot snapshot) {
                 myGames = new ArrayList<String>();
                 games = new ArrayList<Game>();
+
                 for (DataSnapshot data : snapshot.getChildren()) {
+
                     Log.d( "onDataChange", data.getValue().toString() );
                     keyGame = (String) snapshot.child( String.valueOf( i ) ).getValue();
                     if (keyGame==null)
                     {
                         Toast.makeText(TeamGamesActivity.this, "you dont have planing games yet", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
-                        finish();
                         return;
                     }
                     gameDatabase = FirebaseDatabase.getInstance().getReference( "Games/" + keyGame );
                     ValueEventListener valueEventListener = gameDatabase.addValueEventListener( new ValueEventListener() {
                         public void onDataChange(DataSnapshot snapshot) {
+
+
                             Game g = snapshot.getValue( Game.class );
                             if(first == true)
                             {
+
+
+                                Toast.makeText(TeamGamesActivity.this, "hi", Toast.LENGTH_LONG).show();
+                                for (int j = 0; j<games.size();j++)
+                                {
+                                    if (g.key.equals(games.get(j).key))
+                                        games.remove(j);
+                                }
                                 games.add( g );
                                 Log.d( "onStart", snapshot.toString() );
 
+
+
+
+
                             }
                             if (TeamGamesAdapter!=null)
-                                 TeamGamesAdapter.notifyDataSetChanged();
+                            {
+                                TeamGamesAdapter.notifyDataSetChanged();
+
+                            }
+
                             progressDialog.dismiss();
                         }
 
@@ -208,7 +228,7 @@ public class TeamGamesActivity extends AppCompatActivity implements com.example.
         dialog.show();
     }
 
-    public void retriveDataForces(final int howMouch) {//for btn who is comming
+    public void retriveDataForces(final int howMouch) {
         database2.addValueEventListener( new ValueEventListener() {
             public ViewGroup getListView() {
                 return lv1;

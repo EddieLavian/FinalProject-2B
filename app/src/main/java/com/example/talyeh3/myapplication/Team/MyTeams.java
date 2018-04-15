@@ -94,6 +94,12 @@ public class MyTeams extends AppCompatActivity {
                        public void onDataChange(DataSnapshot snapshot) {
 
                            Team t = snapshot.getValue(Team.class);
+                           if (keyteam==null||t==null)
+                           {
+                               Toast.makeText(MyTeams.this, "you dont have teams yet", Toast.LENGTH_LONG).show();
+                               progressDialog.dismiss();
+                               return;
+                           }
                            teams.add(t);
                            Log.d("onStart", snapshot.toString());
                            allTeamsAdapter.notifyDataSetChanged();
@@ -102,7 +108,12 @@ public class MyTeams extends AppCompatActivity {
 
 
                        public void onCancelled(DatabaseError databaseError) {
-
+                           if (keyteam==null)
+                           {
+                               Toast.makeText(MyTeams.this, "you dont have teams yet", Toast.LENGTH_LONG).show();
+                               progressDialog.dismiss();
+                               return;
+                           }
                        }
 
                    });

@@ -149,7 +149,7 @@ public class ChatActivity extends AppCompatActivity {
             if (usersInTeam!=null)
             {
                 for (int i = 0 ; i < usersInTeam.size(); i++) {
-                  //  if (!myUserId.equals(  usersInTeam.get( i )))
+                    if (!myUserId.equals(  usersInTeam.get( i )))
                     {
                     HashMap<String, String> notificationData = new HashMap<>();
                     notificationData.put( "from", myUserId );
