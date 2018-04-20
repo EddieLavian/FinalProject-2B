@@ -30,7 +30,7 @@ Eddie Lavian
 * <a href="https://github.com/EddieLavian/FinalProject-2B/wiki/About-Us"> About Us </a>
 
 
-* Acedamic advisor Shimrit Tzur-David
+* Acedamic advisor: Shimrit Tzur-David
   
  |Category|Link|
 |---|---|
