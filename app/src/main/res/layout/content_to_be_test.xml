@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.talyeh3.myapplication.ToBeTest"
+    tools:context="com.example.talyeh3.myapplication.ToBe"
     tools:showIn="@layout/app_bar_to_be_test">
 
 </android.support.constraint.ConstraintLayout>

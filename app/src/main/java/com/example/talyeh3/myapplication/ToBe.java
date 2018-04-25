@@ -23,11 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 
-import static android.Manifest.permission.SEND_SMS;
-
-public class ToBeTest extends AppCompatActivity implements View.OnClickListener
+public class ToBe extends AppCompatActivity implements View.OnClickListener
      {
     FirebaseAuth firebaseAuth;
     TextView btnAllUsers;
@@ -71,7 +68,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         }
         else//registeration page
         {
-            Intent intent = new Intent(ToBeTest.this, RegisterActivity.class);
+            Intent intent = new Intent(ToBe.this, RegisterActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
@@ -104,7 +101,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         btnOpenTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ToBeTest.this,OpenTeamDetails.class);
+                Intent intent = new Intent(ToBe.this,OpenTeamDetails.class);
                 startActivity(intent);
 
             }
@@ -116,10 +113,10 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
             public void onClick(View v) {
                 if(user2== null)
                 {
-                    Toast.makeText(ToBeTest.this, "The data will be updated now, please click again ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ToBe.this, "The data will be updated now, please click again ", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Intent intent = new Intent(ToBeTest.this,ChatActivity.class);
+                Intent intent = new Intent(ToBe.this,ChatActivity.class);
                 intent.putExtra( "profilePic", user2.imgUrl );
                 intent.putExtra( "userName", user2.userName );
                 startActivity(intent);
@@ -130,7 +127,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         btnAllPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ToBeTest.this,AllPostActivity.class);
+                Intent intent = new Intent(ToBe.this,AllPostActivity.class);
                 startActivity(intent);
             }
         });
@@ -138,7 +135,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         btnWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ToBeTest.this,WeatherActivity.class);
+                Intent intent = new Intent(ToBe.this,WeatherActivity.class);
                 startActivity(intent);
             }
         });
@@ -148,7 +145,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         btnMyTeams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ToBeTest.this,MyTeams.class);
+                Intent intent = new Intent(ToBe.this,MyTeams.class);
                 startActivity(intent);
             }
         });
@@ -159,7 +156,7 @@ public class ToBeTest extends AppCompatActivity implements View.OnClickListener
         btnAllUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ToBeTest.this,AllUsers.class);
+                Intent intent = new Intent(ToBe.this,AllUsers.class);
                 startActivity(intent);
 
             }
@@ -239,13 +236,13 @@ catch ( ActivityNotFoundException ex  )
              if(view==logOut)
              {
                  firebaseAuth.signOut();
-                 Intent intent = new Intent(ToBeTest.this,RegisterActivity.class);
+                 Intent intent = new Intent(ToBe.this,RegisterActivity.class);
                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                  startActivity(intent);
              }
              if(view==MyProfile)
              {
-                 Intent intent = new Intent(ToBeTest.this, ProfilePage.class);
+                 Intent intent = new Intent(ToBe.this, ProfilePage.class);
                  intent.putExtra("key", myUserId);
                  d.dismiss();
                  startActivity(intent);

@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.talyeh3.myapplication.R;
-import com.example.talyeh3.myapplication.RegisterActivity;
-import com.example.talyeh3.myapplication.ToBeTest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

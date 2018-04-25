@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -136,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             mDatabase = FirebaseDatabase.getInstance().getReference();
                             mDatabase.child("Users").child(uid).setValue(u);
 
-                            Intent intent = new Intent(RegisterActivity.this, ToBeTest.class);
+                            Intent intent = new Intent(RegisterActivity.this, ToBe.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         }
@@ -229,7 +228,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         mDatabase = FirebaseDatabase.getInstance().getReference();
                         mDatabase.child("Users").child(uid).setValue(u);
 
-                        Intent intent = new Intent(RegisterActivity.this, ToBeTest.class);
+                        Intent intent = new Intent(RegisterActivity.this, ToBe.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }
@@ -273,7 +272,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(RegisterActivity.this, "auth success",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, ToBeTest.class);
+                                    Intent intent = new Intent(RegisterActivity.this, ToBe.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 }
