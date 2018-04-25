@@ -10,6 +10,8 @@
 
 * This is Our final project repository in the B.Sc Software Engineering program at Jerusalem College of Engineering.
 
+* The main goal of the project is to connect soccer players to their games in an amateurish manner and to give all players a feeling that they are part of the professional game.
+
 * This repository include files, documents, planning, photos and all that relevent for the product.
 
 ## Staff
@@ -30,7 +32,7 @@ Eddie Lavian
 * <a href="https://github.com/EddieLavian/FinalProject-2B/wiki/About-Us"> About Us </a>
 
 
-* Acedamic advisor Shimrit Tzur-David
+* Acedamic advisor: Shimrit Tzur-David
   
  |Category|Link|
 |---|---|
