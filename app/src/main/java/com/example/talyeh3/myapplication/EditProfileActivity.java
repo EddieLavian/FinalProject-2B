@@ -64,7 +64,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         key = intent.getExtras().getString("key");
         userRef = database.getReference("Users/" + key);
-        Toast.makeText(EditProfileActivity.this, key, Toast.LENGTH_LONG).show();
+        //Toast.makeText(EditProfileActivity.this, key, Toast.LENGTH_LONG).show();
         this.retrieveData();
         btnChoose = (Button) findViewById( R.id.btnChoose );
         btnChoose.setOnClickListener(this);

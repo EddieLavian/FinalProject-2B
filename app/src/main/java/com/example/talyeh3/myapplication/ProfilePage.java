@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class ProfilePage extends AppCompatActivity implements View.OnClickListener{
-    TextView tvUserName,tvAge,tvCity,tvTeams;
+    TextView tvUserName,tvAge,tvCity,tvTeams, tvUpcomingGames, tvMyStatistics;
     FirebaseDatabase database;
     DatabaseReference userRef;
     ImageView editProfile;
@@ -64,6 +64,8 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         editProfile = (ImageView) findViewById(R.id.editProfile);
        // tvTeam = (TextView) findViewById(R.id.tvTeam);
         tvTeams = (TextView) findViewById( R.id.tvTeams);
+        tvUpcomingGames = (TextView) findViewById( R.id.tvUpcomingGames);
+        tvMyStatistics = (TextView) findViewById( R.id.tvMyStatistics);
         tvCity = (TextView) findViewById( R.id.tvCity);
         tvAge = (TextView) findViewById( R.id.tvAge);
         Intent intent = getIntent();
@@ -86,7 +88,8 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         });
         userRef = database.getReference("Users/" + key);
         tvTeams.setOnClickListener(this);
-
+        tvUpcomingGames.setOnClickListener(this);
+        tvMyStatistics.setOnClickListener(this);
 
         Picasso
                 .with( ProfilePage.this )
@@ -201,6 +204,14 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         if(v==tvTeams)
         {
             myTeams();
+        }
+        if(v == tvUpcomingGames)
+        {
+            Toast.makeText(this, "This Feature Will Be Able Soon", Toast.LENGTH_LONG).show();
+        }
+        if (v== tvMyStatistics)
+        {
+            Toast.makeText(this, "This Feature Will Be Able Soon", Toast.LENGTH_LONG).show();
         }
     }
 
