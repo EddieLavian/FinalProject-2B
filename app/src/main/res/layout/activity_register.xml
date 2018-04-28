@@ -82,7 +82,9 @@
         android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register Here."
+        android:text="Register Here"
+        android:textStyle="bold"
+        android:textSize="15dp"
         android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="6dp" />
@@ -106,11 +108,13 @@
         android:id="@+id/linearLayout"
        >
 
+        <!--
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/twitter" />
+        -->
 
         <ImageView
             android:id="@+id/imageView3"
@@ -120,17 +124,10 @@
             app:srcCompat="@drawable/instagram" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/btnfacebook"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             app:srcCompat="@drawable/facebook" />
     </LinearLayout>
-
-
-
-
-
-
-
 </RelativeLayout>

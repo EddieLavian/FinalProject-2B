@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.talyeh3.myapplication.R;
+import com.example.talyeh3.myapplication.Team.TeamDetails;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,13 +73,26 @@ public class editStatistics extends AppCompatActivity  implements View.OnClickLi
 
         if (v==btnSave)
         {
-            statisticRef = database.getReference("Statistics/" + s.key);
-            s.assist = Integer.valueOf(  etAssists.getText().toString());
-            s.goals = Integer.valueOf(  etGoals.getText().toString());
-            s.games = Integer.valueOf(  etGames.getText().toString());
-            s.wins = Integer.valueOf( etWins.getText().toString());
-            statisticRef.setValue(s);
-            finish();
+            if(Integer.valueOf(etGames.getText().toString())==0 &&
+                    (Integer.valueOf(  etAssists.getText().toString()) > 0  || Integer.valueOf(  etGoals.getText().toString()) > 0
+                            || Integer.valueOf( etWins.getText().toString()) > 0))
+            {
+                Toast.makeText(this, "Wrong input. The number of games can't be zero",Toast.LENGTH_SHORT).show();
+            }
+            else if(Integer.valueOf(etGames.getText().toString()) < Integer.valueOf( etWins.getText().toString()))
+            {
+                Toast.makeText(this, "Wrong input. The number of games can't be less than number of wins",Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                statisticRef = database.getReference("Statistics/" + s.key);
+                s.assist = Integer.valueOf(  etAssists.getText().toString());
+                s.goals = Integer.valueOf(  etGoals.getText().toString());
+                s.games = Integer.valueOf(  etGames.getText().toString());
+                s.wins = Integer.valueOf( etWins.getText().toString());
+                statisticRef.setValue(s);
+                finish();
+            }
 
         }
 

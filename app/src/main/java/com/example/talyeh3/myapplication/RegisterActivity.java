@@ -2,7 +2,9 @@ package com.example.talyeh3.myapplication;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText etEmailLogin,etPassLogin,etUserName,etAge, etRePass, etEmailReg, etPassReg;
     Dialog d;
     CardView cvLogIn;
+    ImageView btnfacebook;
     Button btnReg,btnLogin;
     ProgressDialog progressDialog;
     Boolean b=true;//if the user uploded photo
@@ -58,6 +61,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Spinner spin;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private DatabaseReference mUserDatabase;
+
+    public static String FACEBOOK_URL = "https://www.facebook.com/eddie.lavian.9";
+    public static String FACEBOOK_PAGE_ID = "eddie.lavian.9";
 
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
@@ -74,11 +80,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //btnMainLogin.setOnClickListener(this);
         tvRegister = (TextView)findViewById(R.id.tvRegister);
        tvRegister.setOnClickListener(this);
+       btnfacebook = (ImageView)findViewById(R.id.btnfacebook);
 
         etEmailLogin=(EditText)findViewById(R.id.etEmailLogin);
         etPassLogin=(EditText)findViewById(R.id.etPassLogin);
         cvLogIn = (CardView)findViewById(R.id.cvLogIn);
         cvLogIn.setOnClickListener(this);
+        btnfacebook.setOnClickListener(this);
     }
 
 
@@ -121,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),"File uploaded",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"File uploaded successfully",Toast.LENGTH_LONG).show();
 
 
                             Uri downloadUri = taskSnapshot.getMetadata().getDownloadUrl();
@@ -144,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onFailure(@NonNull Exception exception) {
                             progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),exception.getMessage(),Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(),exception.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -165,12 +173,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         if(etUserName.getText().length() < 1 || etEmailReg.getText().length() < 1 || etPassReg.getText().length() < 1 || etRePass.getText().length() < 1 || etAge.getText().length()< 1)
         {
-            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty. Please try again", Toast.LENGTH_LONG).show();
             return;
         }
         else if(etPassReg.getText().toString().length() < 6)
         {
-            Toast.makeText(RegisterActivity.this, "Password must be six Charcters or more.", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, "Password must be six Charcters or more. Please try again", Toast.LENGTH_LONG).show();
             return;
         }
         else if(!etPassReg.getText().toString().equals(etRePass.getText().toString()))
@@ -180,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         else if(!etEmailReg.getText().toString().matches(emailPattern))
         {
-            Toast.makeText(RegisterActivity.this, "Invalid email", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, "Invalid email. Please try again", Toast.LENGTH_LONG).show();
             return;
         }
         progressDialog.setMessage("Registering Please Wait...");
@@ -205,12 +213,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             });
 
-                    Toast.makeText(RegisterActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Successfully registered. Welcome!", Toast.LENGTH_LONG).show();
 
                     //for user datails will save on data base
                     String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                    Toast.makeText(RegisterActivity.this, uid,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(RegisterActivity.this, uid,Toast.LENGTH_SHORT).show();
                     List<String> myTeams;
                     myTeams = new ArrayList<String>();
                     myTeams.add("-1");
@@ -235,7 +243,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "This email is already used. Please try again", Toast.LENGTH_LONG).show();
                 }
 
                 d.dismiss();
@@ -252,7 +260,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     {
         if(etEmailLogin.getText().length() < 1 || etEmailLogin.getText().length() < 1)
         {
-            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty... etEmailLogin.getText().length() = " + etEmailLogin.getText().length(), Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, "Some Fields Are Empty. Please try again", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -271,7 +279,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             mUserDatabase.child( current_user_id ).child( "device_token" ).setValue( deviceToken ).addOnSuccessListener( new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(RegisterActivity.this, "auth success",Toast.LENGTH_SHORT).show();
+                                    //.makeText(RegisterActivity.this, "auth success",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(RegisterActivity.this, ToBe.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
@@ -283,7 +291,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         }
                         else
                         {
-                            Toast.makeText(RegisterActivity.this, "auth_failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Failed! please try again",Toast.LENGTH_SHORT).show();
 
                         }
            progressDialog.dismiss();
@@ -299,8 +307,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select an Image"),PICK_IMAGE_REQUEST);
+    }
 
 
+    //method to get the right URL to use in the intent
+    public String getFacebookPageURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            } else { //older versions of fb app
+                return "fb://page/" + FACEBOOK_PAGE_ID;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL; //normal web url
+        }
     }
 
     @Override
@@ -351,8 +373,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         {
             showFileChooser();
         }
+        else if(v == btnfacebook)
+        {
+            Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+            String facebookUrl = getFacebookPageURL(this);
+            facebookIntent.setData(Uri.parse(facebookUrl));
+            startActivity(facebookIntent);
+        }
 
     }
 
 }
-

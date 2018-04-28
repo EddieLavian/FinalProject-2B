@@ -127,6 +127,7 @@
                 android:id="@+id/etRePass"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+
                 android:layout_weight="5"
                 android:textAllCaps="false"
                 android:drawablePadding="16dp"
@@ -140,6 +141,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:drawableLeft="@drawable/password"
                 android:textAllCaps="false"
                 android:drawablePadding="16dp"
                 android:textSize="18sp"

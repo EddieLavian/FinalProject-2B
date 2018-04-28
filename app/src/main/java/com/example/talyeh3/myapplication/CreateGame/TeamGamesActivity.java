@@ -119,7 +119,7 @@ public class TeamGamesActivity extends AppCompatActivity implements com.example.
                             {
 
 
-                                Toast.makeText(TeamGamesActivity.this, "hi", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(TeamGamesActivity.this, "hi", Toast.LENGTH_LONG).show();
                                 for (int j = 0; j<games.size();j++)
                                 {
                                     if (g.key.equals(games.get(j).key))
@@ -268,7 +268,7 @@ public class TeamGamesActivity extends AppCompatActivity implements com.example.
                                 else if(j%2!=0 &&j<howMouch)
                                 {
                                     ratings2.add( r );
-                                    Toast.makeText( TeamGamesActivity.this, String.valueOf( i ), Toast.LENGTH_SHORT ).show();
+                                    //Toast.makeText( TeamGamesActivity.this, String.valueOf( i ), Toast.LENGTH_SHORT ).show();
                                     Collections.sort( ratings2, new Comparator<Rating>() {
                                         public int compare(Rating obj1, Rating obj2) {
                                             // TODO Auto-generated method stub

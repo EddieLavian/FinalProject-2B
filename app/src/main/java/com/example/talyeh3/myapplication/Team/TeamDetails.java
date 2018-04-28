@@ -312,6 +312,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         if (v==btnLeave)
         {
             Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
+            Toast.makeText(TeamDetails.this, "If you want to leave this team right now you can send us email to eddielavian1@gmail.com",Toast.LENGTH_SHORT).show();
             //t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             /*
             if (t.users.size()<=1)
@@ -329,6 +330,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 return;
             }
             */
+            /*
             if (t.manager.equals( myUserId ) )
             {
                 if (t.users.size()>1)
@@ -355,6 +357,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 userRef.setValue( u );
                 teamRef.setValue( t );
                 finish();
+                */
 
         }
         if (v==btnDelitePlayer )
@@ -388,7 +391,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             Intent intent = new Intent( TeamDetails.this, TeamGamesActivity.class );
             intent.putExtra( "teamKey", key );
             intent.putExtra( "k", t.howMouchPlayers );
-            Toast.makeText(TeamDetails.this,  t.howMouchPlayers,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(TeamDetails.this,  t.howMouchPlayers,Toast.LENGTH_SHORT).show();
             startActivity( intent );
         }
         if (v==btnChat)
