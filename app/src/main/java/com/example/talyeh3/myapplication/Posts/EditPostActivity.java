@@ -38,7 +38,7 @@ public class EditPostActivity extends AppCompatActivity implements View.OnClickL
 
         key = intent.getExtras().getString("key");
         postRef = database.getReference("Posts/" + key);
-        Toast.makeText(EditPostActivity.this, "user: " + postRef, Toast.LENGTH_LONG).show();
+        //Toast.makeText(EditPostActivity.this, "user: " + postRef, Toast.LENGTH_LONG).show();
         this.retrieveData();
     }
 

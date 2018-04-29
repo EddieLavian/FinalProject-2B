@@ -105,7 +105,7 @@ public class TeamGamesActivity extends AppCompatActivity implements com.example.
                     keyGame = (String) snapshot.child( String.valueOf( i ) ).getValue();
                     if (keyGame==null)
                     {
-                        Toast.makeText(TeamGamesActivity.this, "you dont have planing games yet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TeamGamesActivity.this, "You don't have any games yet", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
                         return;
                     }

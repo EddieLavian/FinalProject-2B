@@ -199,7 +199,7 @@ public class CreateGame extends AppCompatActivity implements TimePickerDialog.On
         String name = placeSelected.getName().toString();
         String address = placeSelected.getAddress().toString();
         String address2 = placeSelected.getLatLng().toString();
-        Toast.makeText(CreateGame.this, address2, Toast.LENGTH_LONG).show();
+        //Toast.makeText(CreateGame.this, address2, Toast.LENGTH_LONG).show();
         TextView enterCurrentLocation = (TextView) findViewById(R.id.btnLocation);
         enterCurrentLocation.setText(name + ", " + address);
     }

@@ -166,7 +166,7 @@ public class WeatherActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
                 (WeatherActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this,"Unknown locaton. Please accept the request ",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Unknown location. Please accept the request ",Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(WeatherActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         } else {
@@ -198,7 +198,7 @@ public class WeatherActivity extends AppCompatActivity {
                 lon = String.valueOf(longitude);
             }
             else{
-                Toast.makeText(this,"Unble to Trace your location",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Unable to trace your location",Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -143,7 +143,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),"File Uploaded",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"File uploaded successfully",Toast.LENGTH_LONG).show();
 
 
                             Uri downloadUri = taskSnapshot.getMetadata().getDownloadUrl();

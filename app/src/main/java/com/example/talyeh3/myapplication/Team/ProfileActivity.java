@@ -110,10 +110,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
     public void onClick(View v) {
-        Toast.makeText(ProfileActivity.this,  String.valueOf( u.teams.size() ), Toast.LENGTH_LONG).show();
+        //Toast.makeText(ProfileActivity.this,  String.valueOf( u.teams.size() ), Toast.LENGTH_LONG).show();
         if (u==null|| t== null)
         {
-             Toast.makeText(ProfileActivity.this,  "try again", Toast.LENGTH_LONG).show();
+             Toast.makeText(ProfileActivity.this,  "Try again later", Toast.LENGTH_LONG).show();
              return;
         }
 
