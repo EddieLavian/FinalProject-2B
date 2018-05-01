@@ -232,7 +232,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
 
                 t = dataSnapshot.getValue(Team.class);
                 teamName=t.name;
-                tvName.setText("team name: " + t.name);
+                tvName.setText(t.name);
                 photo= t.imgUrl;
                         Picasso
                         .with( TeamDetails.this )
@@ -312,7 +312,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         if (v==btnLeave)
         {
             Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
-            Toast.makeText(TeamDetails.this, "If you want to leave this team right now you can send us email to eddielavian1@gmail.com",Toast.LENGTH_SHORT).show();
+            Toast.makeText(TeamDetails.this, "If you want to leave this team right now you can send us email to tobesupp@gmail.com",Toast.LENGTH_SHORT).show();
             //t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             /*
             if (t.users.size()<=1)

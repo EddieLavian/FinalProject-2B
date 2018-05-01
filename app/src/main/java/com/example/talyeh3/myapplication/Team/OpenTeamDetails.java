@@ -101,7 +101,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
             }
             if(etMinimumPlayers.getText().length()<=0 || Integer.valueOf(etMinimumPlayers.getText().toString()) <2)
             {
-                Toast.makeText(OpenTeamDetails.this, "Minimum players can't be less than 2", Toast.LENGTH_LONG).show();
+                Toast.makeText(OpenTeamDetails.this, "Minimum players can't be less than 4", Toast.LENGTH_LONG).show();
                 return;
             }
             String uid = FirebaseAuth.getInstance().getCurrentUser().toString();

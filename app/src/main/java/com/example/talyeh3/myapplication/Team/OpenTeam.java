@@ -235,7 +235,7 @@ public class OpenTeam extends AppCompatActivity {
 
                         //If closed Search View , lstView will return default
                         lstView = (ListView)findViewById(R.id.lv);
-                         //ArrayAdapter adapter = new ArrayAdapter(OpenTeam.this,android.R.layout.simple_list_item_1,lstSource);
+                         //ArrayAdapter adapter = new ArrayAdapter(OpenTeam.this,android.R.laMinimumt.simple_list_item_1,lstSource);
                         allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
                          lstView.setAdapter(allUsersAdapter);
 

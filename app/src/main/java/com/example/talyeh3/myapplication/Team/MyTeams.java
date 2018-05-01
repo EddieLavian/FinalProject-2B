@@ -84,7 +84,7 @@ public class MyTeams extends AppCompatActivity {
                         keyteam = (String) snapshot.child(String.valueOf(i)).getValue();
                         if (keyteam==null)
                         {
-                            Toast.makeText(MyTeams.this, "You don't have teams yet", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(MyTeams.this, "You don't have teams yettttttttttttttttttt", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
                             return;
                         }
@@ -96,7 +96,7 @@ public class MyTeams extends AppCompatActivity {
                            Team t = snapshot.getValue(Team.class);
                            if (keyteam==null||t==null)
                            {
-                               Toast.makeText(MyTeams.this, "You don't have teams yet", Toast.LENGTH_LONG).show();
+                               //Toast.makeText(MyTeams.this, "You don't have teams yetrrrrrrrrrrrrrrrrrrrrrrr", Toast.LENGTH_LONG).show();
                                progressDialog.dismiss();
                                return;
                            }
@@ -110,7 +110,7 @@ public class MyTeams extends AppCompatActivity {
                        public void onCancelled(DatabaseError databaseError) {
                            if (keyteam==null)
                            {
-                               Toast.makeText(MyTeams.this, "You don't have teams yet", Toast.LENGTH_LONG).show();
+                               Toast.makeText(MyTeams.this, "You don't have teams yetppppppppppppppppp", Toast.LENGTH_LONG).show();
                                progressDialog.dismiss();
                                return;
                            }
