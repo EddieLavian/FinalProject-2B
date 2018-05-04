@@ -40,6 +40,7 @@ Eddie Lavian
 | Issues | [![GitHub issues](	https://img.shields.io/bitbucket/issues-raw/atlassian/python-bitbucket.svg)](https://github.com/EddieLavian/FinalProject-2B/issues) |
 | Project Management Board| [Tasks](https://github.com/EddieLavian/FinalProject-2B/projects) |
 | Diary |  [Teamup Calendar](https://teamup.com/ksr245rqo4i7dqs464) |
+| App | [Google Play](https://play.google.com/store/apps/details?id=com.tobe.talyeh3.myapplication)
 
 
 ## [Diagrams and Designs](https://github.com/EddieLavian/FinalProject-2B/wiki)
