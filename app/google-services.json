@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:15246466950:android:8d078932a544c2af",
         "android_client_info": {
-          "package_name": "com.example.talyeh3.myapplication"
+          "package_name": "com.tobe.talyeh3.myapplication"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "15246466950-b87qcuc1ak92bq7lv7pvdqeqd338s654.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.talyeh3.myapplication",
+            "package_name": "com.tobe.talyeh3.myapplication",
             "certificate_hash": "656a7f03fa9c5895870e752a72bf11c0ac394878"
           }
         },

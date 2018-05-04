@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/viewBg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.talyeh3.myapplication.Gallery.GalleryActivity"
+    tools:context="com.tobe.talyeh3.myapplication.Gallery.GalleryActivity"
     tools:showIn="@layout/activity_gallery">
 
     <android.support.v7.widget.RecyclerView
