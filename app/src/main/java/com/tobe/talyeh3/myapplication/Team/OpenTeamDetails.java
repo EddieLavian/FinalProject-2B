@@ -49,7 +49,7 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
     User u;
     Spinner spin;
     ImageView imgProfile;
-    String generatedFilePath = "https://firebasestorage.googleapis.com/v0/b/tobe-722db.appspot.com/o/images%2Fteam.png?alt=media&token=032ec4ea-80a1-476b-befc-c8caeda0c3a2";
+    String generatedFilePath = "https://firebasestorage.googleapis.com/v0/b/tobe-722db.appspot.com/o/appImages%2Fteam.png?alt=media&token=de9d4a8c-bb6f-45a6-ab32-31e857743859";
     Button btnChoose;
     private static final int PICK_IMAGE_REQUEST = 234;
     private StorageReference mStorageRef;

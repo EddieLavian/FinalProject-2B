@@ -101,7 +101,8 @@
                 android:clickable="true"
                 android:padding="10dp"
                 android:textColor="#a6aff1"
-                android:hint="Password"/>
+                android:hint="Password"
+                android:inputType="textPassword"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -136,7 +137,8 @@
                 android:clickable="true"
                 android:padding="10dp"
                 android:textColor="#a6aff1"
-                android:hint="Re Password"/>
+                android:hint="Re Password"
+                android:inputType="textPassword"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

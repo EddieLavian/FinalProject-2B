@@ -28,8 +28,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -54,13 +57,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Button btnReg,btnLogin;
     ProgressDialog progressDialog;
     Boolean b=true;//if the user uploded photo
-    String generatedFilePath="https://firebasestorage.googleapis.com/v0/b/tobe-722db.appspot.com/o/images%2Fprofile.jpg?alt=media&token=da8a59c5-92b4-41d8-8453-bc64b9a3d1b8";
+    String generatedFilePath="https://firebasestorage.googleapis.com/v0/b/tobe-722db.appspot.com/o/appImages%2Fprofile.jpg?alt=media&token=04178b40-4678-441b-adca-3d3d1dde15c9";
     TextView tvRegister;
     //for user datails will save on data base
     FirebaseDatabase database;
     Spinner spin;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private DatabaseReference mUserDatabase;
+
+    // All users
+    /*
+    ArrayList<String> users;
+    private DatabaseReference databaseUsers;
+    */
 
     public static String FACEBOOK_URL = "https://www.facebook.com/eddie.lavian.9";
     public static String FACEBOOK_PAGE_ID = "eddie.lavian.9";
@@ -70,6 +79,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mStorageRef = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
 
+        // All users
+        /*
+        databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
+        users = new ArrayList<String>();
+        */
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child( "Users" );
         progressDialog = new ProgressDialog(this);
@@ -89,13 +103,32 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnfacebook.setOnClickListener(this);
     }
 
+/*
+    public void retriveData()
+    {
+        databaseUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    {
+                        User u = data.getValue(User.class);
+                        users.add(u.userName);
+                        Toast.makeText(RegisterActivity.this, u.userName, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-
-
+            }
+        });
+    }
+*/
 
 
     public void createRegisterDialog()
     {
+//        this.retriveData();
         d= new Dialog(this);
         d.setContentView(R.layout.registerlayout);
         d.setTitle("Register");
@@ -191,6 +224,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(RegisterActivity.this, "Invalid email. Please try again", Toast.LENGTH_LONG).show();
             return;
         }
+/*
+        boolean checkUserName = false;
+        for(int i=0; i <users.size(); i++)
+        {
+            if(users.get(i).equals(etUserName.getText()))
+                checkUserName = true;
+            Toast.makeText(RegisterActivity.this, users.get(i), Toast.LENGTH_LONG).show();
+        }
+        if(checkUserName == true)
+        {
+            Toast.makeText(RegisterActivity.this, "This Username used already, please choose another one", Toast.LENGTH_LONG).show();
+            return;
+        }
+*/
         progressDialog.setMessage("Registering Please Wait...");
         progressDialog.show();
 
@@ -375,8 +422,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         else if(v == btnfacebook)
         {
-            Toast.makeText(this, "Our page is on building", Toast.LENGTH_LONG).show();
-
+            Toast.makeText(this, "Our page will be able soon ", Toast.LENGTH_LONG).show();
             /*
             Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
             String facebookUrl = getFacebookPageURL(this);

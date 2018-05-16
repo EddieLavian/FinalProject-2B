@@ -179,7 +179,7 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
         //Ask you how you want to share again and again //
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "בוא להיות חלק מהמשחק. הורד את האפליקציה ToBe עוד היום ותתחבר לשחקנים האמיתיים");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "בוא להיות חלק מהמשחק. הורד את האפליקציה ToBe עוד היום ותתחבר לשחקנים האמיתיים https://play.google.com/store/apps/details?id=com.tobe.talyeh3.myapplication");
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.project_id)));
 

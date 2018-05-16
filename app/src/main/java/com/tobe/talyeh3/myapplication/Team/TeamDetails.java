@@ -317,7 +317,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             /*
             if (t.users.size()<=1)
             {
-
                 DatabaseReference team = FirebaseDatabase.getInstance().getReference().getRoot().child("Teams/"+t.key);//remove team if no have players
                 team.setValue(null);
                 if (u.teams.size()<=1)

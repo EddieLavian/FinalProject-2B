@@ -28,12 +28,23 @@
 
     <string-array name="city">
         <item>Jerusalem</item>
-        <item>Tel Aviv, IL</item>
+        <item>Tel Aviv</item>
         <item>Ashkelon</item>
         <item>Ashdod</item>
         <item>Haifa</item>
         <item>Ramat Gan</item>
         <item>Eilat</item>
+        <item>Beer-Sheva</item>
+        <item>Beit Shemesh</item>
+        <item>Herzliya</item>
+        <item>Holon</item>
+        <item>Modiin</item>
+        <item>Maale-Adummim</item>
+        <item>Netanya</item>
+        <item>Petah-Tikva</item>
+        <item>Kiryat Shmona</item>
+        <item>Rishon Lezion</item>
+        <item>Raanana</item>
     </string-array>
 
 
