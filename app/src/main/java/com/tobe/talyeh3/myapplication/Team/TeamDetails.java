@@ -219,6 +219,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 u = dataSnapshot.getValue(User.class);
+
+                Toast.makeText(TeamDetails.this,String.valueOf(u.teams.size()),Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -313,7 +315,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         {
             Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
             Toast.makeText(TeamDetails.this, "If you want to leave this team right now you can send us email to tobesupp@gmail.com",Toast.LENGTH_SHORT).show();
-            //t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             /*
             if (t.users.size()<=1)
             {
@@ -329,7 +331,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 return;
             }
             */
-            /*
+
             if (t.manager.equals( myUserId ) )
             {
                 if (t.users.size()>1)
@@ -338,25 +340,28 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                     t.manager= "-1";
             }
 
-            if (u.teams.size()<=2)
+            if (u.teams.size()==2)
             {
-                Toast.makeText(TeamDetails.this, u.teams.size() +"   llllllllllllllllllllllllllllllllllll  ",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(TeamDetails.this, u.teams.size() +"   llllllllllllllllllllllllllllllllllll  ",Toast.LENGTH_SHORT).show();
                 DatabaseReference mDatabase;
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 mDatabase.child("Users").child( myUserId ).child("teams").child( "0" ).setValue("-1");
+                mDatabase.child("Users").child( myUserId ).child("teams").child( "1" ).removeValue();
+                //userRef.setValue( u );
+            }
+            else
+            {
+                u.teams.remove(t.key);
                 userRef.setValue( u );
             }
                 t.users.remove( u.uid );
-                u.teams.remove(t.key);
                 t.statistics.remove(myUserId+t.key);
                 String keyStatistics=myUserId+t.key;
-
                 DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
                 statisticsPlayer.setValue(null);
-                userRef.setValue( u );
                 teamRef.setValue( t );
                 finish();
-                */
+
 
         }
         if (v==btnDelitePlayer )

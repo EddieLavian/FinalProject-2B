@@ -39,11 +39,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     String photo;
     ImageView imgProfile;
+    String myUserId;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_profile);
 
+        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
         tvUserName = (TextView) findViewById(R.id.tvUserName);
 
@@ -121,15 +123,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (delete!=null)//delete player from the team
         {
             t.users.remove( u.uid );
-            t.permissions.remove(u.uid);
+            //t.permissions.remove(u.uid);
 
             if (u.teams.size()==2)//the size 2 but only 1 team???
             {
-                u.teams.set( 0, "-1" );
-                u.teams.remove(t.key);
+                DatabaseReference mDatabase;
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("Users").child( key ).child("teams").child( "0" ).setValue("-1");
+                mDatabase.child("Users").child( key ).child("teams").child( "1" ).removeValue();
+                Toast.makeText(ProfileActivity.this,  key, Toast.LENGTH_LONG).show();
             }
             else
+            {
                 u.teams.remove(t.key);
+                userRef.setValue( u );
+            }
 
             t.statistics.remove(key+t.key);
             t.rating.remove(key+t.key);
@@ -165,6 +173,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             DatabaseReference rDatabase;
             rDatabase = FirebaseDatabase.getInstance().getReference();
             rDatabase.child("Rating").child(keyStatistics).setValue(r);
+            userRef.setValue(u);
+            if (userRef2!=null)
+            {
+                if (userRef2.getKey().equals( "0" ))
+                    userRef2.removeValue();
+            }
         }
         else if(permissions != null)
         {
@@ -172,12 +186,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         userRefTeam.setValue(t);
-        userRef.setValue(u);
-        if (userRef2!=null)
-        {
-            if (userRef2.getKey().equals( "0" ))
-                userRef2.removeValue();
-        }
+
+
 
         finish();
     }

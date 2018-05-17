@@ -202,7 +202,7 @@ public class OpenTeam extends AppCompatActivity {
                         if (notDuplicateUser==0 )
                             users.add(u);
                     }
-                    else if(delete != null)//delite players list
+                    else if(delete != null)//delete players list
                     {
                         for (int i = 0; i < usersInTeam.size(); i++) {
                             if (usersInTeam.get( i ).equals( u.uid )&&!usersInTeam.get( i ).equals(myUserId))
