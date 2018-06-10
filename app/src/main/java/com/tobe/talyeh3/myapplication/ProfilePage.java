@@ -109,6 +109,11 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
 
     public void myTeams()
     {
+        if(teams == null )
+        {
+            Toast.makeText(this, " You don't have teams yet", Toast.LENGTH_LONG).show();
+            return;
+        }
         if(firstPress==0)
         {
             d= new Dialog(this);

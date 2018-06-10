@@ -62,15 +62,18 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
+
         if(firebaseUser!=null)
         {
             us= FirebaseAuth.getInstance().getCurrentUser();
             myUserId = us.getUid();
+            Toast.makeText(ToBe.this, "yes ", Toast.LENGTH_LONG).show();
         }
         else//registeration page
         {
+
+            Toast.makeText(ToBe.this, "no ", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ToBe.this, RegisterActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
 

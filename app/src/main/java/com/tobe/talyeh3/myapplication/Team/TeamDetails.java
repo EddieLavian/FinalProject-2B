@@ -75,7 +75,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
        // FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
 
         getSupportActionBar().hide();
-
+        Toast.makeText(TeamDetails.this,"JJJJJJJJJJJJJJJJJJJJJ",Toast.LENGTH_SHORT).show();
         myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseUser = FirebaseDatabase.getInstance().getReference("Users");
         this.retriveData();
@@ -313,24 +313,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
         }
         if (v==btnLeave)
         {
-            Toast.makeText(TeamDetails.this, "This feature will be able soon",Toast.LENGTH_SHORT).show();
-            Toast.makeText(TeamDetails.this, "If you want to leave this team right now you can send us email to tobesupp@gmail.com",Toast.LENGTH_SHORT).show();
             t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            /*
-            if (t.users.size()<=1)
-            {
-                DatabaseReference team = FirebaseDatabase.getInstance().getReference().getRoot().child("Teams/"+t.key);//remove team if no have players
-                team.setValue(null);
-                if (u.teams.size()<=1)
-                {
-                    u.teams.add( "-1" );
-                }
-                userRef.setValue( u );
-                u.teams.remove(t.key);
-                finish();
-                return;
-            }
-            */
 
             if (t.manager.equals( myUserId ) )
             {
@@ -361,7 +344,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 statisticsPlayer.setValue(null);
                 teamRef.setValue( t );
                 finish();
-
 
         }
         if (v==btnDelitePlayer )

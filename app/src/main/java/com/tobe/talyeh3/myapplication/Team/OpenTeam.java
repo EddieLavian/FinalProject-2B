@@ -54,18 +54,17 @@ public class OpenTeam extends AppCompatActivity {
     int i = 0;
     String delete;
     String permissions;
-   public boolean autocompliteUse;
+    public boolean autocompliteUse;
     List<User> lstFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_open_team);
-
-       // Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
-       // getSupportActionBar().setTitle("Material Search");
-       // toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+        // Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        // setSupportActionBar(toolbar);
+        // getSupportActionBar().setTitle("Material Search");
+        // toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         autocompliteUse=false;
         myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         //getSupportActionBar().hide();
@@ -155,7 +154,7 @@ public class OpenTeam extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String u = String.valueOf( data.getValue( ) );
 
-                    //Toast.makeText( OpenTeam.this, "sd  " + u, Toast.LENGTH_SHORT ).show();
+                    Toast.makeText( OpenTeam.this, "sdlllllllllllllllllllllll  " + u, Toast.LENGTH_SHORT ).show();
                     usersInTeam.add( u );
                 }
             }
@@ -196,17 +195,21 @@ public class OpenTeam extends AppCompatActivity {
                     else if (delete==null){ //add players list
                         for (int i = 0; i < usersInTeam.size(); i++) {
                             if (usersInTeam.get( i ).equals( u.uid )) {
+
+
                                 notDuplicateUser = -1;
                             }
                         }
-                        if (notDuplicateUser==0 )
+                        if (notDuplicateUser==0 ) {
                             users.add(u);
+                        }
                     }
-                    else if(delete != null)//delete players list
+                    else if(delete != null)//delite players list
                     {
                         for (int i = 0; i < usersInTeam.size(); i++) {
                             if (usersInTeam.get( i ).equals( u.uid )&&!usersInTeam.get( i ).equals(myUserId))
                             {//in the team but not me
+
                                 users.add(u);
                                 break;
                             }
@@ -214,8 +217,8 @@ public class OpenTeam extends AppCompatActivity {
                     }
                 }
                 progressDialog.dismiss();
-              // allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
-              //  lv.setAdapter(allUsersAdapter);
+                // allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
+                //  lv.setAdapter(allUsersAdapter);
 
                 lstView = (ListView)findViewById(R.id.lv);
                 allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
@@ -235,9 +238,9 @@ public class OpenTeam extends AppCompatActivity {
 
                         //If closed Search View , lstView will return default
                         lstView = (ListView)findViewById(R.id.lv);
-                         //ArrayAdapter adapter = new ArrayAdapter(OpenTeam.this,android.R.laMinimumt.simple_list_item_1,lstSource);
+                        //ArrayAdapter adapter = new ArrayAdapter(OpenTeam.this,android.R.laMinimumt.simple_list_item_1,lstSource);
                         allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, users);
-                         lstView.setAdapter(allUsersAdapter);
+                        lstView.setAdapter(allUsersAdapter);
 
 
                     }
@@ -255,11 +258,11 @@ public class OpenTeam extends AppCompatActivity {
                             lstFound = new ArrayList<User>();
                             int i=0;
                             for(User item:users ){
-                                    if(item.userName.contains( newText ) )
-                                    {
-                                        lstFound.add(item);
-                                        autocompliteUse =true;
-                                    }
+                                if(item.userName.contains( newText ) )
+                                {
+                                    lstFound.add(item);
+                                    autocompliteUse =true;
+                                }
                             }
 
                             allUsersAdapter = new AllUsersAdapter(OpenTeam.this, 0, 0, lstFound);

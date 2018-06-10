@@ -302,7 +302,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:hint="Choose"
+                android:hint="Uplaod photo"
                 android:textAllCaps="false"
                 android:drawablePadding="10dp"
                 android:textSize="15sp"

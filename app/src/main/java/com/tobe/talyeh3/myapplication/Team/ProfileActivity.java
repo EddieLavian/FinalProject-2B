@@ -39,13 +39,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     String photo;
     ImageView imgProfile;
-    String myUserId;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_profile);
 
-        myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
         tvUserName = (TextView) findViewById(R.id.tvUserName);
 
@@ -58,13 +56,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Intent intent = getIntent();
         photo = intent.getExtras().getString("photo");
         delete=intent.getExtras().getString("delete");
-       // Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
+        // Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
         permissions = intent.getExtras().getString("permissions");
-
-        if (delete!=null)
-        {
-            btnSave.setText("Delete This Player From Your Team");
-        }
 
         imgProfile = (ImageView)findViewById( R.id.imgProfile);
         Picasso
@@ -112,36 +105,27 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
     public void onClick(View v) {
-        //Toast.makeText(ProfileActivity.this,  String.valueOf( u.teams.size() ), Toast.LENGTH_LONG).show();
+        Toast.makeText(ProfileActivity.this,  String.valueOf( u.teams.size() ), Toast.LENGTH_LONG).show();
         if (u==null|| t== null)
         {
-             Toast.makeText(ProfileActivity.this,  "Try again later", Toast.LENGTH_LONG).show();
-             return;
+            Toast.makeText(ProfileActivity.this,  "try again", Toast.LENGTH_LONG).show();
+            return;
         }
 
         t.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         if (delete!=null)//delete player from the team
         {
             t.users.remove( u.uid );
-            //t.permissions.remove(u.uid);
 
-            if (u.teams.size()==2)//the size 2 but only 1 team???
+            if (u.teams.size()==2)
             {
-                DatabaseReference mDatabase;
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Users").child( key ).child("teams").child( "0" ).setValue("-1");
-                mDatabase.child("Users").child( key ).child("teams").child( "1" ).removeValue();
-                Toast.makeText(ProfileActivity.this,  key, Toast.LENGTH_LONG).show();
+                 Toast.makeText(ProfileActivity.this, " you can not delete this player.",Toast.LENGTH_SHORT).show();
             }
             else
-            {
                 u.teams.remove(t.key);
-                userRef.setValue( u );
-            }
 
             t.statistics.remove(key+t.key);
             t.rating.remove(key+t.key);
-            t.permissions.remove(key+t.key);
             String keyStatistics=key+t.key;
             DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
             statisticsPlayer.setValue(null);
@@ -173,12 +157,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             DatabaseReference rDatabase;
             rDatabase = FirebaseDatabase.getInstance().getReference();
             rDatabase.child("Rating").child(keyStatistics).setValue(r);
-            userRef.setValue(u);
-            if (userRef2!=null)
-            {
-                if (userRef2.getKey().equals( "0" ))
-                    userRef2.removeValue();
-            }
         }
         else if(permissions != null)
         {
@@ -186,8 +164,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         userRefTeam.setValue(t);
-
-
+        userRef.setValue(u);
+        if (userRef2!=null)
+        {
+            if (userRef2.getKey().equals( "0" ))
+                userRef2.removeValue();
+        }
 
         finish();
     }
