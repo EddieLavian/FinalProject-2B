@@ -92,22 +92,29 @@ public class StatisticsActivity extends AppCompatActivity{
                     }
                 }
 
-                if (per == 2) // if user have permmision he can edit statistics
-                {
+
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            if (per == 2) // if user have permmision he can edit statistics
+                            {
                             Statistics s = statistics.get(position);
                             Intent intent = new Intent(StatisticsActivity.this, editStatistics.class);
                             intent.putExtra("keyStatistic", s.key);
                             startActivity(intent);
+                            }
+                            else
+                                Toast.makeText(StatisticsActivity.this, "Ask from the manager perrmissions to update the statistics", Toast.LENGTH_LONG).show();
 
 
                         }
 
 
                     });
-                }
+
+
+
+
                 /////////////////////////////////////////////////////////////////////////
             }
             public void onCancelled(DatabaseError databaseError) {
@@ -194,49 +201,5 @@ public class StatisticsActivity extends AppCompatActivity{
 
 
     }
-
-
-
-/*
-    public void onClick(View v) {
-        if (v==btnSortAssists)
-        {
-            Collections.sort(statistics, new Comparator<Statistics>(){
-                public int compare(Statistics obj1, Statistics obj2)
-                {
-                    // TODO Auto-generated method stub
-                    return (obj1.assist > obj2.assist) ? -1: (obj1.assist > obj2.assist) ? 1:0 ;
-                }
-            });
-        }
-        if(v==btnSortGames)
-        {
-            Collections.sort(statistics, new Comparator<Statistics>(){
-                public int compare(Statistics obj1, Statistics obj2)
-                {
-                    // TODO Auto-generated method stub
-                    return (obj1.games > obj2.games) ? -1: (obj1.games > obj2.games) ? 1:0 ;
-                }
-            });
-            finish();
-            startActivity(getIntent());
-        }
-        if (v==btnSortGolas)
-        {
-            Collections.sort(statistics, new Comparator<Statistics>(){
-                public int compare(Statistics obj1, Statistics obj2)
-                {
-                    // TODO Auto-generated method stub
-                    return (obj1.goals > obj2.goals) ? -1: (obj1.goals > obj2.goals) ? 1:0 ;
-                }
-            });
-
-        }
-        finish();
-        startActivity(getIntent());
-
-    }
-
-*/
 
     }

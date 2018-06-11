@@ -33,7 +33,7 @@ android:layout_height="match_parent">
         android:background="#fff"
         android:elevation="4dp"
         android:padding="20dp"
-        android:text="Body" />
+        android:text="No Teams Yet" />
 
 
 

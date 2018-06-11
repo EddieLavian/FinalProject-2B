@@ -3,7 +3,10 @@ package com.tobe.talyeh3.myapplication;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
@@ -50,8 +53,6 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
     private static final int REQUEST_SMS = 0;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -95,16 +96,22 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            menu();
+                menu();
 
             }
         });
+
 
 
         btnOpenTeam = (TextView)findViewById(R.id.btnOpenTeam);
         btnOpenTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(user2== null)
+                {
+                    Toast.makeText(ToBe.this, "There is no internet connection, please try again.. ", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent = new Intent(ToBe.this,OpenTeamDetails.class);
                 startActivity(intent);
 
@@ -117,7 +124,7 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
             public void onClick(View v) {
                 if(user2== null)
                 {
-                    Toast.makeText(ToBe.this, "The data will be updated now, please click again ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ToBe.this, "There is no internet connection, please try again.. ", Toast.LENGTH_LONG).show();
                     return;
                 }
                 Intent intent = new Intent(ToBe.this,ChatActivity.class);
@@ -131,6 +138,11 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
         btnAllPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(user2== null)
+                {
+                    Toast.makeText(ToBe.this, "There is no internet connection, please try again.. ", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent = new Intent(ToBe.this,AllPostActivity.class);
                 startActivity(intent);
             }
@@ -139,6 +151,11 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
         btnWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(user2 == null)
+                {
+                    Toast.makeText(ToBe.this, "There is no internet connection, please try again.. ", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent = new Intent(ToBe.this,WeatherActivity.class);
                 startActivity(intent);
             }
@@ -170,6 +187,11 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
         btnAddFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(user2== null)
+                {
+                    Toast.makeText(ToBe.this, "There is no internet connection, please try again.. ", Toast.LENGTH_LONG).show();
+                    return;
+                }
 /*
         // Ask you only once how you want to share //
                 Intent sendIntent = new Intent();
@@ -211,7 +233,6 @@ catch ( ActivityNotFoundException ex  )
             }
         });
 
-
     }
 
 
@@ -233,6 +254,7 @@ catch ( ActivityNotFoundException ex  )
 
          @Override
          public void onClick(View view) {
+
              if (view==btnMenu)
              {
                  menu();
@@ -256,6 +278,7 @@ catch ( ActivityNotFoundException ex  )
 
 
          public void retriveData() {
+
              databaseUser.addValueEventListener(new ValueEventListener() {
                  @Override
                  public void onDataChange(DataSnapshot dataSnapshot) {

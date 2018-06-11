@@ -30,6 +30,7 @@ public class TeamGamesAdapter extends ArrayAdapter<Game> {
     List<Game> objects;
     Boolean ifAttending,check=true;
     String myUserId, playersAttended;
+    String howMouch;
     Dialog dialog;
     private DatabaseReference database,teamDatabase;;
     ArrayList<User> users;
@@ -50,7 +51,7 @@ public class TeamGamesAdapter extends ArrayAdapter<Game> {
     }
     String keyGame;
 
-    public TeamGamesAdapter(Context context, int resource, int textViewResourceId, List<Game> objects,Boolean ifAttending,String myUserId,Dialog dialog,String keyGame) {
+    public TeamGamesAdapter(Context context, int resource, int textViewResourceId, List<Game> objects,Boolean ifAttending,String myUserId,Dialog dialog,String keyGame,String howMouch) {
         super(context, textViewResourceId, objects);
         this.context=context;
         this.objects=objects;
@@ -60,10 +61,11 @@ public class TeamGamesAdapter extends ArrayAdapter<Game> {
         this.dialog=dialog;
         this.i=1;
         this.keyGame=keyGame;
+        this.howMouch = howMouch;
     }
 
     static class ViewHolder {
-        TextView tvDate,tvAttending,tvTime,tvPlace,tvAttended,tvMinimumPlayers;
+        TextView tvDate,tvAttending,tvTime,tvPlace,tvAttended,tvMinimumPlayers,tvHowMouch;
         Button tvPlayers,tvAcceptArrive,btnForce;
     }
 
@@ -83,6 +85,7 @@ public class TeamGamesAdapter extends ArrayAdapter<Game> {
             h.tvPlace = (TextView)rowView.findViewById(R.id.tvPlace);
             h.tvAttended = (TextView)rowView.findViewById(R.id.tvAttended);
             h.tvMinimumPlayers = (TextView)rowView.findViewById(R.id.tvMinimumPlayers);
+            h.tvHowMouch = (TextView)rowView.findViewById(R.id.tvHowMouch);
             h.tvAcceptArrive= (Button)rowView.findViewById(R.id.tvAcceptArrive);
             rowView.setTag(h);
         }
@@ -95,8 +98,7 @@ public class TeamGamesAdapter extends ArrayAdapter<Game> {
         h.tvAttended.setText( "Attended: "+String.valueOf(temp.attending  ) );
 
         h.tvMinimumPlayers.setText("Minimum players: "+ String.valueOf(temp.minimumPlayers ));
-
-
+        h.tvHowMouch.setText("Team Size: "+ String.valueOf(howMouch+"x"+howMouch ));
         Boolean b = false;
         for (int i = 1 ; i<temp.whoIsComming.size();i++)
         {

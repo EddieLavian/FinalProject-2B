@@ -85,23 +85,6 @@ android:layout_height="match_parent">
         android:textColor="#a6aff1" />
 
 </LinearLayout>
-
-
-    <EditText
-        android:id="@+id/etMinimumPlayers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Minimum Players"
-        android:drawableLeft="@drawable/ellipse_06"
-        android:textAllCaps="false"
-        android:drawablePadding="16dp"
-        android:textSize="18sp"
-        android:gravity="start"
-        android:clickable="true"
-        android:padding="10dp"
-        android:textColor="#a6aff1"
-        android:inputType="number"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

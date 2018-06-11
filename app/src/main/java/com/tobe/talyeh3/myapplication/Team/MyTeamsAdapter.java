@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tobe.talyeh3.myapplication.R;
 import com.squareup.picasso.Picasso;
@@ -35,17 +36,17 @@ public class MyTeamsAdapter extends ArrayAdapter<Team> {
         // String  temp = objects.get(position);
         //tvTitle.setText(temp);
         Team temp = objects.get(position);
-        tvTitle.setText(temp.name);
+        if(temp!=null  )
+        {
 
-        ImageView imgTeamProfile = (ImageView)view.findViewById(R.id.imgTeamProfile);
-
-
-        Picasso
-                .with( context )
-                .load( temp.imgUrl )
-                .fit() // will explain later
-                .into( imgTeamProfile );
-
+            tvTitle.setText(temp.name);
+            ImageView imgTeamProfile = (ImageView)view.findViewById(R.id.imgTeamProfile);
+            Picasso
+                    .with( context )
+                    .load( temp.imgUrl )
+                    .fit() // will explain later
+                    .into( imgTeamProfile );
+        }
 
         return view;
     }

@@ -56,6 +56,7 @@ android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/editProfile"
+            android:visibility="invisible"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
@@ -107,18 +108,6 @@ android:layout_height="match_parent">
         android:layout_marginTop="5dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvUpcomingGames"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="3dp"
-            android:background="#fff"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:padding="20dp"
-            android:text="Upcoming Games" />
 
         <TextView
             android:id="@+id/tvTeams"
@@ -130,17 +119,6 @@ android:layout_height="match_parent">
             android:elevation="4dp"
             android:padding="20dp"
             android:text="Teams" />
-
-        <TextView
-            android:id="@+id/tvMyStatistics"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#fff"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:padding="20dp"
-            android:text="Statistics" />
 
 
         <ListView

@@ -39,7 +39,7 @@ import java.util.List;
 
 public class OpenTeamDetails extends AppCompatActivity implements View.OnClickListener {
 
-    EditText etTeamName, etMinimumPlayers;
+    EditText etTeamName;
     Button btnSave;
     FirebaseDatabase database;
     DatabaseReference teamRef, userRef, userRef2;
@@ -62,7 +62,6 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
         setContentView( R.layout.activity_open_team_details );
         database = FirebaseDatabase.getInstance();
         etTeamName = (EditText) findViewById( R.id.etTeamName );
-        etMinimumPlayers = (EditText)findViewById(R.id.etMinimumPlayers);
         btnSave = (Button) findViewById( R.id.btnSave );
         btnSave.setOnClickListener( this );
         userRef = database.getReference( "Users/" + myUserId );
@@ -97,11 +96,6 @@ public class OpenTeamDetails extends AppCompatActivity implements View.OnClickLi
             if(etTeamName.getText().length()<=0)
             {
                 Toast.makeText(OpenTeamDetails.this, "Team name is empty", Toast.LENGTH_LONG).show();
-                return;
-            }
-            if(etMinimumPlayers.getText().length()<=0 || Integer.valueOf(etMinimumPlayers.getText().toString()) <2)
-            {
-                Toast.makeText(OpenTeamDetails.this, "Minimum players can't be less than 4", Toast.LENGTH_LONG).show();
                 return;
             }
             String uid = FirebaseAuth.getInstance().getCurrentUser().toString();

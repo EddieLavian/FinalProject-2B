@@ -64,8 +64,6 @@ public class TeamGamesActivity extends AppCompatActivity implements com.tobe.tal
     String howMouchPlayers;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -147,7 +145,7 @@ public class TeamGamesActivity extends AppCompatActivity implements com.tobe.tal
                     } );
                     i++;
                 }
-                TeamGamesAdapter = new TeamGamesAdapter( TeamGamesActivity.this, 0, 0, games,ifAttending ,myUserId,dialog,"no");
+                TeamGamesAdapter = new TeamGamesAdapter( TeamGamesActivity.this, 0, 0, games,ifAttending ,myUserId,dialog,"no",howMouchPlayers);
                 TeamGamesAdapter.setCustomButtonListner(TeamGamesActivity.this);
                 lv.setAdapter( TeamGamesAdapter );
 
@@ -210,8 +208,9 @@ public class TeamGamesActivity extends AppCompatActivity implements com.tobe.tal
 
     @Override
     public void onButtonForces(int position, Game value) {
-        int howMouch =Integer.parseInt(howMouchPlayers);
-        howMouch=howMouch*2;
+        int howMouch = Integer.parseInt(howMouchPlayers);
+        howMouch = howMouch*2;
+
         if (value.attending<howMouch)
        {
             Toast.makeText( TeamGamesActivity.this,"Not enough players confirmed arrival", Toast.LENGTH_SHORT ).show();

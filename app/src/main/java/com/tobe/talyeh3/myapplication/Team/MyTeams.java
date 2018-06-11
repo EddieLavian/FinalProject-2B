@@ -100,6 +100,13 @@ public class MyTeams extends AppCompatActivity {
                                progressDialog.dismiss();
                                return;
                            }
+
+                           for (int j = 0; j<teams.size();j++)
+                           {
+                               if (t.key.equals(teams.get(j).key))
+                                   teams.remove(j);
+                           }
+
                            teams.add(t);
                            Log.d("onStart", snapshot.toString());
                            allTeamsAdapter.notifyDataSetChanged();
