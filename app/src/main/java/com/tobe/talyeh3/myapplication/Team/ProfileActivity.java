@@ -161,6 +161,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         else if(permissions != null)
         {
             t.permissions.add(key);
+            Intent intent = new Intent(ProfileActivity.this, TeamDetails.class);
+            startActivity(intent);
         }
 
         userRefTeam.setValue(t);
