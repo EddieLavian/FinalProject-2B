@@ -89,19 +89,24 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void onClick(View v) {
-        if(v==btnSave)
-        {
-            userRef = database.getReference("Users/" + key);
-            u.age = Integer.valueOf(etAge.getText().toString())  ;
-            u.city=spin.getSelectedItem().toString();
-            u.userName=etUserName.getText().toString();
-            uploadFile();
-            userRef.setValue(u);
-            if (filePath==null)
-                finish();
-
+        if(etUserName.getText().toString().length() > 0 && etAge.getText().toString().length() > 0) {
+            if (v == btnSave) {
+                userRef = database.getReference("Users/" + key);
+                u.age = Integer.valueOf(etAge.getText().toString());
+                u.city = spin.getSelectedItem().toString();
+                u.userName = etUserName.getText().toString();
+                uploadFile();
+                userRef.setValue(u);
+                if (filePath == null)
+                    finish();
+            }
         }
-        else if(v==btnChoose)
+        else
+        {
+            Toast.makeText(this,"Some fields are empty, please try again",Toast.LENGTH_LONG).show();
+        }
+
+        if(v==btnChoose)
         {
             showFileChooser();
         }

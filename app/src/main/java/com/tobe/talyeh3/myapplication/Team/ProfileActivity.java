@@ -51,13 +51,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         tvAge = (TextView) findViewById(R.id.tvAge);
-        btnSave = (TextView) findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+
         Intent intent = getIntent();
         photo = intent.getExtras().getString("photo");
         delete=intent.getExtras().getString("delete");
-        // Toast.makeText(ProfileActivity.this,  delete, Toast.LENGTH_LONG).show();
         permissions = intent.getExtras().getString("permissions");
+        btnSave = (TextView) findViewById(R.id.btnSave);
+        if (delete!=null)
+        {
+            btnSave.setText("Delete This Player From Your Team");
+        }
+        else if (permissions != null)
+        {
+            btnSave.setText("Add Permissions To This Player");
+        }
+        btnSave.setOnClickListener(this);
 
         imgProfile = (ImageView)findViewById( R.id.imgProfile);
         Picasso
