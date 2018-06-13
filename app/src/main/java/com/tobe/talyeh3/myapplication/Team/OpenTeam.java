@@ -154,7 +154,7 @@ public class OpenTeam extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String u = String.valueOf( data.getValue( ) );
 
-                    Toast.makeText( OpenTeam.this, "sdlllllllllllllllllllllll  " + u, Toast.LENGTH_SHORT ).show();
+                    //Toast.makeText( OpenTeam.this, "sdlllllllllllllllllllllll  " + u, Toast.LENGTH_SHORT ).show();
                     usersInTeam.add( u );
                 }
             }

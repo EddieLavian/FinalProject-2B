@@ -117,7 +117,7 @@ public class MyTeams extends AppCompatActivity {
                        public void onCancelled(DatabaseError databaseError) {
                            if (keyteam==null)
                            {
-                               Toast.makeText(MyTeams.this, "You don't have teams yetppppppppppppppppp", Toast.LENGTH_LONG).show();
+                               //Toast.makeText(MyTeams.this, "You don't have teams yetppppppppppppppppp", Toast.LENGTH_LONG).show();
                                progressDialog.dismiss();
                                return;
                            }

@@ -1,5 +1,4 @@
 package com.tobe.talyeh3.myapplication.Team;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.tobe.talyeh3.myapplication.AllUsersAdapter;
 import com.tobe.talyeh3.myapplication.Chat.ChatActivity;
 import com.tobe.talyeh3.myapplication.CreateGame.CreateGame;
@@ -30,7 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 public class TeamDetails extends AppCompatActivity implements View.OnClickListener
@@ -46,11 +43,8 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     String photo="";
     String teamName;
     User u;
-
     private DatabaseReference databaseUser;
-
     Dialog d,menu;
-
     int firstPress=0;
     ListView lv;
     int i = 0;
@@ -59,7 +53,6 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
     String keyUser="";
     AllUsersAdapter allPlayersAdapter;
     String myUserId;
-
     User user,user2;
 
 
@@ -75,7 +68,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
        // FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
 
         getSupportActionBar().hide();
-        Toast.makeText(TeamDetails.this,"JJJJJJJJJJJJJJJJJJJJJ",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(TeamDetails.this,"JJJJJJJJJJJJJJJJJJJJJ",Toast.LENGTH_SHORT).show();
         myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseUser = FirebaseDatabase.getInstance().getReference("Users");
         this.retriveData();
@@ -220,7 +213,7 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
             public void onDataChange(DataSnapshot dataSnapshot) {
                 u = dataSnapshot.getValue(User.class);
 
-                Toast.makeText(TeamDetails.this,String.valueOf(u.teams.size()),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(TeamDetails.this,String.valueOf(u.teams.size()),Toast.LENGTH_SHORT).show();
             }
 
             @Override
