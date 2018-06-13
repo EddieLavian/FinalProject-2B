@@ -131,12 +131,14 @@ public class ChatActivity extends AppCompatActivity {
         LinearLayoutManager l = new LinearLayoutManager(this);
         rvMensajes.setLayoutManager(l);
         rvMensajes.setAdapter(adapter);
+
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),userName,profilePic,"1", ServerValue.TIMESTAMP));
-                txtMensaje.setText("");
-
+                if(txtMensaje.getText().toString().length()>0) {
+                    databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(), userName, profilePic, "1", ServerValue.TIMESTAMP));
+                    txtMensaje.setText("");
+                }
 
             if (usersInTeam!=null)
             {
