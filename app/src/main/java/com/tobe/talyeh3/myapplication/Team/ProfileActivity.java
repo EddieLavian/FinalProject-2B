@@ -43,7 +43,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_profile);
-
+        getSupportActionBar().hide();
+        
         database = FirebaseDatabase.getInstance();
         tvUserName = (TextView) findViewById(R.id.tvUserName);
 
