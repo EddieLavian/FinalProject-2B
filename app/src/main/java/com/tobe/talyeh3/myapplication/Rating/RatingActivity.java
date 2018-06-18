@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tobe.talyeh3.myapplication.CreateGame.TeamGamesActivity;
 import com.tobe.talyeh3.myapplication.Posts.Post;
 import com.tobe.talyeh3.myapplication.R;
 
@@ -87,7 +89,14 @@ public class RatingActivity extends AppCompatActivity {
     }
 
 
-
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     public void retrieveData()
     {
@@ -123,32 +132,46 @@ public class RatingActivity extends AppCompatActivity {
                 myRatings = new ArrayList<String>();
                 ratings = new ArrayList<Rating>();
                 for (DataSnapshot data : snapshot.getChildren()) {
+
+
+
                     Log.d("onDataChange", data.getValue().toString());
                     keyRating = (String) snapshot.child(String.valueOf(i)).getValue();
+
+
+                    if (keyRating == null)
+                    {
+                        return;
+                    }
+
                    // Toast.makeText(RatingActivity.this, i+keyRating, Toast.LENGTH_LONG).show();
                     ratingsDatabase = FirebaseDatabase.getInstance().getReference("Rating/" + keyRating);
-
-
-
-
-
                     ValueEventListener valueEventListener = ratingsDatabase.addValueEventListener(new ValueEventListener() {
-
                         public void onDataChange(DataSnapshot snapshot) {
                             Rating r = snapshot.getValue( Rating.class );
+
+                            if (r==null)
+                                return;
+
                             for (int j =0; j<ratings.size();j++)//for not duplicate on the screen
                             {
-                                if(ratings.get( j ).key.equals( r.key )&&!ratings.get( j ).equals( null ))
+                                if(!r.equals(null)&&!ratings.get( j ).key.equals( null ) && ! r.key.equals(null)&&!r.equals(null))
                                 {
-                                    ratings.remove( j );
+                                        if(ratings.get( j ).key.equals( r.key ) &&!ratings.get( j ).equals( null ) )
+                                            {
+                                                  ratings.remove( j );
+                                            }
                                 }
                             }
+
                             String keyUser= myUserId.concat( keyTeam );//for the user cnnot rate himself
-                           // Toast.makeText(RatingActivity.this,keyUser, Toast.LENGTH_LONG).show();
+
                             if (!r.key.equals(keyUser))
                                 ratings.add( r );
+
                             else
                                 tvMyRate.setText( "My average Rate is " + String.valueOf( r.avgRating ) );
+
                             Collections.sort(ratings, new Comparator<Rating>(){
                                 public int compare(Rating obj1, Rating obj2)
                                 {
@@ -157,14 +180,8 @@ public class RatingActivity extends AppCompatActivity {
                                 }
                             });
 
-
-                            Log.d( "onStart", snapshot.toString() );
-
                             ratingAdapter.notifyDataSetChanged();
-
                             progressDialog.dismiss();
-
-
                         }
 
 

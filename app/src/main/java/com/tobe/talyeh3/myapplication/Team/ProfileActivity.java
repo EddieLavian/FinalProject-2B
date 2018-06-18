@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_profile);
         getSupportActionBar().hide();
-        
+
         database = FirebaseDatabase.getInstance();
         tvUserName = (TextView) findViewById(R.id.tvUserName);
 
@@ -135,11 +135,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             t.statistics.remove(key+t.key);
             t.rating.remove(key+t.key);
+            t.permissions.remove(key);
             String keyStatistics=key+t.key;
             DatabaseReference statisticsPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Statistics/"+keyStatistics);//remove Statistics player from team
             statisticsPlayer.setValue(null);
 
-            DatabaseReference ratingPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Rating/"+keyStatistics);//remove Statistics player from team
+            DatabaseReference ratingPlayer = FirebaseDatabase.getInstance().getReference().getRoot().child("Rating/"+keyStatistics);//remove rating for this player from team
             ratingPlayer.setValue(null);
         }
         else if (delete== null && permissions == null )//add player to the team
@@ -170,8 +171,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         else if(permissions != null)
         {
             t.permissions.add(key);
-            Intent intent = new Intent(ProfileActivity.this, TeamDetails.class);
-            startActivity(intent);
         }
 
         userRefTeam.setValue(t);

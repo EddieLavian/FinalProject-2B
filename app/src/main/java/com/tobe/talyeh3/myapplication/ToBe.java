@@ -1,4 +1,3 @@
-// Eddie Lavian
 package com.tobe.talyeh3.myapplication;
 
 import android.app.Dialog;
@@ -31,26 +30,15 @@ import com.google.firebase.database.ValueEventListener;
 public class ToBe extends AppCompatActivity implements View.OnClickListener
      {
     FirebaseAuth firebaseAuth;
-    TextView btnAllUsers;
-    TextView btnOpenTeam;
-    TextView btnMyTeams;
-    TextView btnChat;
-    TextView btnAddFriends;
-
-    Dialog d;
-    TextView logOut,MyProfile;
+    TextView btnAllUsers, btnOpenTeam, btnMyTeams, btnChat, btnAddFriends, logOut,MyProfile, btnAllPost, btnWeather;
     Button btnMenu;
-    int mode=0; // o means register 1 means login
+    Dialog d;
     ProgressDialog progressDialog;
-    TextView btnAllPost;
-    TextView btnWeather;
-    String name="";
     FirebaseUser us;
     String myUserId;
     private DatabaseReference databaseUser;
     User user,user2;
     private static final int REQUEST_LOCATION = 1;
-    private static final int REQUEST_SMS = 0;
 
 
     @Override
@@ -58,22 +46,16 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_to_be_test );
 
-       // FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
-        //FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
-
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
 
-        if(firebaseUser!=null)
+        if(firebaseUser!=null) // Main page
         {
             us= FirebaseAuth.getInstance().getCurrentUser();
             myUserId = us.getUid();
-            //Toast.makeText(ToBe.this, "yes ", Toast.LENGTH_LONG).show();
         }
         else//registeration page
         {
-
-           // Toast.makeText(ToBe.this, "no ", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ToBe.this, RegisterActivity.class);
             startActivity(intent);
         }
@@ -82,15 +64,14 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
 
         // get permissions to user location
         ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-        //ActivityCompat.requestPermissions(this, new String[]{SEND_SMS}, REQUEST_SMS);
 
+        // initializations //
         btnAllPost = (TextView)findViewById(R.id.btnAllPost);
         btnWeather = (TextView)findViewById(R.id.btnWeather);
-         retriveData();
         btnMyTeams = (TextView)findViewById(R.id.btnMyTeams);
+
+        retriveData();
         progressDialog = new ProgressDialog(this);
-
-
 
         btnMenu = (Button)findViewById( R.id.btnMenu );
         btnMenu.setOnClickListener(new View.OnClickListener() {
@@ -100,8 +81,6 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
 
             }
         });
-
-
 
         btnOpenTeam = (TextView)findViewById(R.id.btnOpenTeam);
         btnOpenTeam.setOnClickListener(new View.OnClickListener() {
@@ -192,44 +171,13 @@ public class ToBe extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(ToBe.this, "There is no internet connection, please try again.. ", Toast.LENGTH_LONG).show();
                     return;
                 }
-/*
-        // Ask you only once how you want to share //
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "בוא להיות חלק מהמשחק. הורד את ToBe עכשיו מהחנות");
-                sendIntent.setType("text/plain");
-                startActivity(sendIntent);
-*/
 
-        //Ask you how you want to share again and again //
+                //Intent to share link with friends to download the app //
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "בוא להיות חלק מהמשחק. הורד את האפליקציה ToBe עוד היום ותתחבר לשחקנים האמיתיים https://play.google.com/store/apps/details?id=com.tobe.talyeh3.myapplication");
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.project_id)));
-
-
- /* // Intent to new wendw with sms sender
-                Intent intent = new Intent(AllUsers.this,AddFriendsActivity.class);
-                startActivity(intent);
- */
-
- /* intent to waze
- try
-{
-  // Launch Waze to look for Hawaii:
-  String url = "https://waze.com/ul?q=Hawaii";
-  Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
-  startActivity( intent );
-}
-catch ( ActivityNotFoundException ex  )
-{
-  // If Waze is not installed, open it in Google Play:
-  Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
-  startActivity(intent);
-}
-  */
-
             }
         });
 
@@ -275,14 +223,10 @@ catch ( ActivityNotFoundException ex  )
              }
          }
 
-
-
          public void retriveData() {
-
              databaseUser.addValueEventListener(new ValueEventListener() {
                  @Override
                  public void onDataChange(DataSnapshot dataSnapshot) {
-                     // myId = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                      for (DataSnapshot data : dataSnapshot.getChildren()) {
                          user = data.getValue(User.class);
                          if (user.uid.equals( myUserId ))
@@ -295,8 +239,5 @@ catch ( ActivityNotFoundException ex  )
                  public void onCancelled(DatabaseError databaseError) {
                  }
              });
-
-
          }
-
      }

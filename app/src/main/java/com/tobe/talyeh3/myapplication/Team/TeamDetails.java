@@ -262,11 +262,21 @@ public class TeamDetails extends AppCompatActivity implements View.OnClickListen
                 users = new ArrayList<User>();
                 for (DataSnapshot data : snapshot.getChildren()) {
                     keyUser = (String) snapshot.child(String.valueOf(i)).getValue();//put in array of users at the teams key and not mail
+
+                    if (keyUser == null)
+                    {
+                        return;
+                    }
+
                     //Toast.makeText(TeamDetails.this, "sd  "+firstPress,Toast.LENGTH_SHORT).show();
                     teamDatabase = FirebaseDatabase.getInstance().getReference("Users/" + keyUser);
                     ValueEventListener valueEventListener = teamDatabase.addValueEventListener(new ValueEventListener() {
                         public void onDataChange(DataSnapshot snapshot) {
                             User u = snapshot.getValue(User.class);
+                            if (keyUser == null)
+                            {
+                                return;
+                            }
                             users.add(u);
                             snapshot.toString();
                             allPlayersAdapter.notifyDataSetChanged();

@@ -43,6 +43,8 @@ public class AllUsersAdapter  extends ArrayAdapter<User> {
 
 
         User temp = objects.get(position);
+        if (tvUserName == null ||temp==null)
+            return view;
         tvUserName.setText(temp.userName);
 
         ImageView imgProfile = (ImageView)view.findViewById(R.id.imgProfile);

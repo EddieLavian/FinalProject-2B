@@ -147,6 +147,13 @@ public class StatisticsActivity extends AppCompatActivity{
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Log.d("onDataChange", data.getValue().toString());
                     keyStatistic = (String) snapshot.child(String.valueOf(i)).getValue();
+
+                    if (keyStatistic == null)
+                    {
+                        return;
+                    }
+
+
                     //Toast.makeText(StatisticsActivity.this, i+keyStatistic, Toast.LENGTH_LONG).show();
                     statisticsDatabase = FirebaseDatabase.getInstance().getReference("Statistics/" + keyStatistic);
 
@@ -154,6 +161,8 @@ public class StatisticsActivity extends AppCompatActivity{
 
                         public void onDataChange(DataSnapshot snapshot) {
                                 Statistics s = snapshot.getValue( Statistics.class );
+                                if (s==null)
+                                    return;
                                 for (int j =0; j<statistics.size();j++)//for not duplicate on the screen
                                 {
                                     if(statistics.get( j ).name.equals( s.name ))

@@ -103,7 +103,6 @@ public class TeamGamesActivity extends AppCompatActivity implements com.tobe.tal
                     keyGame = (String) snapshot.child( String.valueOf( i ) ).getValue();
                     if (keyGame==null)
                     {
-                        Toast.makeText(TeamGamesActivity.this, "You don't have any games yet", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
                         return;
                     }
@@ -125,7 +124,7 @@ public class TeamGamesActivity extends AppCompatActivity implements com.tobe.tal
                                 }
                                 games.add( g );
                                 Log.d( "onStart", snapshot.toString() );
-
+      
 
 
 

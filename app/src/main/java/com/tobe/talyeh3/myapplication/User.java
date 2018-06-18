@@ -5,25 +5,26 @@ import android.widget.ImageView;
 import java.util.List;
 
 /**
- * Created by talyeh3 on 16/11/2017.
+ * Object of User
  */
 
 public class User
 {
-    public String key,imgUrl;
-    public String uid;
+    public String key; // need to delete
+    public String imgUrl; // image
+    public String uid; // the key of the user
     public String userName;
-    public String email;
+    public String email; // need to check
     public int age;
     public String city;
     public String device_token;
-    public double rating;
+    public double rating; // need to delete
     public String managerSite;
     public List<String> teams;
 
     public User()
     {
-        //empty constructor becouse firebase needs
+        //empty constructor because of firebase needs
     }
 
     public User(String uid, String userName, String email, int age, String key,List<String> teams,String imgUrl, String city, double rating, String managerSite, String device_token){
