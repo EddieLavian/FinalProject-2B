@@ -124,10 +124,7 @@ public class TeamGamesActivity extends AppCompatActivity implements com.tobe.tal
                                 }
                                 games.add( g );
                                 Log.d( "onStart", snapshot.toString() );
-      
-
-
-
+                                
 
                             }
                             if (TeamGamesAdapter!=null)
