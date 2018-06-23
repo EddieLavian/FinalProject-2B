@@ -48,19 +48,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private StorageReference mStorageRef;
     private Uri filePath;
     FirebaseAuth firebaseAuth;
-    Button btnMainRegister,btnMainLogin,btnChoose;
+    Button btnMainLogin,btnChoose, btnReg;
     ImageView imgProfile;
     EditText etEmailLogin,etPassLogin,etUserName,etAge, etRePass, etEmailReg, etPassReg;
     Dialog d;
     CardView cvLogIn;
     ImageView btnfacebook;
-    Button btnReg,btnLogin;
     ProgressDialog progressDialog;
     Boolean b=true;//if the user uploded photo
     String generatedFilePath="https://firebasestorage.googleapis.com/v0/b/tobe-722db.appspot.com/o/appImages%2Fprofile.jpg?alt=media&token=04178b40-4678-441b-adca-3d3d1dde15c9";
     TextView tvRegister;
-    //for user datails will save on data base
-    FirebaseDatabase database;
+    FirebaseDatabase database; //for user datails will save on data base
     Spinner spin;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private DatabaseReference mUserDatabase;
